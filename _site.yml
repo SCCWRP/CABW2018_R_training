@@ -1,0 +1,15 @@
+name: "CABW2018_R_training"
+navbar:
+  title: "CABW 2018 R training"
+  type: inverse
+  left:
+    - text: "Home"
+      href: index.html
+output_dir: "."
+output:
+  html_document:
+    theme: cosmo
+    highlight: textmate
+    toc: true
+    toc_float: 
+       collapsed: true
