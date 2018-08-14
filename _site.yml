@@ -5,6 +5,12 @@ navbar:
   left:
     - text: "Home"
       href: index.html
+    - text: "What, why, and how of R"
+      href: rbasics.html
+    - text: "Wrangling and plotting"
+      href: wrangleplot.html
+    - text: "Mapping"
+      href: mapping.html
 output_dir: "."
 output:
   html_document:
