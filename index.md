@@ -18,7 +18,9 @@ By the end of this course you should be able to or have the resources to find ou
 
 * __2 - 3pm__: Wrangling and plotting bioassessment data for exploratory analysis
 
-* __3 - 4pm__: Mapping bioassessment data for reporting
+* __3 - 4pm__: Mapping bioassessment data for exploratory analysis
+
+* __4 - 5pm__: Mapping bioassessment data for reporting
 
 ## Instructors
 
