@@ -5,6 +5,162 @@ x<-lapply(pkgs, library, character.only = TRUE)
 opts_chunk$set(tidy = FALSE, message = F, warning = F)
 ```
 
-# Mapping in R
+# Mapping in R with `sf`
 
-Content TBD
+There are loads of spatial mapping/plotting packages in R. The main two ways to read in spatial data use the `rgdal` package, and the `sf` package. We're going to use the `sf` approach because it's simpler and typically faster.
+
+## Load packages
+
+We'll use a series of packages, some new and some we've already used. Most importantly this includes the `sf` package.
+
+```{r installsf, echo=T, eval=F}
+
+# install packages if you haven't already
+install.packages(c("sf","mapview", "maps","maptools","viridis"))
+
+# load packages or "libraries"
+library(readr) # reading/writing files
+library(dplyr) # wrangling data/plotting
+library(viridis) # nice color palette
+library(sf) # newer "simple features" spatial package
+library(mapview)
+library(maps) # for map functions
+library(maptools) # map data
+
+```
+
+```{r load libs, echo=F, warning=FALSE}
+suppressPackageStartupMessages({
+  library(readr); # reading/writing files
+  library(dplyr); # wrangling data/plotting
+  library(viridis); # nice color palette
+  library(sf); # newer "simple features" spatial package
+  library(mapview); # interactive web map
+  library(maps); # for map functions
+  library(maptools) # map data
+  }) 
+
+```
+
+## Read in Data
+
+First we need to read in some data. Let's use the `read_csv` function from the `tidyverse (readr)` package.
+
+```{r getData}
+
+latlons <- read_csv("data/latlon.csv")
+ascidat <- read_csv("data/ascidat.csv")
+cscidat <- read_csv("data/cscidat.csv")
+
+```
+
+Let's take a look at our dataset, and in particular, let's look at the coordinates we'll be using to make our data "spatial". The `latlons` dataset just has three columns. How many rows?
+
+If we look at a summary of the latitude and longitude, what do we notice? Why might it be important to look at the latitude and longitude data[^1] before plotting?
+
+```{r summLats}
+
+glimpse(latlons)
+summary(latlons)
+
+```
+
+[^1]: For data from the North American continent, keep an eye on your lat/long coordinates, especially **longitude**. It should be `negative`. A common snafu that can occur is a few values (or all) from the longitude column may remain positive, which means the data typically plots somewhere in the Indian Ocean. Make sure all your longitudes are negative (if in the US and using lat/longs).
+
+
+```{r Fixlatlong, echo=F, eval=F}
+
+latlons$New_Long <- abs(latlons$New_Long) * -1 # make all values negative
+
+```
+
+
+```{r makespatial}
+
+# set projections
+# utms <- CRS("+init=epsg:32610") ## more detailed def using the EPSG code
+# utms # more detail
+# lats84<-CRS("+init=epsg:4326") # set the default for lat/longs
+# lats84
+
+# make data sf object: 
+df_sf <- st_as_sf(latlons,
+                  # coords = c("Lon", "Lat"), # can use numbers here too
+                  coords = c(3, 2), # can use numbers here too
+                  remove = F, # don't remove these lat/lon cols from df
+                  crs = 4326) # add projection (this is WGS84)
+
+```
+
+
+```{r quick_mapview, echo=T, eval=T}
+
+# make a map
+mapview::mapview(df_sf)
+
+```
+
+
+### Plotting with `sf` Data
+
+Can we do the same thing with `sf` data? Nope! Not in the same way. You'll get this error:
+
+```
+Error in data.matrix(x) : 
+  (list) object cannot be coerced to type 'double'
+```
+
+Baseplotting functions work with `sf`, but be aware, using `plot` will default to plotting a facet or map for every column of data in your dataframe. Avoid that by specifying `st_coordinates()`.
+
+```{r mapXY_sf1, eval=F, echo=T}
+
+# the simplest plot with sf data: 
+plot(df_locs_sf, pch=16, col=adjustcolor("maroon", alpha=0.7), cex=1.5) #YIKES
+
+# this is better
+plot(st_coordinates(df_locs_sf), pch=16, col=adjustcolor("maroon", alpha=0.7), cex=1.5)
+graphics::title("Map of CA Hot Springs")
+
+```
+
+### Plotting with `ggplot` and `ggmap`
+
+Alternatively, we can use `ggplot2` instead. This is where `sf` objects are really nice. They fit well within the ggplot framework because they are simply dataframes with a spatial list-column. You can plot XY data as a regular layer, or you can use the `geom_sf` function. 
+
+The only caveat here is we currently (as of `r Sys.Date()`) need the development version of `ggplot2`. To install, use:
+
+```{r, eval=F, echo=T}
+#install.packages("devtools")
+devtools::install_github("tidyverse/ggplot2")
+
+```
+
+Once we have the dev version of `ggplot2`, we can make a fancier plot.
+
+```{r mapXY_sf2, eval=F, echo=T}
+# fancier ggplot w google background plot:
+library(ggplot2)
+library(ggmap) # need this package
+location=c(-119.7,38.7) # set the center of the map
+
+# set the background map up
+map1 <- get_map(location=location, crop = F,
+             color="bw",
+             maptype="satellite",
+             source="google",
+             zoom=8)
+
+sitemap <- ggmap(map1) # start a ggmap... like calling ggplot()
+
+# and let's make our nicemap
+nicemap<-
+  sitemap + 
+  geom_point(data=df_locs_sf, aes(x=Lon, y=Lat, fill=Temp_F), pch=21, alpha=0.7, size=4)+
+  scale_fill_viridis_c(option = "A")+
+  labs(x="Longitude (WGS84)", y="Latitude",
+       title="Hot Springs in California") + 
+  theme_bw(base_family = "Roboto Condensed") # change this to sans if it doesn't plot
+nicemap
+
+# To save plot
+# ggsave(filename = "./figs/site_map_ggplot.png", width = 8, height = 6, units = "in", dpi = 300)
