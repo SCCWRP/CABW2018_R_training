@@ -29,7 +29,7 @@ By the end of this course you should be able to or have the resources to find ou
 
 ## Software requirements
 
-Please bring a laptop with the latest version of RStudio and R installed.  The [setup instructions](setup.html) will guide you through the process.  Take note of the required R packages that you must also download and install.
+Please bring a laptop with the latest version of RStudio and R installed.  Download the compressed [data](https://SCCWRP.github.io/CABW2018_R_training/data/datazip.zip) folder and make sure it is accessible on your computer.  The [setup instructions](setup.html) will guide you through the rest of the process.  Take note of the required R packages that you must also download and install.  Please contact the instructors with any questions or issues related to setup.
 
 ## Source content
 
