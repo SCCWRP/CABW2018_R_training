@@ -104,9 +104,14 @@ That's OK! There’s a dialog box hiding behind RStudio asking if you want to cr
 
 # Grab the Sample Datasets
 
-We'll be working with a chemistry dataset and metadata from the Bight for many of our examples. Please download the chemistry dataset [here](https://github.com/SCCWRP/SCCWRP_R_training/blob/master/data/B13%20Chem%20data.xlsx?raw=true) and the metadata [here](https://github.com/SCCWRP/SCCWRP_R_training/blob/master/data/Master%20Data%20-%20Station%20Info.xlsx?raw=true).  Make sure you have access to these data on the day of training.
+We'll be working with some California bioassessment data and some shapefiles for this workshop.  The bioassessment data are available as three separate csv files that describe scores for the California Stream Condition Index (CSCI), the Algal Stream Condition Index (ASCI), and station latitude/longitude.  These files include scores at over 2000 locations and are a portion of the data used to develop the indices. The shapefile is a polygon dataset of the PSA regions of California.  
 
-<!-- may want to make .csv versions of these data so folks can see what it looks like and download more easily? Or is this and older version, we'll be using the calipsa/ascidat data in the CABW2018_R_training repo? -->
+* `ascidat.csv`: ASCI index data
+* `cscidat.csv`: CSCI index data
+* `latlong.csv`: station locations
+* `calipsa.shp`: PSA regions
+
+Download the zipped file of all the data from this [link](https://SCCWRP.github.io/CABW2018_R_training/data/datazip.zip).  Unzip the content into a folder on your computer that you can access for the workshop.
 
 ## Exercise 1
 Just to make sure everything is working do the following:
