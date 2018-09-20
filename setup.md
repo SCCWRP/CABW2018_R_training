@@ -2,13 +2,14 @@
 
 Thanks for your interest in learning R.  For the workshop, we will be using [RStudio](https://www.rstudio.com/) as our interface to R.  In order to participate in this workshop you will need to make sure you have R and RStudio installed on your laptop.
 
-Big thanks to the [USGS-R Training group](https://owi.usgs.gov/R/training.html) for making their installation materials available.  The instructions below are mostly theirs with some light editing and should help you get all set up for the workshop.
+Thanks to the [USGS-R Training group](https://owi.usgs.gov/R/training.html) and [Data Carpentry](https://datacarpentry.org/R-ecology-lesson/index.html) for making their installation materials available.  The following instructions come directly from their materials, with a few minor edits to help you get all set up for the workshop.
 
 # Install R and RStudio
-These instructions are for Windows install. Download and install R for Mac [here](https://cran.r-project.org/bin/macosx/). 
 
-## Download and install R
-Go to [CRAN and download](https://cran.rstudio.com/bin/windows/base/) the R installer for Windows. Make sure to choose the latest stable version (v3.4.3 as of January 2018).
+**R** and **RStudio** are separate downloads and installations. R is the underlying statistical computing environment, but using R alone is no fun. RStudio is a graphical integrated development environment (IDE) that makes using R much easier and more interactive. *You need to install R before you install RStudio*.
+
+## *Windows*: Download and install R
+Go to [CRAN and download](https://cran.rstudio.com/bin/windows/base/) the R installer for Windows. Make sure to choose the latest stable version (v3.5.1 as of Sept 2018).
 
 Once the installer downloads, Right-click on it and select "Run as administrator". 
 
@@ -30,7 +31,7 @@ At this screen, uncheck 'Create a desktop icon' because non-admin users in Windo
 ![](figure/install_tasks.png#inline-img "uncheck desktop icon")
 
 
-## Download and install RStudio
+## *Windows*: Download and install RStudio
 [](https://www.rstudio.com/products/rstudio/download/)
 
 Double-click the installer. It will ask for your administrator credentials to install (you might need to have your IT rep install again). 
@@ -38,6 +39,21 @@ Double-click the installer. It will ask for your administrator credentials to in
 Accept all the default options for the RStudio install.
 
 ![](figure/install_rstudio.png#inline-img "RStudio install screen")
+
+## *macOS*: Download and install R
+
+ - Download and install R from the CRAN website for Mac [here](https://cran.r-project.org/bin/macosx/). 
+ - Select the `.pkg` file for the latest R version
+ - Double click on the downloaded file to install R
+ - It is also a good idea to install [XQuartz](https://www.xquartz.org/) (needed by some packages)
+
+## *macOS*: Download and install RStudio
+
+ - Go to the [RStudio](https://www.rstudio.com/products/rstudio/download/#download) download page
+ - Under Installers select **RStudio x.yy.zzz - Mac OS X 10.6+ (64-bit)** (where x, y, and z represent version numbers)
+ - Double click the file to install RStudio
+ - Once it’s installed, open RStudio to make sure it works and you don’t get any error messages.
+
 
 # Check Install
 
@@ -60,15 +76,16 @@ version$version.string
 ```
 
 ## Verify your installed R version
-Ideally you should be running the latest stable release (v3.4.3 as of January 2017). If you have an older version, please install the newest version using the instructions above.
+
+Ideally you should be running the latest stable release (`v3.5.1` as of Sept 2018). If you have an older version, please install the newest version using the instructions above.
 
 Here is what my R version looks like.
 
 ```
-## [1] "R version 3.4.3 (2017-11-30)"
+## [1] "R version 3.5.1 (2018-07-02)"
 ```
 
-# Add packages
+# Add Packages
 
 Install packages available for all R users from [CRAN](https://cran.r-project.org/) by pasting the following code and hitting `ENTER`.
 
@@ -85,11 +102,13 @@ That's OK! There’s a dialog box hiding behind RStudio asking if you want to cr
 
 ![](figure/general_pkg_output.png#inline-img "console output")
 
-# Grab the sample datasets
+# Grab the Sample Datasets
 
-We'll be working with a chemistry dataset and metadata from the Bight for many of our examples. Please download the chemistry dataset [here](http://bit.ly/2Gpgzil) and the metadata [here](http://bit.ly/2sCBtbV).  Make sure you have access to these data on the day of training.
+We'll be working with a chemistry dataset and metadata from the Bight for many of our examples. Please download the chemistry dataset [here](https://github.com/SCCWRP/SCCWRP_R_training/blob/master/data/B13%20Chem%20data.xlsx?raw=true) and the metadata [here](https://github.com/SCCWRP/SCCWRP_R_training/blob/master/data/Master%20Data%20-%20Station%20Info.xlsx?raw=true).  Make sure you have access to these data on the day of training.
 
-# Exercise 1
+<!-- may want to make .csv versions of these data so folks can see what it looks like and download more easily? Or is this and older version, we'll be using the calipsa/ascidat data in the CABW2018_R_training repo? -->
+
+## Exercise 1
 Just to make sure everything is working do the following:
 
 1. Open up RStudio.
