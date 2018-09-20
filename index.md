@@ -25,7 +25,7 @@ By the end of this course you should be able to or have the resources to find ou
 ## Instructors
 
 * [Marcus Beck](https://fawda123.github.io/CV/Beck_CV.pdf) ([marcusb@sccwrp.org](mailto:marcusb@sccwrp.org)) - Marcus is a scientist with the Southern California Coastal Water Research Project.  His interests include time series analysis of water quality data, lake bioassessment, and data visualization.  
-* [Ryan Peek](https://ryanpeek.github.io/) ([rapeek@ucdavis.edu](mailto:rapeek@ucdavis.edu)) - Ryan is a doctoral candidate at UC Davis and a resercher at the Center for Watershed Sciences. 
+* [Ryan Peek](https://ryanpeek.github.io/) ([rapeek@ucdavis.edu](mailto:rapeek@ucdavis.edu)) - Ryan is a post-doctoral researcher at the Center for Watershed Sciences at UC Davis. He interests focus on hydropower regulation and environmental management of rivers and streams in California, as well as integrating the fields of genomics, ecology, and hydrology.
 
 ## Software requirements
 
