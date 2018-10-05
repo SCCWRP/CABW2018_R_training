@@ -75,6 +75,11 @@ Install packages available for all R users from [CRAN](https://cran.r-project.or
 
 ```r
 install.packages("tidyverse")
+install.packages("sf")
+install.packages("mapview")
+install.package("tmap")
+install.packages("viridis")
+install.packages("USAboundaries")
 ```
 
 If you see 
@@ -99,7 +104,7 @@ Just to make sure everything is working do the following:
 
 
 ```r
-"tidyverse" %in% installed.packages()
+c("tidyverse", "sf", "viridis", "mapview", "tmap", "USAboundaries") %in% installed.packages()
 ```
 
 The end result should look something like:
