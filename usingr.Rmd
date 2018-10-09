@@ -15,11 +15,12 @@ opts_chunk$set(tidy = FALSE, message = F, warning = F)
 - [R language fundamentals]
 - [Data structures in R]
 - [Data I/O]
-- [Retention]
 
 ## Lesson Exercises
+
 - [Exercise 1]
 - [Exercise 2]
+- [Exercise 3]
 
 ## Goals and Motivation
 
@@ -32,7 +33,7 @@ The goals of this training are to expose you to fundamentals and to develop an a
 * How can I write, save, and run scripts in RStudio?
 * Where can I go for help?
 * What are the basic data structures in R?
-* How do I import/export data? 
+* How do I import data? 
 
 ### Why should I invest time in R?
 
@@ -63,7 +64,7 @@ There are four panes in RStudio:
 
 ### RStudio projects
 
-I strongly encourage you to use RStudio projects when you are working with R.  The RStudio project provides a central location for working on a particular task.  It helps with file management and is portable if all the files live in the same project.  RStudio projects also remember history - what commands you used and what data objects are in your enviornment.  
+I strongly encourage you to use RStudio projects when you are working with R.  The RStudio project provides a central location for working on a particular task.  It helps with file management and is portable because all the files live in the same project.  RStudio projects also remember history - what commands you used and what data objects are in your enviornment.  
 
 To create a new project, click on the File menu at the top and select 'New project...'
 
@@ -163,12 +164,12 @@ We're going to install some packages from CRAN that will give us the tools for o
 
 1. At the top of the script you just created, type the following functions.
 
-```{r install_package, eval=FALSE}
+    ```{r install_package, eval=FALSE}
 # install packages from CRAN
 install.packages("tidyverse")
 install.packages("sf")
 install.packages("mapview")
-```
+    ```
 
 1. Select all three lines by clicking and dragging the mouse pointer over the text.  
 
@@ -178,11 +179,11 @@ install.packages("mapview")
 
 1. Load the packages after they've installed. 
 
-```{r eval=FALSE}
+    ```{r eval=FALSE}
 library("tidyverse")
 library("sf")
 library("mapview")
-```
+    ```
 
 ### Getting Help
 
@@ -291,166 +292,68 @@ The only constraints required to make a data frame are:
 
 1. The number of observations in each column is equal.
 
-A data frame has other attributes, such as row names and column names.  These are useful for indexing (selecting) different parts of the data.
-
-```{r}
-names(mydf)
-row.names(mydf)
-```
-
 ## Data I/O
 
 ### Input
 
-<!-- It is the rare case when you manually enter your data in R.  Most data analysis workflows typically begin with importing a dataset from an external source.  Literally, this means committing a dataset to memory (i.e., storing it as a variable) as one of R's data structure formats. -->
+It is the rare case when you manually enter your data in R, not to mention impractical for most datasets.  Most data analysis workflows typically begin with importing a dataset from an external source.  Literally, this means committing a dataset to memory (i.e., storing it as a variable) as one of R's data structure formats.
 
-<!-- If you're lucky, your data are already in a flat, rectangular format.  In other words, your data are two-dimensional as standard ASCI text.  Flat data files present the least complications on import because there is very little to assume about the structure of the data. On import, R tries to guess the data type for each column and this is fairly unambiguous with flat files.  The base installation of R comes with some easy to use functions for importing flat files, such as `read.table()` and `read.csv`. -->
+Flat data files (text only, rectangular format) present the least complications on import because there is very little to assume about the structure of the data. On import, R tries to guess the data type for each column and this is fairly unambiguous with flat files.  The base installation of R comes with some easy to use functions for importing flat files, such as `read.table()` and `read.csv`.
 
-<!-- More often you will probably have an Excel spreadsheet to import. This is not a preferred format but the reality is that most people are using this software for data storage. In the old days, importing spreadsheets into R was almost impossible given the proprietary data structure of Excel.  The tools available in R have since matured and it's now pretty painless to import a spreadsheet.  But "painless" comes with some caveats.   -->
+### Exercise 3
 
-<!-- You will save yourself a lot of trouble with data import from Excel if you think like a machine.  Consider the example below: -->
+Now that we have the data downloaded and extracted to our data folder, we'll use `read.csv` to import two files.
 
-<!-- Computers, although very trainable, are also very dumb.  If you have trouble interpreting the information, can you expect a computer to do so?  Most issues importing Excel spreadsheets relate to format of the data.  Here are few pointers to keep in mind if you are using Excel to store data: -->
+1. Type the following in your script.
 
-<!-- * Use the one spreadsheet, one data frame rule (rectangular) -->
-<!-- * No colors or special formatting -->
-<!-- * No links between sheets -->
-<!-- * One data type per column -->
-<!-- * Use simple column names (no spaces or special characters) -->
-<!-- * Be explicit and consistent with missing values -->
+    ```{r}
+cscidat <- read.csv('data/cscidat.csv', stringsAsFactors = F)
+ascidat <- read.csv('data/ascidat.csv', stringsAsFactors = F)
+    ```
 
-<!-- Following these simple guidelines will make import much, much smoother.  -->
+1. Send the commands to the console with `ctrl+enter`.
 
-<!-- The `readxl` package is the most recent and by far most flexible data import package for Excel files. It comes with the `tidyverse` family of packages (more about this next training), but you can install it separately as follows: -->
+1. Verify that the data imported correctly by viewing the first six rows of each dataset.  Use the `head()` function directly in the console, e.g., `head(cscidat)`
 
-<!-- ```{r eval = F} -->
-<!-- install.packages('readxl') -->
-<!-- ``` -->
+Let's explore the datasets a bit.  There are many useful functions for exploring the characteristics of a dataset.  This is always a good idea when you first import something.  
 
-<!-- Once installed, we can load it to access the import functions. -->
+```{r}
+# get the dimensions
+dim(cscidat)
+dim(ascidat)
 
-<!-- ```{r} -->
-<!-- library(readxl) -->
-<!-- ``` -->
+# get the column names
+names(cscidat)
+names(ascidat)
 
-<!-- We'll import the `mpg` dataset that describes fuel economy of different car models.  This dataset actually comes with R but I've saved it as a an Excel spreadsheet to demonstrate the `read_excel` import function. If you haven't downloaded the file already, grab it from the [online materials](https://github.com/SCCWRP/R_training_2018/lessons/data) and save it in your `data` folder in your project. -->
+# see the first six rows
+head(cscidat)
+head(ascidat)
 
-<!-- Now we can import the file (note the **relative** path): -->
+# get the overall structure
+str(cscidat)
+str(ascidat)
+```
 
-<!-- ```{r, eval = F} -->
-<!-- dat <- read_excel('data/mpg.xlsx') -->
-<!-- ``` -->
+You can also view each dataset in a spreadsheet style in the scripting window:
 
-<!-- If you didn't get any errors or warnings, the file is now stored in your environment. -->
+```{r, eval = F}
+View(cscidat)
+View(ascidat)
+```
 
-<!-- ```{r} -->
-<!-- ls() -->
-<!-- ``` -->
+### Other ways to import data
 
-<!-- Before we go on, let's look at the data class: -->
+More often you will probably have an Excel spreadsheet to import. In the old days, importing spreadsheets into R was almost impossible given the proprietary data structure of Excel.  The tools available in R have since matured and it's now pretty painless to import a spreadsheet.  The `readxl` package is the most recent and by far most flexible data import package for Excel files. It comes with the `tidyverse` family of package.
 
-<!-- ```{r} -->
-<!-- class(dat) -->
-<!-- head(dat) -->
-<!-- ``` -->
+Once installed, we can load it to access the import functions.
 
-<!-- The data are in the `tibble` format.  A tibble is basically a data frame with some extra features, mostly related to how the data are printed in the console. You'll encounter tibbles a lot if you are using the `tidyverse` family of packages, which we'll go over next training.  There are some very good reasons to use tibbles for data wrangling but they can also cause some headaches when used with other packages.  For now, let's just `coerce` the tibble to a data frame. -->
+```{r eval = F}
+library(readxl)
+dat <- read_excel('location/of/excel/file.xlsx')
+```
 
-<!-- ```{r} -->
-<!-- dat <- as.data.frame(dat) -->
-<!-- class(dat) -->
-<!-- ``` -->
+## Summary
 
-<!-- Now let's look at the data to get an idea of the structure: -->
+In this lesson we learned about R and Rstudio, some of the basic syntax and data structures in R, and how to import files.  We've just imported some provisional data for the California Stream Condition Index (CSCI) and the Algal Stream Condition Index (ASCI) that we'll continue to use for the rest of the workshop.  These data represent a portion of the sampling sites that were used to develop each index.  Next we'll learn how to process and plot these data to gain insight into bioassessment patterns throughout the state. 
 
-<!-- ```{r} -->
-<!-- # get the dimensions -->
-<!-- dim(dat) -->
-
-<!-- # get the column names -->
-<!-- names(dat) -->
-
-<!-- # get the row names -->
-<!-- row.names(dat) -->
-
-<!-- # get the overall structure -->
-<!-- str(dat) -->
-<!-- ``` -->
-
-<!-- There are several ways to select (aka index) subsets of the data, either by rows or columns.  Here are all the ways you can get the `fl` column from `mpg`: -->
-
-<!-- ```{r eval = F} -->
-<!-- dat$fl -->
-<!-- dat$"fl" -->
-<!-- dat["fl"] -->
-<!-- dat[,"fl"] -->
-<!-- dat[["fl"]] -->
-<!-- dat[10] -->
-<!-- dat[,10] -->
-<!-- dat[[10]] -->
-<!-- ``` -->
-
-<!-- It's not easy to understand how and why there are so many ways to subset data in R.  Next time, we'll focus on the `dplyr` package that uses a more logical approach to working with and manipulating data. -->
-
-<!-- ### Output -->
-
-<!-- Once we're done working with our data, we'll probably want to save it if we've made significant changes or if we want to share it with somebody. As you an imagine, there are countless ways to save the data depending on the format you want.  We could easily spend the next hour discussing best practices for data storage, but for now, I'll show you an easy approach to save your data as a flat, rectangular text file.  -->
-
-<!-- We can use the `write_csv` function from the `readr` package.  This function is very similar to `write.csv` from base R but it handles some of the annoying quirks of `write.csv`. -->
-
-<!-- Install `readr` if you don't have it already. -->
-
-<!-- ```{r eval = F} -->
-<!-- install.packages('readr') -->
-<!-- ``` -->
-
-<!-- Load `readr`. -->
-
-<!-- ```{r eval = F} -->
-<!-- library(readr) -->
-<!-- ``` -->
-
-<!-- And save the file. -->
-
-<!-- ```{r eval = F} -->
-<!-- write_csv(dat, 'data/new_mpg.csv') -->
-<!-- ``` -->
-
-<!-- ## Exercise 2 -->
-
-<!-- From here on out I hope to have the exercises build on each other. For this exercise we are going to grab the `mpg` data, look at that data, and be able to describe some basic information about that dataset. -->
-
-<!-- 1. We will be using a new script for the rest of our exercises.  Create this script in RStudio and name it "mpg_analysis.R" -->
-<!-- 2. As you write the script, comment as you go. Some good examples are what we used in the first script where we provided some details on each of the exercises. Remember comments are lines that begin with `#` and you can put whatever you like after that. -->
-<!-- 3. Add some lines to your script to import and store the data in your Enviroment. Remember that the data should be in your `data` folder in your project.  The `read_excel` function is your friend here and the path is `"data/mpg.xlsx"`.  Remember to install/load the `readxl` library.  Alternatively, you can use `read_csv` (`readr` package) if you've saved a csv file from the examples above. -->
-<!-- 5. Now run your script and make sure it doesn't throw any errors and you do in fact get a data frame (or tibble). -->
-<!-- 6. Explore the data frame using some of the functions we covered above (e.g. `head()`,`dim()`, or `str()`).  This part does not need to be included in the script and can be done directly inthe console. It is just a quick QA step to be sure the data read in as expected. -->
-
-<!-- ## Retention -->
-
-<!-- ![](figure/automation.png) -->
-
-<!-- Today we covered a lot of material but at this point you should have the resources to answer the following: -->
-
-<!-- * What is R and why should I use it? -->
-<!-- * Why would I use RStudio and RStudio projects? -->
-<!-- * How can I write, save, and run scripts in RStudio? -->
-<!-- * Where can I go for help? -->
-<!-- * What are the basic data structures in R? -->
-<!-- * How do I import/export data?  -->
-
-<!-- R is not an easy language to learn (see [here](http://r4stats.com/articles/why-r-is-hard-to-learn/)).  At the beginning, the payoff in your investment will not be obvious.  You will spend time banging your head on the wall and be tempted to revert to old habits.  Having used R for over ten years, I can tell you that the investment is absolutely worth it.  Once you're able to use R, you will have access to an almost endless repository of analytical tools.  You will also be more efficient, reproducible, and transparent with your workflows.  My advice in the beginning: -->
-
-<!-- * Time spent frustrated is time spent learning. Just because you're angry doesn't mean you're not gaining information. -->
-<!-- * Pick something small to begin with. Do not try to port all of your old projects to RStudio, this will come with time. -->
-<!-- * Use someone else's code. It's often easier to learn a complex problem by seeing someone else's approach line by line. -->
-<!-- * Become a savvy Googler, see the tips above.  Hard-copy books are obselete when you have all the information at your finger tips. -->
-<!-- * Do not give up!!! -->
-
-<!-- Next time, we'll talk about data wrangling. This is where the real fun begins... -->
-
-<!-- ![](figure/learning_crv.png) -->
-
-## Attribution
-
-Content in this lesson was pillaged extensively from Jeffrey Hollister (USEPA) and the USGS-R training curriculum [here](https://github.com/USGS-R/training-curriculum).

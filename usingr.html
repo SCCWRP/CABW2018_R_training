@@ -316,7 +316,6 @@ div.tocify {
 <li><a href="#r-language-fundamentals">R language fundamentals</a></li>
 <li><a href="#data-structures-in-r">Data structures in R</a></li>
 <li><a href="#data-io">Data I/O</a></li>
-<li>[Retention]</li>
 </ul>
 </div>
 <div id="lesson-exercises" class="section level2">
@@ -324,6 +323,7 @@ div.tocify {
 <ul>
 <li><a href="#exercise-1">Exercise 1</a></li>
 <li><a href="#exercise-2">Exercise 2</a></li>
+<li><a href="#exercise-3">Exercise 3</a></li>
 </ul>
 </div>
 <div id="goals-and-motivation" class="section level2">
@@ -336,7 +336,7 @@ div.tocify {
 <li>How can I write, save, and run scripts in RStudio?</li>
 <li>Where can I go for help?</li>
 <li>What are the basic data structures in R?</li>
-<li>How do I import/export data?</li>
+<li>How do I import data?</li>
 </ul>
 <div id="why-should-i-invest-time-in-r" class="section level3">
 <h3>Why should I invest time in R?</h3>
@@ -344,7 +344,7 @@ div.tocify {
 <ul>
 <li>The growth of R as explained in the <a href="https://stackoverflow.blog/2017/10/10/impressive-growth-r/">Stack Overflow blog</a>, <a href="http://blog.revolutionanalytics.com/2016/07/r-moves-up-to-5th-place-in-ieee-language-rankings.html">IEEE rating</a></li>
 </ul>
-<p>R is also an open-source programming language - not only is it free, but this means anybody can contribute to it’s development. As of 2018-10-08, there are 13132 on CRAN!</p>
+<p>R is also an open-source programming language - not only is it free, but this means anybody can contribute to it’s development. As of 2018-10-09, there are 13133 on CRAN!</p>
 </div>
 </div>
 <div id="rstudio" class="section level2">
@@ -365,7 +365,7 @@ div.tocify {
 </div>
 <div id="rstudio-projects" class="section level3">
 <h3>RStudio projects</h3>
-<p>I strongly encourage you to use RStudio projects when you are working with R. The RStudio project provides a central location for working on a particular task. It helps with file management and is portable if all the files live in the same project. RStudio projects also remember history - what commands you used and what data objects are in your enviornment.</p>
+<p>I strongly encourage you to use RStudio projects when you are working with R. The RStudio project provides a central location for working on a particular task. It helps with file management and is portable because all the files live in the same project. RStudio projects also remember history - what commands you used and what data objects are in your enviornment.</p>
 <p>To create a new project, click on the File menu at the top and select ‘New project…’</p>
 <p><img src="figure/rstudio_proj.jpg" /></p>
 <p>Now we can use this project for our data and any scripts we create.</p>
@@ -411,32 +411,32 @@ seq(1, 10)</code></pre>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <pre class="r"><code># random numbers
 rnorm(100, mean = 10, sd = 2)</code></pre>
-<pre><code>##   [1] 12.852829  8.069691 11.580614 10.999086  7.208115 12.117805  9.446305
-##   [8]  7.613590  9.528074  9.361867 10.845224  8.529499  9.561156  9.808277
-##  [15]  8.526057 11.959975  9.496306 11.133977 10.594277  6.172468 14.045830
-##  [22] 11.605639  4.380223  9.593316  8.942798 11.998788  9.884103  7.089177
-##  [29] 10.735667 11.183200 11.530050  7.834951  9.882204  9.883599 12.816330
-##  [36]  8.487276 11.196966  9.385998  9.280937  8.596865  8.892108 12.511322
-##  [43] 11.801546 10.905318 10.137962 11.699435  9.292474  8.525711 11.324331
-##  [50]  8.801528  9.081604  9.523991  8.828765  9.447094  9.810804  6.944139
-##  [57] 13.507976 11.172086  7.519347  9.849156 13.871626  5.014093 10.411628
-##  [64] 14.124548  9.224385 10.495232  8.664914  8.957238  9.758752 10.431326
-##  [71] 14.220345 12.245604 11.955130  8.663069 11.266556  7.985181  7.526232
-##  [78] 10.463069  9.347962  9.400004 10.523235  9.482013 10.935331 13.884069
-##  [85] 11.243829 11.244948  8.438531 10.275403  9.525658 12.755183  9.168943
-##  [92] 11.372410  8.732740  8.299631 14.056852  9.118241  7.874157  6.489794
-##  [99]  7.300767 10.926198</code></pre>
+<pre><code>##   [1]  9.234697  7.325015 11.025329  8.891668  8.434442  8.034273 11.083279
+##   [8]  9.676903  6.374959 10.883794 10.752928 12.443206  8.318660  9.997796
+##  [15]  6.822576  7.973754  8.656932  8.133499 12.502876  9.723305  7.849971
+##  [22]  9.670360 10.275101 10.989731 11.499838  8.179896 12.596143 10.649108
+##  [29]  7.338727 10.460669 11.218418 11.291818  8.380637  9.037970  9.072481
+##  [36]  8.115265  9.239469  8.842551  9.440406 10.436332  8.709816 11.278432
+##  [43] 12.760908 11.044240  9.960686  8.931251  8.414800 11.513835  4.317354
+##  [50] 12.010149 10.848136  9.183098  8.824641 12.326169  9.677211  9.213246
+##  [57]  8.538170 10.156260  7.996688  8.957740 11.750148  8.769279  8.462737
+##  [64] 10.334551  8.532128  9.237086 10.429454 12.322314  9.985021 10.226600
+##  [71]  9.259184  9.743765 10.722185 10.713799  5.308031 10.596151  8.086890
+##  [78] 11.215113  8.100894  8.887228 10.161560 11.108236 10.219556  8.258701
+##  [85] 12.912597 13.428694  9.706775 11.276596 12.351461  9.947323  8.034967
+##  [92]  9.583146  8.786809  5.948753 11.199562 11.572461  8.498664 10.143592
+##  [99] 10.810869  8.718495</code></pre>
 <pre class="r"><code># average 
 mean(rnorm(100))</code></pre>
-<pre><code>## [1] 0.03946573</code></pre>
+<pre><code>## [1] 0.02438196</code></pre>
 <pre class="r"><code># sum
 sum(rnorm(100))</code></pre>
-<pre><code>## [1] 1.332777</code></pre>
+<pre><code>## [1] -6.528141</code></pre>
 <p>Very often you will see functions used like this:</p>
 <pre class="r"><code>my_random_sum &lt;- sum(rnorm(100))</code></pre>
 <p>In this case the first part of the line is the name of an object. You make this up. Ideally it should have some meaning, but the only rules are that it can’t start with a number and must not have any spaces. The second bit, <code>&lt;-</code>, is the assignment operator. This tells R to take the result of <code>sum(rnorm(100))</code> and store it an object named, <code>my_random_sum</code>. It is stored in the environment and can be used by just executing it’s name in the console.</p>
 <pre class="r"><code>my_random_sum</code></pre>
-<pre><code>## [1] -6.38524</code></pre>
+<pre><code>## [1] -4.253696</code></pre>
 <p>With this, you have the very basics of how we write R code and save objects that can be used later.</p>
 <div id="packages" class="section level3">
 <h3>Packages</h3>
@@ -444,7 +444,7 @@ sum(rnorm(100))</code></pre>
 </div>
 <div id="cran" class="section level3">
 <h3>CRAN</h3>
-<p>One of the reasons for R’s popularity is CRAN, <a href="http://cran.r-project.org/">The Comprehensive R Archive Network</a>. This is where you download R and also where most will gain access to packages (there are other places, but that is for later). Not much else to say about this now other than to be aware of it. As of 2018-10-08, there are 13132 on CRAN!</p>
+<p>One of the reasons for R’s popularity is CRAN, <a href="http://cran.r-project.org/">The Comprehensive R Archive Network</a>. This is where you download R and also where most will gain access to packages (there are other places, but that is for later). Not much else to say about this now other than to be aware of it. As of 2018-10-09, there are 13133 on CRAN!</p>
 </div>
 <div id="installing-packages" class="section level3">
 <h3>Installing packages</h3>
@@ -455,21 +455,19 @@ sum(rnorm(100))</code></pre>
 <h2>Exercise 2</h2>
 <p>We’re going to install some packages from CRAN that will give us the tools for our workshop today. We’ll use the tidyverse, sf, and mapview packages. Later, we’ll explain in detail what each of these packages provide.</p>
 <ol style="list-style-type: decimal">
-<li>At the top of the script you just created, type the following functions.</li>
-</ol>
+<li><p>At the top of the script you just created, type the following functions.</p>
 <pre class="r"><code># install packages from CRAN
 install.packages(&quot;tidyverse&quot;)
 install.packages(&quot;sf&quot;)
-install.packages(&quot;mapview&quot;)</code></pre>
-<ol style="list-style-type: decimal">
+install.packages(&quot;mapview&quot;)</code></pre></li>
 <li><p>Select all three lines by clicking and dragging the mouse pointer over the text.</p></li>
 <li><p>Send all threee commands to the console using <code>ctrl+enter</code>. You should see some text output on the console about the installation process. The installation may take a few minutes so don’t be alarmed.</p></li>
 <li><p>After the packages are done installing, verify that there were no errors during the process (this should be pretty obvious, i.e., error text in big scary red letters).</p></li>
-<li><p>Load the packages after they’ve installed.</p></li>
-</ol>
+<li><p>Load the packages after they’ve installed.</p>
 <pre class="r"><code>library(&quot;tidyverse&quot;)
 library(&quot;sf&quot;)
-library(&quot;mapview&quot;)</code></pre>
+library(&quot;mapview&quot;)</code></pre></li>
+</ol>
 <div id="getting-help" class="section level3">
 <h3>Getting Help</h3>
 <p>Being able to find help and interpret that help is probably one of the most important skills for learning a new language. R is no different. Help on functions and packages can be accessed directly from R, can be found on CRAN and other official R resources, searched on Google, found on StackOverflow, or from any number of fantastic online resources. I will cover a few of these here.</p>
@@ -564,123 +562,98 @@ mydf</code></pre>
 <li><p>Each column contains the same type of data</p></li>
 <li><p>The number of observations in each column is equal.</p></li>
 </ol>
-<p>A data frame has other attributes, such as row names and column names. These are useful for indexing (selecting) different parts of the data.</p>
-<pre class="r"><code>names(mydf)</code></pre>
-<pre><code>## [1] &quot;ltrs&quot; &quot;nums&quot; &quot;logs&quot;</code></pre>
-<pre class="r"><code>row.names(mydf)</code></pre>
-<pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot;</code></pre>
 </div>
 </div>
 <div id="data-io" class="section level2">
 <h2>Data I/O</h2>
 <div id="input" class="section level3">
 <h3>Input</h3>
-<!-- It is the rare case when you manually enter your data in R.  Most data analysis workflows typically begin with importing a dataset from an external source.  Literally, this means committing a dataset to memory (i.e., storing it as a variable) as one of R's data structure formats. -->
-<!-- If you're lucky, your data are already in a flat, rectangular format.  In other words, your data are two-dimensional as standard ASCI text.  Flat data files present the least complications on import because there is very little to assume about the structure of the data. On import, R tries to guess the data type for each column and this is fairly unambiguous with flat files.  The base installation of R comes with some easy to use functions for importing flat files, such as `read.table()` and `read.csv`. -->
-<!-- More often you will probably have an Excel spreadsheet to import. This is not a preferred format but the reality is that most people are using this software for data storage. In the old days, importing spreadsheets into R was almost impossible given the proprietary data structure of Excel.  The tools available in R have since matured and it's now pretty painless to import a spreadsheet.  But "painless" comes with some caveats.   -->
-<!-- You will save yourself a lot of trouble with data import from Excel if you think like a machine.  Consider the example below: -->
-<!-- Computers, although very trainable, are also very dumb.  If you have trouble interpreting the information, can you expect a computer to do so?  Most issues importing Excel spreadsheets relate to format of the data.  Here are few pointers to keep in mind if you are using Excel to store data: -->
-<!-- * Use the one spreadsheet, one data frame rule (rectangular) -->
-<!-- * No colors or special formatting -->
-<!-- * No links between sheets -->
-<!-- * One data type per column -->
-<!-- * Use simple column names (no spaces or special characters) -->
-<!-- * Be explicit and consistent with missing values -->
-<!-- Following these simple guidelines will make import much, much smoother.  -->
-<!-- The `readxl` package is the most recent and by far most flexible data import package for Excel files. It comes with the `tidyverse` family of packages (more about this next training), but you can install it separately as follows: -->
-<!-- ```{r eval = F} -->
-<!-- install.packages('readxl') -->
-<!-- ``` -->
-<!-- Once installed, we can load it to access the import functions. -->
-<!-- ```{r} -->
-<!-- library(readxl) -->
-<!-- ``` -->
-<!-- We'll import the `mpg` dataset that describes fuel economy of different car models.  This dataset actually comes with R but I've saved it as a an Excel spreadsheet to demonstrate the `read_excel` import function. If you haven't downloaded the file already, grab it from the [online materials](https://github.com/SCCWRP/R_training_2018/lessons/data) and save it in your `data` folder in your project. -->
-<!-- Now we can import the file (note the **relative** path): -->
-<!-- ```{r, eval = F} -->
-<!-- dat <- read_excel('data/mpg.xlsx') -->
-<!-- ``` -->
-<!-- If you didn't get any errors or warnings, the file is now stored in your environment. -->
-<!-- ```{r} -->
-<!-- ls() -->
-<!-- ``` -->
-<!-- Before we go on, let's look at the data class: -->
-<!-- ```{r} -->
-<!-- class(dat) -->
-<!-- head(dat) -->
-<!-- ``` -->
-<!-- The data are in the `tibble` format.  A tibble is basically a data frame with some extra features, mostly related to how the data are printed in the console. You'll encounter tibbles a lot if you are using the `tidyverse` family of packages, which we'll go over next training.  There are some very good reasons to use tibbles for data wrangling but they can also cause some headaches when used with other packages.  For now, let's just `coerce` the tibble to a data frame. -->
-<!-- ```{r} -->
-<!-- dat <- as.data.frame(dat) -->
-<!-- class(dat) -->
-<!-- ``` -->
-<!-- Now let's look at the data to get an idea of the structure: -->
-<!-- ```{r} -->
-<!-- # get the dimensions -->
-<!-- dim(dat) -->
-<!-- # get the column names -->
-<!-- names(dat) -->
-<!-- # get the row names -->
-<!-- row.names(dat) -->
-<!-- # get the overall structure -->
-<!-- str(dat) -->
-<!-- ``` -->
-<!-- There are several ways to select (aka index) subsets of the data, either by rows or columns.  Here are all the ways you can get the `fl` column from `mpg`: -->
-<!-- ```{r eval = F} -->
-<!-- dat$fl -->
-<!-- dat$"fl" -->
-<!-- dat["fl"] -->
-<!-- dat[,"fl"] -->
-<!-- dat[["fl"]] -->
-<!-- dat[10] -->
-<!-- dat[,10] -->
-<!-- dat[[10]] -->
-<!-- ``` -->
-<!-- It's not easy to understand how and why there are so many ways to subset data in R.  Next time, we'll focus on the `dplyr` package that uses a more logical approach to working with and manipulating data. -->
-<!-- ### Output -->
-<!-- Once we're done working with our data, we'll probably want to save it if we've made significant changes or if we want to share it with somebody. As you an imagine, there are countless ways to save the data depending on the format you want.  We could easily spend the next hour discussing best practices for data storage, but for now, I'll show you an easy approach to save your data as a flat, rectangular text file.  -->
-<!-- We can use the `write_csv` function from the `readr` package.  This function is very similar to `write.csv` from base R but it handles some of the annoying quirks of `write.csv`. -->
-<!-- Install `readr` if you don't have it already. -->
-<!-- ```{r eval = F} -->
-<!-- install.packages('readr') -->
-<!-- ``` -->
-<!-- Load `readr`. -->
-<!-- ```{r eval = F} -->
-<!-- library(readr) -->
-<!-- ``` -->
-<!-- And save the file. -->
-<!-- ```{r eval = F} -->
-<!-- write_csv(dat, 'data/new_mpg.csv') -->
-<!-- ``` -->
-<!-- ## Exercise 2 -->
-<!-- From here on out I hope to have the exercises build on each other. For this exercise we are going to grab the `mpg` data, look at that data, and be able to describe some basic information about that dataset. -->
-<!-- 1. We will be using a new script for the rest of our exercises.  Create this script in RStudio and name it "mpg_analysis.R" -->
-<!-- 2. As you write the script, comment as you go. Some good examples are what we used in the first script where we provided some details on each of the exercises. Remember comments are lines that begin with `#` and you can put whatever you like after that. -->
-<!-- 3. Add some lines to your script to import and store the data in your Enviroment. Remember that the data should be in your `data` folder in your project.  The `read_excel` function is your friend here and the path is `"data/mpg.xlsx"`.  Remember to install/load the `readxl` library.  Alternatively, you can use `read_csv` (`readr` package) if you've saved a csv file from the examples above. -->
-<!-- 5. Now run your script and make sure it doesn't throw any errors and you do in fact get a data frame (or tibble). -->
-<!-- 6. Explore the data frame using some of the functions we covered above (e.g. `head()`,`dim()`, or `str()`).  This part does not need to be included in the script and can be done directly inthe console. It is just a quick QA step to be sure the data read in as expected. -->
-<!-- ## Retention -->
-<!-- ![](figure/automation.png) -->
-<!-- Today we covered a lot of material but at this point you should have the resources to answer the following: -->
-<!-- * What is R and why should I use it? -->
-<!-- * Why would I use RStudio and RStudio projects? -->
-<!-- * How can I write, save, and run scripts in RStudio? -->
-<!-- * Where can I go for help? -->
-<!-- * What are the basic data structures in R? -->
-<!-- * How do I import/export data?  -->
-<!-- R is not an easy language to learn (see [here](http://r4stats.com/articles/why-r-is-hard-to-learn/)).  At the beginning, the payoff in your investment will not be obvious.  You will spend time banging your head on the wall and be tempted to revert to old habits.  Having used R for over ten years, I can tell you that the investment is absolutely worth it.  Once you're able to use R, you will have access to an almost endless repository of analytical tools.  You will also be more efficient, reproducible, and transparent with your workflows.  My advice in the beginning: -->
-<!-- * Time spent frustrated is time spent learning. Just because you're angry doesn't mean you're not gaining information. -->
-<!-- * Pick something small to begin with. Do not try to port all of your old projects to RStudio, this will come with time. -->
-<!-- * Use someone else's code. It's often easier to learn a complex problem by seeing someone else's approach line by line. -->
-<!-- * Become a savvy Googler, see the tips above.  Hard-copy books are obselete when you have all the information at your finger tips. -->
-<!-- * Do not give up!!! -->
-<!-- Next time, we'll talk about data wrangling. This is where the real fun begins... -->
-<!-- ![](figure/learning_crv.png) -->
+<p>It is the rare case when you manually enter your data in R, not to mention impractical for most datasets. Most data analysis workflows typically begin with importing a dataset from an external source. Literally, this means committing a dataset to memory (i.e., storing it as a variable) as one of R’s data structure formats.</p>
+<p>Flat data files (text only, rectangular format) present the least complications on import because there is very little to assume about the structure of the data. On import, R tries to guess the data type for each column and this is fairly unambiguous with flat files. The base installation of R comes with some easy to use functions for importing flat files, such as <code>read.table()</code> and <code>read.csv</code>.</p>
+</div>
+<div id="exercise-3" class="section level3">
+<h3>Exercise 3</h3>
+<p>Now that we have the data downloaded and extracted to our data folder, we’ll use <code>read.csv</code> to import two files.</p>
+<ol style="list-style-type: decimal">
+<li><p>Type the following in your script.</p>
+<pre class="r"><code>cscidat &lt;- read.csv(&#39;data/cscidat.csv&#39;, stringsAsFactors = F)
+ascidat &lt;- read.csv(&#39;data/ascidat.csv&#39;, stringsAsFactors = F)</code></pre></li>
+<li><p>Send the commands to the console with <code>ctrl+enter</code>.</p></li>
+<li><p>Verify that the data imported correctly by viewing the first six rows of each dataset. Use the <code>head()</code> function directly in the console, e.g., <code>head(cscidat)</code></p></li>
+</ol>
+<p>Let’s explore the datasets a bit. There are many useful functions for exploring the characteristics of a dataset. This is always a good idea when you first import something.</p>
+<pre class="r"><code># get the dimensions
+dim(cscidat)</code></pre>
+<pre><code>## [1] 1613   10</code></pre>
+<pre class="r"><code>dim(ascidat)</code></pre>
+<pre><code>## [1] 2585    5</code></pre>
+<pre class="r"><code># get the column names
+names(cscidat)</code></pre>
+<pre><code>##  [1] &quot;SampleID_old&quot;   &quot;StationCode&quot;    &quot;New_Lat&quot;        &quot;New_Long&quot;      
+##  [5] &quot;COMID&quot;          &quot;E&quot;              &quot;OE&quot;             &quot;pMMI&quot;          
+##  [9] &quot;CSCI&quot;           &quot;SampleID_old.1&quot;</code></pre>
+<pre class="r"><code>names(ascidat)</code></pre>
+<pre><code>## [1] &quot;Type.hybrid.1&quot; &quot;MMI.hybrid&quot;    &quot;Replicate&quot;     &quot;SampleDate&quot;   
+## [5] &quot;StationID&quot;</code></pre>
+<pre class="r"><code># see the first six rows
+head(cscidat)</code></pre>
+<pre><code>##          SampleID_old StationCode  New_Lat  New_Long    COMID        E
+## 1 000CAT148_8.10.10_1   000CAT148 39.07523 -119.8994  8942501 16.05804
+## 2 000CAT228_8.10.10_1   000CAT228 39.07307 -119.9201  8942503 16.08960
+## 3  102PS0139_8.9.10_1   102PS0139 41.99595 -122.9597 23936337 15.46439
+## 4 103CDCHHR_9.14.10_1   103CDCHHR 41.78890 -124.0778 22226836 21.10443
+## 5 103FC1106_7.15.14_1   103FC1106 41.93407 -124.1081 22226634 16.83757
+## 6 103FCA168_7.24.13_1   103FCA168 41.64962 -124.0912 22226990 19.07408
+##          OE      pMMI      CSCI      SampleID_old.1
+## 1 0.9309977 1.0449580 0.9879779 000CAT148_8.10.10_1
+## 2 0.9726777 0.9896232 0.9811505 000CAT228_8.10.10_1
+## 3 1.0896002 1.0535386 1.0715694  102PS0139_8.9.10_1
+## 4 1.0898184 1.0834653 1.0866419 103CDCHHR_9.14.10_1
+## 5 1.0779468 0.9163731 0.9971599 103FC1106_7.15.14_1
+## 6 1.0931064 1.0335179 1.0633122 103FCA168_7.24.13_1</code></pre>
+<pre class="r"><code>head(ascidat)</code></pre>
+<pre><code>##   Type.hybrid.1 MMI.hybrid Replicate SampleDate StationID
+## 1     Reference  1.1950555         1    8.10.10 000CAT148
+## 2     Reference  1.1514480         1    8.10.10 000CAT228
+## 3  Intermediate  0.9345882         1     8.9.10 102PS0139
+## 4     Reference  1.1965128         1    8.28.12 102PS0177
+## 5     Reference  1.2091360         2    8.28.12 102PS0177
+## 6     Reference  0.8369236         1    9.14.10 103CDCHHR</code></pre>
+<pre class="r"><code># get the overall structure
+str(cscidat)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    1613 obs. of  10 variables:
+##  $ SampleID_old  : chr  &quot;000CAT148_8.10.10_1&quot; &quot;000CAT228_8.10.10_1&quot; &quot;102PS0139_8.9.10_1&quot; &quot;103CDCHHR_9.14.10_1&quot; ...
+##  $ StationCode   : chr  &quot;000CAT148&quot; &quot;000CAT228&quot; &quot;102PS0139&quot; &quot;103CDCHHR&quot; ...
+##  $ New_Lat       : num  39.1 39.1 42 41.8 41.9 ...
+##  $ New_Long      : num  -120 -120 -123 -124 -124 ...
+##  $ COMID         : int  8942501 8942503 23936337 22226836 22226634 22226990 22227592 22226948 22226612 22226750 ...
+##  $ E             : num  16.1 16.1 15.5 21.1 16.8 ...
+##  $ OE            : num  0.931 0.973 1.09 1.09 1.078 ...
+##  $ pMMI          : num  1.045 0.99 1.054 1.083 0.916 ...
+##  $ CSCI          : num  0.988 0.981 1.072 1.087 0.997 ...
+##  $ SampleID_old.1: chr  &quot;000CAT148_8.10.10_1&quot; &quot;000CAT228_8.10.10_1&quot; &quot;102PS0139_8.9.10_1&quot; &quot;103CDCHHR_9.14.10_1&quot; ...</code></pre>
+<pre class="r"><code>str(ascidat)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    2585 obs. of  5 variables:
+##  $ Type.hybrid.1: chr  &quot;Reference&quot; &quot;Reference&quot; &quot;Intermediate&quot; &quot;Reference&quot; ...
+##  $ MMI.hybrid   : num  1.195 1.151 0.935 1.197 1.209 ...
+##  $ Replicate    : int  1 1 1 1 2 1 2 1 1 1 ...
+##  $ SampleDate   : chr  &quot;8.10.10&quot; &quot;8.10.10&quot; &quot;8.9.10&quot; &quot;8.28.12&quot; ...
+##  $ StationID    : chr  &quot;000CAT148&quot; &quot;000CAT228&quot; &quot;102PS0139&quot; &quot;102PS0177&quot; ...</code></pre>
+<p>You can also view each dataset in a spreadsheet style in the scripting window:</p>
+<pre class="r"><code>View(cscidat)
+View(ascidat)</code></pre>
+</div>
+<div id="other-ways-to-import-data" class="section level3">
+<h3>Other ways to import data</h3>
+<p>More often you will probably have an Excel spreadsheet to import. In the old days, importing spreadsheets into R was almost impossible given the proprietary data structure of Excel. The tools available in R have since matured and it’s now pretty painless to import a spreadsheet. The <code>readxl</code> package is the most recent and by far most flexible data import package for Excel files. It comes with the <code>tidyverse</code> family of package.</p>
+<p>Once installed, we can load it to access the import functions.</p>
+<pre class="r"><code>library(readxl)
+dat &lt;- read_excel(&#39;location/of/excel/file.xlsx&#39;)</code></pre>
 </div>
 </div>
-<div id="attribution" class="section level2">
-<h2>Attribution</h2>
-<p>Content in this lesson was pillaged extensively from Jeffrey Hollister (USEPA) and the USGS-R training curriculum <a href="https://github.com/USGS-R/training-curriculum">here</a>.</p>
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<p>In this lesson we learned about R and Rstudio, some of the basic syntax and data structures in R, and how to import files. We’ve just imported some provisional data for the California Stream Condition Index (CSCI) and the Algal Stream Condition Index (ASCI) that we’ll continue to use for the rest of the workshop. These data represent a portion of the sampling sites that were used to develop each index. Next we’ll learn how to process and plot these data to gain insight into bioassessment patterns throughout the state.</p>
 </div>
 </div>
 
