@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>usingr.utf8.md</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">CABW 2018 R training</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="rbasics.html">What, why, and how of R</a>
+</li>
+<li>
+  <a href="wrangleplot.html">Wrangling and plotting</a>
+</li>
+<li>
+  <a href="mapping.html">Mapping</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<div id="using-r-for-bioassessment-data-what-why-and-how" class="section level1">
+<h1>Using R for bioassessment data: What, why, and how</h1>
+<div id="lesson-outline" class="section level2">
+<h2>Lesson Outline</h2>
+<ul>
+<li><a href="#goals-and-motivation">Goals and Motivation</a></li>
+<li><a href="#rstudio">RStudio</a></li>
+<li><a href="#r-language-fundamentals">R language fundamentals</a></li>
+<li><a href="#data-structures-in-r">Data structures in R</a></li>
+<li><a href="#data-io">Data I/O</a></li>
+<li>[Retention]</li>
+</ul>
+</div>
+<div id="lesson-exercises" class="section level2">
+<h2>Lesson Exercises</h2>
+<ul>
+<li><a href="#exercise-1">Exercise 1</a></li>
+<li><a href="#exercise-2">Exercise 2</a></li>
+</ul>
+</div>
+<div id="goals-and-motivation" class="section level2">
+<h2>Goals and Motivation</h2>
+<p><a href="https://www.r-project.org/">R</a> is a language for statistical computing as well as a general purpose programming language. Increasingly, it has become one of the primary languages used in data science and for data analysis across many of the natural sciences.</p>
+<p>The goals of this training are to expose you to fundamentals and to develop an appreciation of what’s possible with this software. We also provide resources that you can use for follow-up learning on your own. You should be able to answer these questions at the end of this session:</p>
+<ul>
+<li>What is R and why should I use it?</li>
+<li>Why would I use RStudio and RStudio projects?</li>
+<li>How can I write, save, and run scripts in RStudio?</li>
+<li>Where can I go for help?</li>
+<li>What are the basic data structures in R?</li>
+<li>How do I import/export data?</li>
+</ul>
+<div id="why-should-i-invest-time-in-r" class="section level3">
+<h3>Why should I invest time in R?</h3>
+<p>There are many programming languages available and each has it’s specific benefits. R was originally created as a statistical programming language but now it is largely viewed as a ‘data science’ language. Why would you invest time in learning R compared to other languages?</p>
+<ul>
+<li>The growth of R as explained in the <a href="https://stackoverflow.blog/2017/10/10/impressive-growth-r/">Stack Overflow blog</a>, <a href="http://blog.revolutionanalytics.com/2016/07/r-moves-up-to-5th-place-in-ieee-language-rankings.html">IEEE rating</a></li>
+</ul>
+<p>R is also an open-source programming language - not only is it free, but this means anybody can contribute to it’s development. As of 2018-10-08, there are 13132 on CRAN!</p>
+</div>
+</div>
+<div id="rstudio" class="section level2">
+<h2>RStudio</h2>
+<p>In the old days, the only way to use R was directly from the Console - this is a bare bones way of running R only with direct input of commands. Now, <a href="https://www.rstudio.com/">RStudio</a> is the go-to Interactive Development Environment (IDE) for R. Think of it like a car that is built around an engine. It is integrated with the console (engine) and includes many other features to improve the user’s experience, such as version control, debugging, dynamic documents, package manager and creation, and code highlighting and completion.</p>
+<p>Let’s get familiar with RStudio before we go on.</p>
+<div id="open-r-and-rstudio" class="section level3">
+<h3>Open R and RStudio</h3>
+<p>If you haven’t done so, download and install RStudio from the link above. After it’s installed, find the RStudio shortcut and fire it up (just watch for now). You should see something like this:</p>
+<p><img src="figure/rstudio.png" /></p>
+<p>There are four panes in RStudio:</p>
+<ul>
+<li>Source</li>
+<li>console</li>
+<li>Environment, History, etc.</li>
+<li>Files, plots, etc.</li>
+</ul>
+</div>
+<div id="rstudio-projects" class="section level3">
+<h3>RStudio projects</h3>
+<p>I strongly encourage you to use RStudio projects when you are working with R. The RStudio project provides a central location for working on a particular task. It helps with file management and is portable if all the files live in the same project. RStudio projects also remember history - what commands you used and what data objects are in your enviornment.</p>
+<p>To create a new project, click on the File menu at the top and select ‘New project…’</p>
+<p><img src="figure/rstudio_proj.jpg" /></p>
+<p>Now we can use this project for our data and any scripts we create.</p>
+</div>
+<div id="scripting" class="section level3">
+<h3>Scripting</h3>
+<p>In most cases, you will not enter and execute code directly in the console. Code can be written in a script and then sent directly to the console when you’re ready to run it. The key difference here is that a script can be saved and shared.</p>
+<p>Open a new script from the File menu…</p>
+<p><img src="figure/rstudio_script.jpg" /></p>
+</div>
+<div id="executing-code-in-rstudio" class="section level3">
+<h3>Executing code in RStudio</h3>
+<p>After you write your script it can be sent to the Console to run the code in R. Any variables you create in your script will not be available in your working environment until this is done. There are two ways to sent code the console. First, you can hit the <code>Run</code> button at the top right of the scripting window. Second, and preferred, you can use <code>ctrl+enter</code> (<code>cmd+enter</code> on a Mac). Both approaches will send the selected line to the console, then move to the next line in your script. You can also highlight and send an entire block of code.</p>
+<p><img src="figure/rstudio_run.jpg" /></p>
+</div>
+<div id="what-is-the-environment" class="section level3">
+<h3>What is the environment?</h3>
+<p>There are two outcomes when you run code. First, the code will simply print output directly in the console. Second, there is no output because you have stored it as a variable (we’ll talk about variable assignment later). Output that is stored is actually saved in the <code>environment</code>. The environment is the collection of named objects that are stored in memory for your current R session. Anything stored in memory will be accessible by it’s name without running the original script that was used to create it.</p>
+</div>
+</div>
+<div id="exercise-1" class="section level2">
+<h2>Exercise 1</h2>
+<p>This exercise will make sure R and RStudio are working and that you can get around the basics in RStudio. Use the blue stickies when you have completed, and red stickies if you are running into problems.</p>
+<ol style="list-style-type: decimal">
+<li><p>Start RStudio: To start both R and RStudio requires only firing up RStudio. RStudio should be available from All Programs at the Start Menu. Fire up RStudio.</p></li>
+<li><p>Take a few minutes to look around RStudio. Find the Console Pane. Find Global and Project Options (hint: look in Tools). Look at the Environment, History Pane. Look at the Files, Plots, Packages, etc. pane.</p></li>
+<li><p>Create a new project. Name it “cabw_r_workshop”. We will use this for the rest of the workshop.</p></li>
+<li><p>Create a new “R Script” in the Source Pane, save that file into your newly created project and name it “cabw_script.R”. It’ll just be a blank text file at this point.</p></li>
+<li><p>Add in a comment line to separate this section. It should look something like: <code># Exercise 1: Just Getting used to RStudio and Scripts</code>.</p></li>
+<li><p>Add a single line to this script with the following text: <code>ls()</code>. This is an R function that lists objects in your current environment. Use the various ways we showed to send this command to the R Console. Also, try typing this directly into the R Console and hit <code>Enter</code> to run it.</p></li>
+<li><p>Lastly, we need to get this project set up with some example data for our exercies. You should have downloaded this already, but if not, the data are available from &lt;<a href="https://SCCWRP.github.io/CABW2018_R_training/data/datazip.zip">link</a>&gt;. The data are in a compressed folder. Download the file to your computer (anywhere). Create a folder in your new project named <code>data</code> and extract the files into this location.</p></li>
+</ol>
+</div>
+<div id="r-language-fundamentals" class="section level2">
+<h2>R language fundamentals</h2>
+<p>The basic syntax of a function follows the form: <code>function_name(arg1, arg2, ...)</code>.</p>
+<p>With the base install, you will gain access to many (2644 functions, to be exact). Some examples:</p>
+<pre class="r"><code># print
+print(&#39;hello world!&#39;)</code></pre>
+<pre><code>## [1] &quot;hello world!&quot;</code></pre>
+<pre class="r"><code># sequence
+seq(1, 10)</code></pre>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<pre class="r"><code># random numbers
+rnorm(100, mean = 10, sd = 2)</code></pre>
+<pre><code>##   [1] 12.852829  8.069691 11.580614 10.999086  7.208115 12.117805  9.446305
+##   [8]  7.613590  9.528074  9.361867 10.845224  8.529499  9.561156  9.808277
+##  [15]  8.526057 11.959975  9.496306 11.133977 10.594277  6.172468 14.045830
+##  [22] 11.605639  4.380223  9.593316  8.942798 11.998788  9.884103  7.089177
+##  [29] 10.735667 11.183200 11.530050  7.834951  9.882204  9.883599 12.816330
+##  [36]  8.487276 11.196966  9.385998  9.280937  8.596865  8.892108 12.511322
+##  [43] 11.801546 10.905318 10.137962 11.699435  9.292474  8.525711 11.324331
+##  [50]  8.801528  9.081604  9.523991  8.828765  9.447094  9.810804  6.944139
+##  [57] 13.507976 11.172086  7.519347  9.849156 13.871626  5.014093 10.411628
+##  [64] 14.124548  9.224385 10.495232  8.664914  8.957238  9.758752 10.431326
+##  [71] 14.220345 12.245604 11.955130  8.663069 11.266556  7.985181  7.526232
+##  [78] 10.463069  9.347962  9.400004 10.523235  9.482013 10.935331 13.884069
+##  [85] 11.243829 11.244948  8.438531 10.275403  9.525658 12.755183  9.168943
+##  [92] 11.372410  8.732740  8.299631 14.056852  9.118241  7.874157  6.489794
+##  [99]  7.300767 10.926198</code></pre>
+<pre class="r"><code># average 
+mean(rnorm(100))</code></pre>
+<pre><code>## [1] 0.03946573</code></pre>
+<pre class="r"><code># sum
+sum(rnorm(100))</code></pre>
+<pre><code>## [1] 1.332777</code></pre>
+<p>Very often you will see functions used like this:</p>
+<pre class="r"><code>my_random_sum &lt;- sum(rnorm(100))</code></pre>
+<p>In this case the first part of the line is the name of an object. You make this up. Ideally it should have some meaning, but the only rules are that it can’t start with a number and must not have any spaces. The second bit, <code>&lt;-</code>, is the assignment operator. This tells R to take the result of <code>sum(rnorm(100))</code> and store it an object named, <code>my_random_sum</code>. It is stored in the environment and can be used by just executing it’s name in the console.</p>
+<pre class="r"><code>my_random_sum</code></pre>
+<pre><code>## [1] -6.38524</code></pre>
+<p>With this, you have the very basics of how we write R code and save objects that can be used later.</p>
+<div id="packages" class="section level3">
+<h3>Packages</h3>
+<p>The base install of R is quite powerful, but you will soon have a need or desire to go beyond this. Packages provide this ability. They are a standardized method for extending R with new methods, techniques, and programming functionality. There is a lot to say about packages regarding finding them, using them, etc., but for now let’s focus just on the basics.</p>
+</div>
+<div id="cran" class="section level3">
+<h3>CRAN</h3>
+<p>One of the reasons for R’s popularity is CRAN, <a href="http://cran.r-project.org/">The Comprehensive R Archive Network</a>. This is where you download R and also where most will gain access to packages (there are other places, but that is for later). Not much else to say about this now other than to be aware of it. As of 2018-10-08, there are 13132 on CRAN!</p>
+</div>
+<div id="installing-packages" class="section level3">
+<h3>Installing packages</h3>
+<p>When a package gets installed, that means the source is downloaded and put into your library. A default library location is set for you so no need to worry about that. In fact on Windows most of this is pretty automatic. Let’s give it a shot.</p>
+</div>
+</div>
+<div id="exercise-2" class="section level2">
+<h2>Exercise 2</h2>
+<p>We’re going to install some packages from CRAN that will give us the tools for our workshop today. We’ll use the tidyverse, sf, and mapview packages. Later, we’ll explain in detail what each of these packages provide.</p>
+<ol style="list-style-type: decimal">
+<li>At the top of the script you just created, type the following functions.</li>
+</ol>
+<pre class="r"><code># install packages from CRAN
+install.packages(&quot;tidyverse&quot;)
+install.packages(&quot;sf&quot;)
+install.packages(&quot;mapview&quot;)</code></pre>
+<ol style="list-style-type: decimal">
+<li><p>Select all three lines by clicking and dragging the mouse pointer over the text.</p></li>
+<li><p>Send all threee commands to the console using <code>ctrl+enter</code>. You should see some text output on the console about the installation process. The installation may take a few minutes so don’t be alarmed.</p></li>
+<li><p>After the packages are done installing, verify that there were no errors during the process (this should be pretty obvious, i.e., error text in big scary red letters).</p></li>
+<li><p>Load the packages after they’ve installed.</p></li>
+</ol>
+<pre class="r"><code>library(&quot;tidyverse&quot;)
+library(&quot;sf&quot;)
+library(&quot;mapview&quot;)</code></pre>
+<div id="getting-help" class="section level3">
+<h3>Getting Help</h3>
+<p>Being able to find help and interpret that help is probably one of the most important skills for learning a new language. R is no different. Help on functions and packages can be accessed directly from R, can be found on CRAN and other official R resources, searched on Google, found on StackOverflow, or from any number of fantastic online resources. I will cover a few of these here.</p>
+</div>
+<div id="help-from-the-console" class="section level3">
+<h3>Help from the console</h3>
+<p>Getting help from the console is straightforward and can be done numerous ways.</p>
+<pre class="r"><code># Using the help command/shortcut
+# When you know the name of a function
+help(&quot;print&quot;) # Help on the print command
+?print # Help on the print command using the `?` shortcut
+
+# When you know the name of the package
+help(package = &quot;sf&quot;) # Help on the package `dplyr`
+
+# Don&#39;t know the exact name or just part of it
+apropos(&quot;print&quot;) # Returns all available functions with &quot;print&quot; in the name
+??print # shortcut, but also searches demos and vignettes in a formatted page</code></pre>
+</div>
+<div id="official-r-resources" class="section level3">
+<h3>Official R Resources</h3>
+<p>In addition to help from within R itself, CRAN and the R-Project have many resources available for support. Two of the most notable are the mailing lists and the <a href="http://cran.r-project.org/web/views/">task views</a>.</p>
+<ul>
+<li><a href="https://stat.ethz.ch/mailman/listinfo/r-help">R Help Mailing List</a>: The main mailing list for R help. Can be a bit daunting and some (although not most) senior folks can be, um, curmudgeonly…</li>
+<li><a href="https://stat.ethz.ch/mailman/listinfo/r-sig-ecology">R-sig-ecology</a>: A special interest group for use of R in ecology. Less daunting than the main help with participation from some big names in ecological modelling and statistics (e.g., Ben Bolker, Gavin Simpson, and Phil Dixon).</li>
+<li><a href="http://cran.r-project.org/web/views/Environmetrics.html">Environmetrics Task View</a>: Task views are great in that they provide an annotated list of packages relevant to a particular field. This one is maintained by Gavin Simpson and has great info on packages relevant to much of the work at EPA.</li>
+<li><a href="http://cran.r-project.org/web/views/Spatial.html">Spatial Analysis Task View</a>: One I use a lot that lists all the relevant packages for spatial analysis, GIS, and Remote Sensing in R.</li>
+</ul>
+</div>
+<div id="google-and-stackoverflow" class="section level3">
+<h3>Google and StackOverflow</h3>
+<p>While the resources already mentioned are useful, often the quickest way is to just turn to Google. However, a search for “R” is a bit challenging. A few ways around this. Google works great if you search for a given package or function name. You can also search for mailing lists directly (i.e. “R-sig-geo”), although Google often finds results from these sources.</p>
+<p>Blind googling can require a bit of strategy to get the info you want. Some pointers:</p>
+<ul>
+<li>Always preface the search with “r”</li>
+<li>Understand which sources are reliable</li>
+<li>Take note of the number of hits and date of a web page</li>
+<li>When in doubt, search with the exact error message</li>
+</ul>
+<p>One specific resource that I use quite a bit is <a href="http://stackoverflow.com/questions/tagged/r">StackOverflow with the ‘r’ tag</a>. StackOverflow is a discussion forum for all things related to programming. You can then use this tag and the search functions in StackOverflow and find answers to almost anything you can think of. However, these forums are also very strict and I typically use them to find answers not to ask questions.</p>
+</div>
+<div id="other-resources" class="section level3">
+<h3>Other Resources</h3>
+<p>As I mentioned earlier, there are TOO many resources to list here and everyone has their favorites. Below are just a few that I like.</p>
+<ul>
+<li><a href="http://rforcats.net/">R For Cats</a>: Basic introduction site, meant to be a gentle and light-hearted introduction</li>
+<li><a href="http://adv-r.had.co.nz/">Advanced R</a>: Web home of Hadley Wickham’s new book. Gets into more advanced topics, but also covers the basics in a great way.</li>
+<li><a href="http://cran.r-project.org/doc/contrib/Short-refcard.pdf">CRAN Cheatsheets</a>: A good cheat sheet from the official source</li>
+<li><a href="http://www.rstudio.com/resources/cheatsheets/">RStudio Cheatsheets</a>: Additional cheat sheets from RStudio. I am especially fond of the data wrangling one.</li>
+</ul>
+</div>
+</div>
+<div id="data-structures-in-r" class="section level2">
+<h2>Data structures in R</h2>
+<p>Now that you know how to get started in R and where to find resources, we can begin talking about R data structures. Simply put, a data structure is a way for programming languages to handle information storage.</p>
+<p>There is a bewildering amount of formats for storing data and R is no exception. Understanding the basic building blocks that make up data types is essential. All functions in R require specific types of input data and the key to using functions is knowing how these types relate to each other.</p>
+<div id="vectors-one-dimensional-data" class="section level3">
+<h3>Vectors (one-dimensional data)</h3>
+<p>The basic data format in R is a vector - a one-dimensional grouping of elements that have the same type. These are all vectors and they are created with the <code>c</code> function:</p>
+<pre class="r"><code>dbl_var &lt;- c(1, 2.5, 4.5)
+int_var &lt;- c(1L, 6L, 10L)
+log_var &lt;- c(TRUE, FALSE, T, F)
+chr_var &lt;- c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)</code></pre>
+<p>The four types of atomic vectors (think atoms that make up a molecule aka vector) are <code>double</code> (or numeric), <code>integer</code>, <code>logical</code>, and <code>character</code>. For most purposes you can ignore the <code>integer</code> class, so there are basically three types. Each type has some useful properties:</p>
+<pre class="r"><code>class(dbl_var)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>length(log_var)</code></pre>
+<pre><code>## [1] 4</code></pre>
+<p>These properties are useful for not only describing an object, but they define limits on which functions or types of operations that can be used. That is, some functions require a character string input while others require a numeric input. Similarly, vectors of different types or properties may not play well together. Let’s look at some examples:</p>
+<pre class="r"><code># taking the mean of a character vector
+mean(chr_var)
+
+# adding two numeric vectors of different lengths
+vec1 &lt;- c(1, 2, 3, 4)
+vec2 &lt;- c(2, 3, 5)
+vec1 + vec2</code></pre>
+</div>
+<div id="dimensional-data" class="section level3">
+<h3>2-dimensional data</h3>
+<p>A collection of vectors represented as a single data object are often described as two-dimensional data. A more common way of storing two-dimensional data is in a data frame (i.e., <code>data.frame</code>). Think of them like your standard spreadsheet, where each column describes a variable and rows link observations between columns. Here’s a simple example:</p>
+<pre class="r"><code>ltrs &lt;- c(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;)
+nums &lt;- c(1, 2, 3)
+logs &lt;- c(T, F, T)
+mydf &lt;- data.frame(ltrs, nums, logs)
+mydf</code></pre>
+<pre><code>##   ltrs nums  logs
+## 1    a    1  TRUE
+## 2    b    2 FALSE
+## 3    c    3  TRUE</code></pre>
+<p>The only constraints required to make a data frame are:</p>
+<ol style="list-style-type: decimal">
+<li><p>Each column contains the same type of data</p></li>
+<li><p>The number of observations in each column is equal.</p></li>
+</ol>
+<p>A data frame has other attributes, such as row names and column names. These are useful for indexing (selecting) different parts of the data.</p>
+<pre class="r"><code>names(mydf)</code></pre>
+<pre><code>## [1] &quot;ltrs&quot; &quot;nums&quot; &quot;logs&quot;</code></pre>
+<pre class="r"><code>row.names(mydf)</code></pre>
+<pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot;</code></pre>
+</div>
+</div>
+<div id="data-io" class="section level2">
+<h2>Data I/O</h2>
+<div id="input" class="section level3">
+<h3>Input</h3>
+<!-- It is the rare case when you manually enter your data in R.  Most data analysis workflows typically begin with importing a dataset from an external source.  Literally, this means committing a dataset to memory (i.e., storing it as a variable) as one of R's data structure formats. -->
+<!-- If you're lucky, your data are already in a flat, rectangular format.  In other words, your data are two-dimensional as standard ASCI text.  Flat data files present the least complications on import because there is very little to assume about the structure of the data. On import, R tries to guess the data type for each column and this is fairly unambiguous with flat files.  The base installation of R comes with some easy to use functions for importing flat files, such as `read.table()` and `read.csv`. -->
+<!-- More often you will probably have an Excel spreadsheet to import. This is not a preferred format but the reality is that most people are using this software for data storage. In the old days, importing spreadsheets into R was almost impossible given the proprietary data structure of Excel.  The tools available in R have since matured and it's now pretty painless to import a spreadsheet.  But "painless" comes with some caveats.   -->
+<!-- You will save yourself a lot of trouble with data import from Excel if you think like a machine.  Consider the example below: -->
+<!-- Computers, although very trainable, are also very dumb.  If you have trouble interpreting the information, can you expect a computer to do so?  Most issues importing Excel spreadsheets relate to format of the data.  Here are few pointers to keep in mind if you are using Excel to store data: -->
+<!-- * Use the one spreadsheet, one data frame rule (rectangular) -->
+<!-- * No colors or special formatting -->
+<!-- * No links between sheets -->
+<!-- * One data type per column -->
+<!-- * Use simple column names (no spaces or special characters) -->
+<!-- * Be explicit and consistent with missing values -->
+<!-- Following these simple guidelines will make import much, much smoother.  -->
+<!-- The `readxl` package is the most recent and by far most flexible data import package for Excel files. It comes with the `tidyverse` family of packages (more about this next training), but you can install it separately as follows: -->
+<!-- ```{r eval = F} -->
+<!-- install.packages('readxl') -->
+<!-- ``` -->
+<!-- Once installed, we can load it to access the import functions. -->
+<!-- ```{r} -->
+<!-- library(readxl) -->
+<!-- ``` -->
+<!-- We'll import the `mpg` dataset that describes fuel economy of different car models.  This dataset actually comes with R but I've saved it as a an Excel spreadsheet to demonstrate the `read_excel` import function. If you haven't downloaded the file already, grab it from the [online materials](https://github.com/SCCWRP/R_training_2018/lessons/data) and save it in your `data` folder in your project. -->
+<!-- Now we can import the file (note the **relative** path): -->
+<!-- ```{r, eval = F} -->
+<!-- dat <- read_excel('data/mpg.xlsx') -->
+<!-- ``` -->
+<!-- If you didn't get any errors or warnings, the file is now stored in your environment. -->
+<!-- ```{r} -->
+<!-- ls() -->
+<!-- ``` -->
+<!-- Before we go on, let's look at the data class: -->
+<!-- ```{r} -->
+<!-- class(dat) -->
+<!-- head(dat) -->
+<!-- ``` -->
+<!-- The data are in the `tibble` format.  A tibble is basically a data frame with some extra features, mostly related to how the data are printed in the console. You'll encounter tibbles a lot if you are using the `tidyverse` family of packages, which we'll go over next training.  There are some very good reasons to use tibbles for data wrangling but they can also cause some headaches when used with other packages.  For now, let's just `coerce` the tibble to a data frame. -->
+<!-- ```{r} -->
+<!-- dat <- as.data.frame(dat) -->
+<!-- class(dat) -->
+<!-- ``` -->
+<!-- Now let's look at the data to get an idea of the structure: -->
+<!-- ```{r} -->
+<!-- # get the dimensions -->
+<!-- dim(dat) -->
+<!-- # get the column names -->
+<!-- names(dat) -->
+<!-- # get the row names -->
+<!-- row.names(dat) -->
+<!-- # get the overall structure -->
+<!-- str(dat) -->
+<!-- ``` -->
+<!-- There are several ways to select (aka index) subsets of the data, either by rows or columns.  Here are all the ways you can get the `fl` column from `mpg`: -->
+<!-- ```{r eval = F} -->
+<!-- dat$fl -->
+<!-- dat$"fl" -->
+<!-- dat["fl"] -->
+<!-- dat[,"fl"] -->
+<!-- dat[["fl"]] -->
+<!-- dat[10] -->
+<!-- dat[,10] -->
+<!-- dat[[10]] -->
+<!-- ``` -->
+<!-- It's not easy to understand how and why there are so many ways to subset data in R.  Next time, we'll focus on the `dplyr` package that uses a more logical approach to working with and manipulating data. -->
+<!-- ### Output -->
+<!-- Once we're done working with our data, we'll probably want to save it if we've made significant changes or if we want to share it with somebody. As you an imagine, there are countless ways to save the data depending on the format you want.  We could easily spend the next hour discussing best practices for data storage, but for now, I'll show you an easy approach to save your data as a flat, rectangular text file.  -->
+<!-- We can use the `write_csv` function from the `readr` package.  This function is very similar to `write.csv` from base R but it handles some of the annoying quirks of `write.csv`. -->
+<!-- Install `readr` if you don't have it already. -->
+<!-- ```{r eval = F} -->
+<!-- install.packages('readr') -->
+<!-- ``` -->
+<!-- Load `readr`. -->
+<!-- ```{r eval = F} -->
+<!-- library(readr) -->
+<!-- ``` -->
+<!-- And save the file. -->
+<!-- ```{r eval = F} -->
+<!-- write_csv(dat, 'data/new_mpg.csv') -->
+<!-- ``` -->
+<!-- ## Exercise 2 -->
+<!-- From here on out I hope to have the exercises build on each other. For this exercise we are going to grab the `mpg` data, look at that data, and be able to describe some basic information about that dataset. -->
+<!-- 1. We will be using a new script for the rest of our exercises.  Create this script in RStudio and name it "mpg_analysis.R" -->
+<!-- 2. As you write the script, comment as you go. Some good examples are what we used in the first script where we provided some details on each of the exercises. Remember comments are lines that begin with `#` and you can put whatever you like after that. -->
+<!-- 3. Add some lines to your script to import and store the data in your Enviroment. Remember that the data should be in your `data` folder in your project.  The `read_excel` function is your friend here and the path is `"data/mpg.xlsx"`.  Remember to install/load the `readxl` library.  Alternatively, you can use `read_csv` (`readr` package) if you've saved a csv file from the examples above. -->
+<!-- 5. Now run your script and make sure it doesn't throw any errors and you do in fact get a data frame (or tibble). -->
+<!-- 6. Explore the data frame using some of the functions we covered above (e.g. `head()`,`dim()`, or `str()`).  This part does not need to be included in the script and can be done directly inthe console. It is just a quick QA step to be sure the data read in as expected. -->
+<!-- ## Retention -->
+<!-- ![](figure/automation.png) -->
+<!-- Today we covered a lot of material but at this point you should have the resources to answer the following: -->
+<!-- * What is R and why should I use it? -->
+<!-- * Why would I use RStudio and RStudio projects? -->
+<!-- * How can I write, save, and run scripts in RStudio? -->
+<!-- * Where can I go for help? -->
+<!-- * What are the basic data structures in R? -->
+<!-- * How do I import/export data?  -->
+<!-- R is not an easy language to learn (see [here](http://r4stats.com/articles/why-r-is-hard-to-learn/)).  At the beginning, the payoff in your investment will not be obvious.  You will spend time banging your head on the wall and be tempted to revert to old habits.  Having used R for over ten years, I can tell you that the investment is absolutely worth it.  Once you're able to use R, you will have access to an almost endless repository of analytical tools.  You will also be more efficient, reproducible, and transparent with your workflows.  My advice in the beginning: -->
+<!-- * Time spent frustrated is time spent learning. Just because you're angry doesn't mean you're not gaining information. -->
+<!-- * Pick something small to begin with. Do not try to port all of your old projects to RStudio, this will come with time. -->
+<!-- * Use someone else's code. It's often easier to learn a complex problem by seeing someone else's approach line by line. -->
+<!-- * Become a savvy Googler, see the tips above.  Hard-copy books are obselete when you have all the information at your finger tips. -->
+<!-- * Do not give up!!! -->
+<!-- Next time, we'll talk about data wrangling. This is where the real fun begins... -->
+<!-- ![](figure/learning_crv.png) -->
+</div>
+</div>
+<div id="attribution" class="section level2">
+<h2>Attribution</h2>
+<p>Content in this lesson was pillaged extensively from Jeffrey Hollister (USEPA) and the USGS-R training curriculum <a href="https://github.com/USGS-R/training-curriculum">here</a>.</p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

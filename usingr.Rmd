@@ -1,0 +1,456 @@
+
+```{r setup, echo=FALSE, warning=FALSE, purl=FALSE, message=FALSE}
+options(repos = "http://cran.rstudio.com/")
+pkgs <- c("dplyr", "knitr")
+x<-lapply(pkgs, library, character.only = TRUE)
+opts_chunk$set(tidy = FALSE, message = F, warning = F)
+```
+
+# Using R for bioassessment data: What, why, and how
+
+## Lesson Outline
+
+- [Goals and Motivation]
+- [RStudio]
+- [R language fundamentals]
+- [Data structures in R]
+- [Data I/O]
+- [Retention]
+
+## Lesson Exercises
+- [Exercise 1]
+- [Exercise 2]
+
+## Goals and Motivation
+
+[R](https://www.r-project.org/) is a language for statistical computing as well as a general purpose programming language. Increasingly, it has become one of the primary languages used in data science and for data analysis across many of the natural sciences. 
+
+The goals of this training are to expose you to fundamentals and to develop an appreciation of what's possible with this software.  We also provide resources that you can use for follow-up learning on your own. You should be able to answer these questions at the end of this session:
+
+* What is R and why should I use it?
+* Why would I use RStudio and RStudio projects?
+* How can I write, save, and run scripts in RStudio?
+* Where can I go for help?
+* What are the basic data structures in R?
+* How do I import/export data? 
+
+### Why should I invest time in R?
+
+There are many programming languages available and each has it's specific benefits. R was originally created as a statistical programming language but now it is largely viewed as a 'data science' language. Why would you invest time in learning R compared to other languages?  
+
+* The growth of R as explained in the [Stack Overflow blog](https://stackoverflow.blog/2017/10/10/impressive-growth-r/), [IEEE rating](http://blog.revolutionanalytics.com/2016/07/r-moves-up-to-5th-place-in-ieee-language-rankings.html)
+
+R is also an open-source programming language - not only is it free, but this means anybody can contribute to it's development. As of `r format(Sys.time(), "%Y-%m-%d")`, there are `r nrow(available.packages())` on CRAN!   
+
+## RStudio
+
+In the old days, the only way to use R was directly from the Console - this is a bare bones way of running R only with direct input of commands. Now, [RStudio](https://www.rstudio.com/) is the go-to Interactive Development Environment (IDE) for R. Think of it like a car that is built around an engine. It is integrated with the console (engine) and includes many other features to improve the user's experience, such as version control, debugging, dynamic documents, package manager and creation, and code highlighting and completion. 
+
+Let's get familiar with RStudio before we go on.  
+
+### Open R and RStudio
+
+If you haven't done so, download and install RStudio from the link above.  After it's installed, find the RStudio shortcut and fire it up (just watch for now).  You should see something like this: 
+
+![](figure/rstudio.png)
+
+There are four panes in RStudio: 
+
+* Source
+* console
+* Environment, History, etc.
+* Files, plots, etc.
+
+### RStudio projects
+
+I strongly encourage you to use RStudio projects when you are working with R.  The RStudio project provides a central location for working on a particular task.  It helps with file management and is portable if all the files live in the same project.  RStudio projects also remember history - what commands you used and what data objects are in your enviornment.  
+
+To create a new project, click on the File menu at the top and select 'New project...'
+
+![](figure/rstudio_proj.jpg)
+
+Now we can use this project for our data and any scripts we create.  
+
+### Scripting
+
+In most cases, you will not enter and execute code directly in the console.  Code can be written in a script and then sent directly to the console when you're ready to run it.  The key difference here is that a script can be saved and shared.
+
+Open a new script from the File menu...
+
+![](figure/rstudio_script.jpg)
+
+### Executing code in RStudio
+
+After you write your script it can be sent to the Console to run the code in R.  Any variables you create in your script will not be available in your working environment until this is done.  There are two ways to sent code the console.  First, you can hit the `Run` button at the top right of the scripting window.  Second, and preferred, you can use `ctrl+enter` (`cmd+enter` on a Mac).  Both approaches will send the selected line to the console, then move to the next line in your script.  You can also highlight and send an entire block of code.
+
+![](figure/rstudio_run.jpg)
+
+### What is the environment?
+
+There are two outcomes when you run code.  First, the code will simply print output directly in the console.  Second, there is no output because you have stored it as a variable (we'll talk about variable assignment later).  Output that is stored is actually saved in the `environment`.  The environment is the collection of named objects that are stored in memory for your current R session.  Anything stored in memory will be accessible by it's name without running the original script that was used to create it.  
+
+## Exercise 1
+
+This exercise will make sure R and RStudio are working and that you can get around the basics in RStudio.  Use the blue stickies when you have completed, and red stickies if you are running into problems.
+
+1. Start RStudio: To start both R and RStudio requires only firing up RStudio.  RStudio should be available from All Programs at the Start Menu.  Fire up RStudio. 
+
+1. Take a few minutes to look around RStudio.  Find the Console Pane. Find Global and Project Options (hint: look in Tools).  Look at the Environment, History Pane.  Look at the Files, Plots, Packages, etc. pane.
+
+1. Create a new project.  Name it "cabw_r_workshop".  We will use this for the rest of the workshop.
+
+1. Create a new "R Script" in the Source Pane, save that file into your newly created project and name it "cabw_script.R". It'll just be a blank text file at this point.
+
+1. Add in a comment line to separate this section.  It should look something like: `# Exercise 1: Just Getting used to RStudio and Scripts`.
+
+1. Add a single line to this script with the following text: `ls()`.  This is an R function that lists objects in your current environment.  Use the various ways we showed to send this command to the R Console.  Also, try typing this directly into the R Console and hit `Enter` to run it.  
+
+1. Lastly, we need to get this project set up with some example data for our exercies.  You should have downloaded this already, but if not, the data are available from <[link](https://SCCWRP.github.io/CABW2018_R_training/data/datazip.zip)>.  The data are in a compressed folder.  Download the file to your computer (anywhere).  Create a folder in your new project named `data` and extract the files into this location.  
+
+## R language fundamentals
+
+The basic syntax of a function follows the form: `function_name(arg1, arg2, ...)`.  
+
+With the base install, you will gain access to many (`r pkgs <- search(); pkgs <- pkgs[grep("package:",pkgs)]; length(unlist(sapply(pkgs,lsf.str)))` functions, to be exact). 
+Some examples:
+
+```{r}
+# print
+print('hello world!')
+
+# sequence
+seq(1, 10)
+
+# random numbers
+rnorm(100, mean = 10, sd = 2)
+
+# average 
+mean(rnorm(100))
+
+# sum
+sum(rnorm(100))
+```
+
+Very often you will see functions used like this:
+
+```{r}
+my_random_sum <- sum(rnorm(100))
+```
+
+In this case the first part of the line is the name of an object.  You make this up.  Ideally it should have some meaning, but the only rules are that it can't start with a number and must not have any spaces.  The second bit, `<-`, is the assignment operator.  This tells R to take the result of `sum(rnorm(100))` and store it an object named, `my_random_sum`.  It is stored in the environment and can be used by just executing it's name in the console.
+
+```{r}
+my_random_sum
+```
+
+With this, you have the very basics of how we write R code and save objects that can be used later.
+
+### Packages
+
+The base install of R is quite powerful, but you will soon have a need or desire to go beyond this.  Packages provide this ability.  They are a standardized method for extending R with new methods, techniques, and programming functionality.  There is a lot to say about packages regarding finding them, using them, etc., but for now let's focus just on the basics.  
+
+### CRAN
+
+One of the reasons for R's popularity is CRAN, [The Comprehensive R Archive Network](http://cran.r-project.org/).  This is where you download R and also where most will gain access to packages (there are other places, but that is for later).  Not much else to say about this now other than to be aware of it.  As of `r format(Sys.time(), "%Y-%m-%d")`, there are `r nrow(available.packages())` on CRAN! 
+
+### Installing packages
+
+When a package gets installed, that means the source is downloaded and put into your library.  A default library location is set for you so no need to worry about that.  In fact on Windows most of this is pretty automatic.  Let's give it a shot.
+
+## Exercise 2
+
+We're going to install some packages from CRAN that will give us the tools for our workshop today.  We'll use the tidyverse, sf, and mapview packages.  Later, we'll explain in detail what each of these packages provide.  
+
+1. At the top of the script you just created, type the following functions.
+
+```{r install_package, eval=FALSE}
+# install packages from CRAN
+install.packages("tidyverse")
+install.packages("sf")
+install.packages("mapview")
+```
+
+1. Select all three lines by clicking and dragging the mouse pointer over the text.  
+
+1. Send all threee commands to the console using `ctrl+enter`.  You should see some text output on the console about the installation process.  The installation may take a few minutes so don't be alarmed.  
+
+1. After the packages are done installing, verify that there were no errors during the process (this should be pretty obvious, i.e., error text in big scary red letters).
+
+1. Load the packages after they've installed. 
+
+```{r eval=FALSE}
+library("tidyverse")
+library("sf")
+library("mapview")
+```
+
+### Getting Help
+
+Being able to find help and interpret that help is probably one of the most important skills for learning a new language.  R is no different. Help on functions and packages can be accessed directly from R, can be found on CRAN and other official R resources, searched on Google, found on StackOverflow, or from any number of fantastic online resources. I will cover a few of these here. 
+
+### Help from the console
+
+Getting help from the console is straightforward and can be done numerous ways.
+
+```{r help_from_console, eval=FALSE}
+# Using the help command/shortcut
+# When you know the name of a function
+help("print") # Help on the print command
+?print # Help on the print command using the `?` shortcut
+
+# When you know the name of the package
+help(package = "sf") # Help on the package `dplyr`
+
+# Don't know the exact name or just part of it
+apropos("print") # Returns all available functions with "print" in the name
+??print # shortcut, but also searches demos and vignettes in a formatted page
+```
+
+### Official R Resources
+
+In addition to help from within R itself, CRAN and the R-Project have many resources available for support.  Two of the most notable are the mailing lists and the [task views](http://cran.r-project.org/web/views/).
+
+- [R Help Mailing List](https://stat.ethz.ch/mailman/listinfo/r-help): The main mailing list for R help.  Can be a bit daunting and some (although not most) senior folks can be, um, curmudgeonly...
+- [R-sig-ecology](https://stat.ethz.ch/mailman/listinfo/r-sig-ecology): A special interest group for use of R in ecology.  Less daunting than the main help with participation from some big names in ecological modelling and statistics (e.g., Ben Bolker, Gavin Simpson, and Phil Dixon).
+- [Environmetrics Task View](http://cran.r-project.org/web/views/Environmetrics.html): Task views are great in that they provide an annotated list of packages relevant to a particular field.  This one is maintained by Gavin Simpson and has great info on packages relevant to much of the work at EPA.
+- [Spatial Analysis Task View](http://cran.r-project.org/web/views/Spatial.html): One I use a lot that lists all the relevant packages for spatial analysis, GIS, and Remote Sensing in R. 
+
+### Google and StackOverflow
+
+While the resources already mentioned are useful, often the quickest way is to just turn to Google.  However, a search for "R" is a bit challenging.  A few ways around this.  Google works great if you search for a given package or function name.  You can also search for mailing lists directly (i.e. "R-sig-geo"), although Google often finds results from these sources.
+
+Blind googling can require a bit of strategy to get the info you want.  Some pointers:
+
+* Always preface the search with "r"
+* Understand which sources are reliable
+* Take note of the number of hits and date of a web page
+* When in doubt, search with the exact error message
+
+One specific resource that I use quite a bit is [StackOverflow with the 'r' tag](http://stackoverflow.com/questions/tagged/r).  StackOverflow is a discussion forum for all things related to programming.  You can then use this tag and the search functions in StackOverflow and find answers to almost anything you can think of. However, these forums are also very strict and I typically use them to find answers not to ask questions.  
+
+### Other Resources
+
+As I mentioned earlier, there are TOO many resources to list here and everyone has their favorites.  Below are just a few that I like.
+
+- [R For Cats](http://rforcats.net/): Basic introduction site, meant to be a gentle and light-hearted introduction
+- [Advanced R](http://adv-r.had.co.nz/): Web home of Hadley Wickham's new book.  Gets into more advanced topics, but also covers the basics in a great way.
+- [CRAN Cheatsheets](http://cran.r-project.org/doc/contrib/Short-refcard.pdf): A good cheat sheet from the official source
+- [RStudio Cheatsheets](http://www.rstudio.com/resources/cheatsheets/): Additional cheat sheets from RStudio.  I am especially fond of the data wrangling one.
+
+## Data structures in R
+
+Now that you know how to get started in R and where to find resources, we can begin talking about R data structures. Simply put, a data structure is a way for programming languages to handle information storage.
+
+There is a bewildering amount of formats for storing data and R is no exception. Understanding the basic building blocks that make up data types is essential.  All functions in R require specific types of input data and the key to using functions is knowing how these types relate to each other.  
+
+### Vectors (one-dimensional data)
+
+The basic data format in R is a vector - a one-dimensional grouping of elements that have the same type.  These are all vectors and they are created with the `c` function:
+
+```{r}
+dbl_var <- c(1, 2.5, 4.5)
+int_var <- c(1L, 6L, 10L)
+log_var <- c(TRUE, FALSE, T, F)
+chr_var <- c("a", "b", "c")
+```
+
+The four types of atomic vectors (think atoms that make up a molecule aka vector) are `double` (or numeric), `integer`, `logical`, and `character`.  For most purposes you can ignore the `integer` class, so there are basically three types.  Each type has some useful properties:
+
+```{r}
+class(dbl_var)
+length(log_var)
+```
+
+These properties are useful for not only describing an object, but they define limits on which functions or types of operations that can be used.  That is, some functions require a character string input while others require a numeric input. Similarly, vectors of different types or properties may not play well together. Let's look at some examples:
+
+```{r eval = F}
+# taking the mean of a character vector
+mean(chr_var)
+
+# adding two numeric vectors of different lengths
+vec1 <- c(1, 2, 3, 4)
+vec2 <- c(2, 3, 5)
+vec1 + vec2
+```
+
+### 2-dimensional data
+
+A collection of vectors represented as a single data object are often described as two-dimensional data.  A more common way of storing two-dimensional data is in a data frame (i.e., `data.frame`).  Think of them like your standard spreadsheet, where each column describes a variable and rows link observations between columns.  Here's a simple example:
+
+```{r}
+ltrs <- c('a', 'b', 'c')
+nums <- c(1, 2, 3)
+logs <- c(T, F, T)
+mydf <- data.frame(ltrs, nums, logs)
+mydf
+```
+
+The only constraints required to make a data frame are:
+
+1. Each column contains the same type of data
+
+1. The number of observations in each column is equal.
+
+A data frame has other attributes, such as row names and column names.  These are useful for indexing (selecting) different parts of the data.
+
+```{r}
+names(mydf)
+row.names(mydf)
+```
+
+## Data I/O
+
+### Input
+
+<!-- It is the rare case when you manually enter your data in R.  Most data analysis workflows typically begin with importing a dataset from an external source.  Literally, this means committing a dataset to memory (i.e., storing it as a variable) as one of R's data structure formats. -->
+
+<!-- If you're lucky, your data are already in a flat, rectangular format.  In other words, your data are two-dimensional as standard ASCI text.  Flat data files present the least complications on import because there is very little to assume about the structure of the data. On import, R tries to guess the data type for each column and this is fairly unambiguous with flat files.  The base installation of R comes with some easy to use functions for importing flat files, such as `read.table()` and `read.csv`. -->
+
+<!-- More often you will probably have an Excel spreadsheet to import. This is not a preferred format but the reality is that most people are using this software for data storage. In the old days, importing spreadsheets into R was almost impossible given the proprietary data structure of Excel.  The tools available in R have since matured and it's now pretty painless to import a spreadsheet.  But "painless" comes with some caveats.   -->
+
+<!-- You will save yourself a lot of trouble with data import from Excel if you think like a machine.  Consider the example below: -->
+
+<!-- Computers, although very trainable, are also very dumb.  If you have trouble interpreting the information, can you expect a computer to do so?  Most issues importing Excel spreadsheets relate to format of the data.  Here are few pointers to keep in mind if you are using Excel to store data: -->
+
+<!-- * Use the one spreadsheet, one data frame rule (rectangular) -->
+<!-- * No colors or special formatting -->
+<!-- * No links between sheets -->
+<!-- * One data type per column -->
+<!-- * Use simple column names (no spaces or special characters) -->
+<!-- * Be explicit and consistent with missing values -->
+
+<!-- Following these simple guidelines will make import much, much smoother.  -->
+
+<!-- The `readxl` package is the most recent and by far most flexible data import package for Excel files. It comes with the `tidyverse` family of packages (more about this next training), but you can install it separately as follows: -->
+
+<!-- ```{r eval = F} -->
+<!-- install.packages('readxl') -->
+<!-- ``` -->
+
+<!-- Once installed, we can load it to access the import functions. -->
+
+<!-- ```{r} -->
+<!-- library(readxl) -->
+<!-- ``` -->
+
+<!-- We'll import the `mpg` dataset that describes fuel economy of different car models.  This dataset actually comes with R but I've saved it as a an Excel spreadsheet to demonstrate the `read_excel` import function. If you haven't downloaded the file already, grab it from the [online materials](https://github.com/SCCWRP/R_training_2018/lessons/data) and save it in your `data` folder in your project. -->
+
+<!-- Now we can import the file (note the **relative** path): -->
+
+<!-- ```{r, eval = F} -->
+<!-- dat <- read_excel('data/mpg.xlsx') -->
+<!-- ``` -->
+
+<!-- If you didn't get any errors or warnings, the file is now stored in your environment. -->
+
+<!-- ```{r} -->
+<!-- ls() -->
+<!-- ``` -->
+
+<!-- Before we go on, let's look at the data class: -->
+
+<!-- ```{r} -->
+<!-- class(dat) -->
+<!-- head(dat) -->
+<!-- ``` -->
+
+<!-- The data are in the `tibble` format.  A tibble is basically a data frame with some extra features, mostly related to how the data are printed in the console. You'll encounter tibbles a lot if you are using the `tidyverse` family of packages, which we'll go over next training.  There are some very good reasons to use tibbles for data wrangling but they can also cause some headaches when used with other packages.  For now, let's just `coerce` the tibble to a data frame. -->
+
+<!-- ```{r} -->
+<!-- dat <- as.data.frame(dat) -->
+<!-- class(dat) -->
+<!-- ``` -->
+
+<!-- Now let's look at the data to get an idea of the structure: -->
+
+<!-- ```{r} -->
+<!-- # get the dimensions -->
+<!-- dim(dat) -->
+
+<!-- # get the column names -->
+<!-- names(dat) -->
+
+<!-- # get the row names -->
+<!-- row.names(dat) -->
+
+<!-- # get the overall structure -->
+<!-- str(dat) -->
+<!-- ``` -->
+
+<!-- There are several ways to select (aka index) subsets of the data, either by rows or columns.  Here are all the ways you can get the `fl` column from `mpg`: -->
+
+<!-- ```{r eval = F} -->
+<!-- dat$fl -->
+<!-- dat$"fl" -->
+<!-- dat["fl"] -->
+<!-- dat[,"fl"] -->
+<!-- dat[["fl"]] -->
+<!-- dat[10] -->
+<!-- dat[,10] -->
+<!-- dat[[10]] -->
+<!-- ``` -->
+
+<!-- It's not easy to understand how and why there are so many ways to subset data in R.  Next time, we'll focus on the `dplyr` package that uses a more logical approach to working with and manipulating data. -->
+
+<!-- ### Output -->
+
+<!-- Once we're done working with our data, we'll probably want to save it if we've made significant changes or if we want to share it with somebody. As you an imagine, there are countless ways to save the data depending on the format you want.  We could easily spend the next hour discussing best practices for data storage, but for now, I'll show you an easy approach to save your data as a flat, rectangular text file.  -->
+
+<!-- We can use the `write_csv` function from the `readr` package.  This function is very similar to `write.csv` from base R but it handles some of the annoying quirks of `write.csv`. -->
+
+<!-- Install `readr` if you don't have it already. -->
+
+<!-- ```{r eval = F} -->
+<!-- install.packages('readr') -->
+<!-- ``` -->
+
+<!-- Load `readr`. -->
+
+<!-- ```{r eval = F} -->
+<!-- library(readr) -->
+<!-- ``` -->
+
+<!-- And save the file. -->
+
+<!-- ```{r eval = F} -->
+<!-- write_csv(dat, 'data/new_mpg.csv') -->
+<!-- ``` -->
+
+<!-- ## Exercise 2 -->
+
+<!-- From here on out I hope to have the exercises build on each other. For this exercise we are going to grab the `mpg` data, look at that data, and be able to describe some basic information about that dataset. -->
+
+<!-- 1. We will be using a new script for the rest of our exercises.  Create this script in RStudio and name it "mpg_analysis.R" -->
+<!-- 2. As you write the script, comment as you go. Some good examples are what we used in the first script where we provided some details on each of the exercises. Remember comments are lines that begin with `#` and you can put whatever you like after that. -->
+<!-- 3. Add some lines to your script to import and store the data in your Enviroment. Remember that the data should be in your `data` folder in your project.  The `read_excel` function is your friend here and the path is `"data/mpg.xlsx"`.  Remember to install/load the `readxl` library.  Alternatively, you can use `read_csv` (`readr` package) if you've saved a csv file from the examples above. -->
+<!-- 5. Now run your script and make sure it doesn't throw any errors and you do in fact get a data frame (or tibble). -->
+<!-- 6. Explore the data frame using some of the functions we covered above (e.g. `head()`,`dim()`, or `str()`).  This part does not need to be included in the script and can be done directly inthe console. It is just a quick QA step to be sure the data read in as expected. -->
+
+<!-- ## Retention -->
+
+<!-- ![](figure/automation.png) -->
+
+<!-- Today we covered a lot of material but at this point you should have the resources to answer the following: -->
+
+<!-- * What is R and why should I use it? -->
+<!-- * Why would I use RStudio and RStudio projects? -->
+<!-- * How can I write, save, and run scripts in RStudio? -->
+<!-- * Where can I go for help? -->
+<!-- * What are the basic data structures in R? -->
+<!-- * How do I import/export data?  -->
+
+<!-- R is not an easy language to learn (see [here](http://r4stats.com/articles/why-r-is-hard-to-learn/)).  At the beginning, the payoff in your investment will not be obvious.  You will spend time banging your head on the wall and be tempted to revert to old habits.  Having used R for over ten years, I can tell you that the investment is absolutely worth it.  Once you're able to use R, you will have access to an almost endless repository of analytical tools.  You will also be more efficient, reproducible, and transparent with your workflows.  My advice in the beginning: -->
+
+<!-- * Time spent frustrated is time spent learning. Just because you're angry doesn't mean you're not gaining information. -->
+<!-- * Pick something small to begin with. Do not try to port all of your old projects to RStudio, this will come with time. -->
+<!-- * Use someone else's code. It's often easier to learn a complex problem by seeing someone else's approach line by line. -->
+<!-- * Become a savvy Googler, see the tips above.  Hard-copy books are obselete when you have all the information at your finger tips. -->
+<!-- * Do not give up!!! -->
+
+<!-- Next time, we'll talk about data wrangling. This is where the real fun begins... -->
+
+<!-- ![](figure/learning_crv.png) -->
+
+## Attribution
+
+Content in this lesson was pillaged extensively from Jeffrey Hollister (USEPA) and the USGS-R training curriculum [here](https://github.com/USGS-R/training-curriculum).
