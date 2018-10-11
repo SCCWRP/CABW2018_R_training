@@ -6,7 +6,7 @@ navbar:
     - text: "Home"
       href: index.html
     - text: "What, why, and how of R"
-      href: rbasics.html
+      href: usingr.html
     - text: "Wrangling and plotting"
       href: wrangleplot.html
     - text: "Mapping"
