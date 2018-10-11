@@ -411,32 +411,32 @@ seq(1, 10)</code></pre>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <pre class="r"><code># random numbers
 rnorm(100, mean = 10, sd = 2)</code></pre>
-<pre><code>##   [1] 10.143377  8.959643 10.183137 11.011022  8.409261 11.709363 16.011825
-##   [8]  9.414071 10.925784  8.605938  8.846473  9.574365  7.692827  5.999091
-##  [15] 11.264737 12.570140 11.296949  8.691725  9.352229 13.042433  8.861333
-##  [22] 10.333771  7.692928 12.622137  7.207384  9.764887  9.082534  7.573180
-##  [29]  9.626841  7.809321  8.332624  7.547312  9.282620  7.414540 13.133175
-##  [36]  9.274805  9.429323  9.831139  9.126103 12.418037 10.941930 13.309487
-##  [43]  8.049486  6.628181 10.102984 12.535545 12.483497 11.582154  7.610288
-##  [50]  9.486803 12.237694  6.892219  7.553413 10.930380  7.620634 10.206430
-##  [57]  8.288505  9.689834  9.555521 11.988417  9.792717  6.922422  9.979460
-##  [64]  9.021495  9.460951  9.248776  8.482447 10.517337  6.784564  6.606622
-##  [71] 11.698024  9.463195  8.844039 10.348142 11.329253 11.239851 12.631729
-##  [78] 11.238975 12.073381 11.301019 10.291398  7.807038 10.103679 11.241210
-##  [85] 10.778816 11.838935 13.016898  7.944668  9.078667 11.499412 12.299553
-##  [92] 10.977811 10.102144  9.108773  6.719336 12.378396  7.696022  8.489373
-##  [99]  9.072776 10.658594</code></pre>
+<pre><code>##   [1] 13.660809 11.156048 10.486150 13.662663  7.726238  9.582465  7.589656
+##   [8] 11.140093 10.949441  4.941752  9.151709  6.193549  7.267216  7.375821
+##  [15] 11.422329  9.492360 12.383667  8.735075 14.074269  8.972618 10.690600
+##  [22] 11.593986  8.074408  9.505014  7.817942  8.843439  7.029642 10.617279
+##  [29] 10.515833  7.979754  9.943849  8.939611  7.642549 12.156901  7.740812
+##  [36] 12.734837  9.732267 11.284122  8.997688  9.207563  9.367867  9.805825
+##  [43] 10.730078  7.655752  9.982017  7.675472 10.206293 11.172784 10.731144
+##  [50]  8.341713 11.219682 12.425303  7.658557 12.238918 15.144881 11.623855
+##  [57] 12.751803  7.527227 11.783360 10.414275 11.410754  9.467126  8.125555
+##  [64] 11.511532 11.052328 10.011243  8.316631 11.465161  9.637652 11.065406
+##  [71]  8.168525 10.120905  8.836666 11.502757  8.189787 10.205412  9.187822
+##  [78]  8.518834 10.665625 10.197702 13.741343  9.745231  9.767559 11.890271
+##  [85]  8.409560  8.133780 11.198815  9.555883  8.393418  6.674997 11.687596
+##  [92] 13.895332  9.507245  8.042388  9.280702 10.021846  6.978052 11.605670
+##  [99]  5.676842 12.416203</code></pre>
 <pre class="r"><code># average 
 mean(rnorm(100))</code></pre>
-<pre><code>## [1] 0.02824488</code></pre>
+<pre><code>## [1] 0.1353474</code></pre>
 <pre class="r"><code># sum
 sum(rnorm(100))</code></pre>
-<pre><code>## [1] -14.49556</code></pre>
+<pre><code>## [1] 23.59775</code></pre>
 <p>Very often you will see functions used like this:</p>
 <pre class="r"><code>my_random_sum &lt;- sum(rnorm(100))</code></pre>
 <p>In this case the first part of the line is the name of an object. You make this up. Ideally it should have some meaning, but the only rules are that it can’t start with a number and must not have any spaces. The second bit, <code>&lt;-</code>, is the assignment operator. This tells R to take the result of <code>sum(rnorm(100))</code> and store it an object named, <code>my_random_sum</code>. It is stored in the environment and can be used by just executing it’s name in the console.</p>
 <pre class="r"><code>my_random_sum</code></pre>
-<pre><code>## [1] 10.93013</code></pre>
+<pre><code>## [1] 9.75727</code></pre>
 <p>With this, you have the very basics of how we write R code and save objects that can be used later.</p>
 <div id="packages" class="section level3">
 <h3>Packages</h3>
@@ -505,7 +505,7 @@ apropos(&quot;print&quot;) # Returns all available functions with &quot;print&qu
 <li>Always preface the search with “r”</li>
 <li>Understand which sources are reliable</li>
 <li>Take note of the number of hits and date of a web page</li>
-<li>When in doubt, search with the exact error message</li>
+<li>When in doubt, search with the exact error message (see here for <a href="https://cran.r-project.org/doc/manuals/R-lang.html#Exception-handling">details</a> about warnings vs errors)</li>
 </ul>
 <p>One specific resource that I use quite a bit is <a href="http://stackoverflow.com/questions/tagged/r">StackOverflow with the ‘r’ tag</a>. StackOverflow is a discussion forum for all things related to programming. You can then use this tag and the search functions in StackOverflow and find answers to almost anything you can think of. However, these forums are also very strict and I typically use them to find answers not to ask questions.</p>
 </div>

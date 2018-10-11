@@ -225,7 +225,7 @@ Blind googling can require a bit of strategy to get the info you want.  Some poi
 * Always preface the search with "r"
 * Understand which sources are reliable
 * Take note of the number of hits and date of a web page
-* When in doubt, search with the exact error message
+* When in doubt, search with the exact error message (see here for [details](https://cran.r-project.org/doc/manuals/R-lang.html#Exception-handling) about warnings vs errors)
 
 One specific resource that I use quite a bit is [StackOverflow with the 'r' tag](http://stackoverflow.com/questions/tagged/r).  StackOverflow is a discussion forum for all things related to programming.  You can then use this tag and the search functions in StackOverflow and find answers to almost anything you can think of. However, these forums are also very strict and I typically use them to find answers not to ask questions.  
 
