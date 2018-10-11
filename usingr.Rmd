@@ -14,7 +14,7 @@ opts_chunk$set(tidy = FALSE, message = F, warning = F)
 - [RStudio]
 - [R language fundamentals]
 - [Data structures in R]
-- [Data I/O]
+- [Getting your data into R]
 
 ## Lesson Exercises
 
@@ -292,9 +292,7 @@ The only constraints required to make a data frame are:
 
 1. The number of observations in each column is equal.
 
-## Data I/O
-
-### Input
+## Getting your data into R
 
 It is the rare case when you manually enter your data in R, not to mention impractical for most datasets.  Most data analysis workflows typically begin with importing a dataset from an external source.  Literally, this means committing a dataset to memory (i.e., storing it as a variable) as one of R's data structure formats.
 
@@ -304,7 +302,7 @@ Flat data files (text only, rectangular format) present the least complications 
 
 Now that we have the data downloaded and extracted to our data folder, we'll use `read.csv` to import two files.
 
-1. Type the following in your script.
+1. Type the following in your script.  Note the use of *relative* file paths within your project.
 
     ```{r}
 cscidat <- read.csv('data/cscidat.csv', stringsAsFactors = F)

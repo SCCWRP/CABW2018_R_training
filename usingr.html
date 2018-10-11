@@ -315,7 +315,7 @@ div.tocify {
 <li><a href="#rstudio">RStudio</a></li>
 <li><a href="#r-language-fundamentals">R language fundamentals</a></li>
 <li><a href="#data-structures-in-r">Data structures in R</a></li>
-<li><a href="#data-io">Data I/O</a></li>
+<li><a href="#getting-your-data-into-r">Getting your data into R</a></li>
 </ul>
 </div>
 <div id="lesson-exercises" class="section level2">
@@ -344,7 +344,7 @@ div.tocify {
 <ul>
 <li>The growth of R as explained in the <a href="https://stackoverflow.blog/2017/10/10/impressive-growth-r/">Stack Overflow blog</a>, <a href="http://blog.revolutionanalytics.com/2016/07/r-moves-up-to-5th-place-in-ieee-language-rankings.html">IEEE rating</a></li>
 </ul>
-<p>R is also an open-source programming language - not only is it free, but this means anybody can contribute to it’s development. As of 2018-10-09, there are 13133 on CRAN!</p>
+<p>R is also an open-source programming language - not only is it free, but this means anybody can contribute to it’s development. As of 2018-10-10, there are 13134 on CRAN!</p>
 </div>
 </div>
 <div id="rstudio" class="section level2">
@@ -411,32 +411,32 @@ seq(1, 10)</code></pre>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <pre class="r"><code># random numbers
 rnorm(100, mean = 10, sd = 2)</code></pre>
-<pre><code>##   [1]  9.234697  7.325015 11.025329  8.891668  8.434442  8.034273 11.083279
-##   [8]  9.676903  6.374959 10.883794 10.752928 12.443206  8.318660  9.997796
-##  [15]  6.822576  7.973754  8.656932  8.133499 12.502876  9.723305  7.849971
-##  [22]  9.670360 10.275101 10.989731 11.499838  8.179896 12.596143 10.649108
-##  [29]  7.338727 10.460669 11.218418 11.291818  8.380637  9.037970  9.072481
-##  [36]  8.115265  9.239469  8.842551  9.440406 10.436332  8.709816 11.278432
-##  [43] 12.760908 11.044240  9.960686  8.931251  8.414800 11.513835  4.317354
-##  [50] 12.010149 10.848136  9.183098  8.824641 12.326169  9.677211  9.213246
-##  [57]  8.538170 10.156260  7.996688  8.957740 11.750148  8.769279  8.462737
-##  [64] 10.334551  8.532128  9.237086 10.429454 12.322314  9.985021 10.226600
-##  [71]  9.259184  9.743765 10.722185 10.713799  5.308031 10.596151  8.086890
-##  [78] 11.215113  8.100894  8.887228 10.161560 11.108236 10.219556  8.258701
-##  [85] 12.912597 13.428694  9.706775 11.276596 12.351461  9.947323  8.034967
-##  [92]  9.583146  8.786809  5.948753 11.199562 11.572461  8.498664 10.143592
-##  [99] 10.810869  8.718495</code></pre>
+<pre><code>##   [1] 10.143377  8.959643 10.183137 11.011022  8.409261 11.709363 16.011825
+##   [8]  9.414071 10.925784  8.605938  8.846473  9.574365  7.692827  5.999091
+##  [15] 11.264737 12.570140 11.296949  8.691725  9.352229 13.042433  8.861333
+##  [22] 10.333771  7.692928 12.622137  7.207384  9.764887  9.082534  7.573180
+##  [29]  9.626841  7.809321  8.332624  7.547312  9.282620  7.414540 13.133175
+##  [36]  9.274805  9.429323  9.831139  9.126103 12.418037 10.941930 13.309487
+##  [43]  8.049486  6.628181 10.102984 12.535545 12.483497 11.582154  7.610288
+##  [50]  9.486803 12.237694  6.892219  7.553413 10.930380  7.620634 10.206430
+##  [57]  8.288505  9.689834  9.555521 11.988417  9.792717  6.922422  9.979460
+##  [64]  9.021495  9.460951  9.248776  8.482447 10.517337  6.784564  6.606622
+##  [71] 11.698024  9.463195  8.844039 10.348142 11.329253 11.239851 12.631729
+##  [78] 11.238975 12.073381 11.301019 10.291398  7.807038 10.103679 11.241210
+##  [85] 10.778816 11.838935 13.016898  7.944668  9.078667 11.499412 12.299553
+##  [92] 10.977811 10.102144  9.108773  6.719336 12.378396  7.696022  8.489373
+##  [99]  9.072776 10.658594</code></pre>
 <pre class="r"><code># average 
 mean(rnorm(100))</code></pre>
-<pre><code>## [1] 0.02438196</code></pre>
+<pre><code>## [1] 0.02824488</code></pre>
 <pre class="r"><code># sum
 sum(rnorm(100))</code></pre>
-<pre><code>## [1] -6.528141</code></pre>
+<pre><code>## [1] -14.49556</code></pre>
 <p>Very often you will see functions used like this:</p>
 <pre class="r"><code>my_random_sum &lt;- sum(rnorm(100))</code></pre>
 <p>In this case the first part of the line is the name of an object. You make this up. Ideally it should have some meaning, but the only rules are that it can’t start with a number and must not have any spaces. The second bit, <code>&lt;-</code>, is the assignment operator. This tells R to take the result of <code>sum(rnorm(100))</code> and store it an object named, <code>my_random_sum</code>. It is stored in the environment and can be used by just executing it’s name in the console.</p>
 <pre class="r"><code>my_random_sum</code></pre>
-<pre><code>## [1] -4.253696</code></pre>
+<pre><code>## [1] 10.93013</code></pre>
 <p>With this, you have the very basics of how we write R code and save objects that can be used later.</p>
 <div id="packages" class="section level3">
 <h3>Packages</h3>
@@ -444,7 +444,7 @@ sum(rnorm(100))</code></pre>
 </div>
 <div id="cran" class="section level3">
 <h3>CRAN</h3>
-<p>One of the reasons for R’s popularity is CRAN, <a href="http://cran.r-project.org/">The Comprehensive R Archive Network</a>. This is where you download R and also where most will gain access to packages (there are other places, but that is for later). Not much else to say about this now other than to be aware of it. As of 2018-10-09, there are 13133 on CRAN!</p>
+<p>One of the reasons for R’s popularity is CRAN, <a href="http://cran.r-project.org/">The Comprehensive R Archive Network</a>. This is where you download R and also where most will gain access to packages (there are other places, but that is for later). Not much else to say about this now other than to be aware of it. As of 2018-10-10, there are 13134 on CRAN!</p>
 </div>
 <div id="installing-packages" class="section level3">
 <h3>Installing packages</h3>
@@ -564,18 +564,15 @@ mydf</code></pre>
 </ol>
 </div>
 </div>
-<div id="data-io" class="section level2">
-<h2>Data I/O</h2>
-<div id="input" class="section level3">
-<h3>Input</h3>
+<div id="getting-your-data-into-r" class="section level2">
+<h2>Getting your data into R</h2>
 <p>It is the rare case when you manually enter your data in R, not to mention impractical for most datasets. Most data analysis workflows typically begin with importing a dataset from an external source. Literally, this means committing a dataset to memory (i.e., storing it as a variable) as one of R’s data structure formats.</p>
 <p>Flat data files (text only, rectangular format) present the least complications on import because there is very little to assume about the structure of the data. On import, R tries to guess the data type for each column and this is fairly unambiguous with flat files. The base installation of R comes with some easy to use functions for importing flat files, such as <code>read.table()</code> and <code>read.csv</code>.</p>
-</div>
 <div id="exercise-3" class="section level3">
 <h3>Exercise 3</h3>
 <p>Now that we have the data downloaded and extracted to our data folder, we’ll use <code>read.csv</code> to import two files.</p>
 <ol style="list-style-type: decimal">
-<li><p>Type the following in your script.</p>
+<li><p>Type the following in your script. Note the use of <em>relative</em> file paths within your project.</p>
 <pre class="r"><code>cscidat &lt;- read.csv(&#39;data/cscidat.csv&#39;, stringsAsFactors = F)
 ascidat &lt;- read.csv(&#39;data/ascidat.csv&#39;, stringsAsFactors = F)</code></pre></li>
 <li><p>Send the commands to the console with <code>ctrl+enter</code>.</p></li>
