@@ -1,3 +1,4 @@
+
 ```{r setup, echo=FALSE, warning=FALSE, purl=FALSE, message=FALSE}
 options(repos = "http://cran.rstudio.com/")
 pkgs <- c("dplyr", "knitr")
@@ -7,4 +8,163 @@ opts_chunk$set(tidy = FALSE, message = F, warning = F)
 
 # Wrangling and plotting data in R
 
-Content TBD
+## Lesson Outline
+
+- [Goals and Motivation]
+- [Data Wrangling with dplyr]
+- [Joining datasets]
+- [Plotting with ggplot2]
+
+## Lesson Exercises
+
+- [Exercise 1]
+- [Exercise 2]
+- [Exercise 3]
+
+## Goals and Motivation
+
+Data wrangling (manipulation, cleaning, ninjery, etc.) is the part of any data analysis that will take the most time. While it may not necessarily be fun, it is foundational to all the work that follows. I strongly believe that mastering these skills has more value than mastering a particular analysis. Check out [this article](https://www.nytimes.com/2014/08/18/technology/for-big-data-scientists-hurdle-to-insights-is-janitor-work.html) if you don’t believe me.  Creating a data visualization will always begin with wrangling, so we'll cover some core wrangling concepts first before we start plotting.
+
+After this session you should be able answer the following:
+
+* What are some basic wrangling functions from dplyr?
+* How do I join different datasets?
+* How do I make some basic plots with ggplot?  
+
+## Data wrangling with `dplyr`
+
+![](figure/data-science-wrangle.png)
+
+The data wrangling process includes data import, tidying, and transformation.  The process directly feeds into, and is not mutually exclusive, with the *understanding* or modelling side of data exploration.  More generally, I consider data wrangling as the manipulation or combination of datasets for the purpose of analysis.  
+
+**All wrangling is based on a purpose.**  No one wrangles for the sake of wrangling (usually), so the process always begins by answering the following two questions:
+
+* What do my input data look like?
+* What should my input data look like given what I want to do?
+
+At the most basic level, going from what your data looks like to what it should look like will require a few key operations.  Some common examples:
+
+* Selecting specific variables
+* Filtering observations by some criteria
+* Adding or modifying existing variables
+* Renaming variables
+* Arranging rows by a variable
+* Summarizing variable conditional on others
+
+The `dplyr` package provides easy tools for these common data manipulation tasks and is a core package from the [tidyverse](https://www.tidyverse.org/) suite of packages. The philosophy of dplyr is that one function does one thing and the name of the function says what it does. 
+
+* [`dplyr` GitHub repo](https://github.com/hadley/dplyr)
+* [CRAN page: vignettes here](http://cran.rstudio.com/web/packages/dplyr/)
+* [Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+### Exercise 1
+
+We'll start this lesson by opening a clean script, loading the packages we need, and importing our data.
+
+1. Open a new script from the file menu on the top left and save the script with an informative name, e.g., "wrangling_and_plotting.R". 
+
+1. Add in a comment line on the top and write some text about the script.  It should look something like: `# Exercise 2: Wrangling and plotting bioassessment data`.
+
+1. Below the comment line, add the code to import the tidyverse, i.e., `library(tidyverse)`.
+
+1. In the next line, add the following to import our two datasets.
+
+    ```{r}
+cscidat <- read.csv('data/cscidat.csv', stringsAsFactors = F)
+ascidat <- read.csv('data/ascidat.csv', stringsAsFactors = F)
+    ```
+
+1. When you're done, run all of the code in the console (highlight all then `ctrl+enter`)
+
+Our goal with these data is to combine the bioassessment scores by each unique location, date, and replicate, while keeping only the data we need for our plots.  
+
+### Selecting
+
+Let's begin using dplyr. The `select` function lets you retain or exclude columns.
+
+```{r}
+# first, select some columns
+dplyr_sel1 <- select(cscidat, SampleID_old, New_Lat, New_Long, CSCI)
+head(dplyr_sel1)
+
+# select everything but CSCI and COMID
+dplyr_sel2 <- select(cscidat, -CSCI, -COMID)
+head(dplyr_sel2)
+
+# select columns that contain the letter c
+dplyr_sel3 <- select(cscidat, matches('c'))
+head(dplyr_sel3)
+```
+
+### Filtering
+
+After selecting columns, you'll probably want to remove observations that don't fit some criteria.  For example, maybe you want to remove CSCI scores less than some threshol, or find stations above a certain latitude, or both.
+
+```{r}
+# get CSCI scores greater than 0.79
+dplyr_filt1 <- filter(cscidat, CSCI > 0.79)
+head(dplyr_filt1)
+
+# get CSCI scores above latitude 37N
+dplyr_filt2 <- filter(cscidat, New_Lat > 37)
+head(dplyr_filt2)
+
+# use both filters
+dplyr_filt3 <- filter(cscidat, CSCI > 0.79 & New_Lat > 37)
+head(dplyr_filt3)
+```
+
+Filtering can take a bit of time to master because there are several ways to tell R what you want. To use filtering effectively, you have to know how to select the observations that you want using the comparison operators. R provides the standard suite: `>`, `>=`, `<`, `<=`, `!=` (not equal), and `==` (equal). When you're starting out with R, the easiest mistake to make is to use `=` instead of `==` when testing for equality. 
+
+### Mutating
+
+Now that we've seen how to filter observations and select columns of a data frame, maybe we want to add a new column. In dplyr, `mutate` allows us to add new columns. These can be vectors you are adding or based on expressions applied to existing columns. For instance, maybe we want to convert a numeric column into a categorical using some criteria or maybe we want to make a new column based on some arithmetic on some other columns.
+
+```{r}
+# get observed taxa
+dplyr_mut1 <- mutate(cscidat, observed = OE * E)
+head(dplyr_mut1)
+
+# add a column for lo/hi csci scores
+dplyr_mut2 <- mutate(cscidat, CSCIcat = ifelse(CSCI <= 0.79, 'lo', 'hi'))
+head(dplyr_mut2)
+```
+
+Some other useful dplyr functions include `arrange` to sort the observations (rows) by a column and `rename` to (you guessed it) rename a column.
+
+```{r}
+# arrange by CSCI scores
+dplyr_arr <- arrange(cscidat, CSCI)
+head(dplyr_arr)
+
+# rename lat/lon (note the multiple arguments)
+dplyr_rnm <- rename(cscidat, 
+                    lat = New_Lat,
+                    lon = New_Long
+                    )
+head(dplyr_rnm)
+```
+
+### Exercise 2
+
+Let's clean up our CSCI dataset in preparation to join with our ASCI dataset.  We'll select columns we want and rename those with odd names.
+
+1. Select the unique sample ID column (`SampleID_old`), latitude (`New_Lat`), longitude (`New_Long`), and `CSCI` columns. Reassign the `cscidat` data object at the same time.
+    ```{r}
+cscidat <- select(cscidat, SampleID_old, New_Lat, New_Long, CSCI)    
+    ```
+    
+1. Rename the `SampleID_old` column to `id`, `New_Lat` to `lat`, and `New_Long` to `lon`.
+    ```{r}
+cscidat <- rename(cscidat, 
+                  id = SampleID_old, 
+                  lat = New_Lat, 
+                  lon = New_Long
+                  )
+    ```
+
+## Joining datasets
+
+## Plotting with ggplot2
+
+### Exercise 3
