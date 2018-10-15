@@ -312,7 +312,7 @@ div.tocify {
 <h2>Lesson Outline</h2>
 <ul>
 <li><a href="#goals-and-motivation">Goals and Motivation</a></li>
-<li>[Data Wrangling with dplyr]</li>
+<li><a href="#data-wrangling-with-dplyr">Data Wrangling with dplyr</a></li>
 <li><a href="#joining-datasets">Joining datasets</a></li>
 <li><a href="#plotting-with-ggplot2">Plotting with ggplot2</a></li>
 </ul>
@@ -323,6 +323,7 @@ div.tocify {
 <li><a href="#exercise-1">Exercise 1</a></li>
 <li><a href="#exercise-2">Exercise 2</a></li>
 <li><a href="#exercise-3">Exercise 3</a></li>
+<li><a href="#exercise-4">Exercise 4</a></li>
 </ul>
 </div>
 <div id="goals-and-motivation" class="section level2">
@@ -336,7 +337,7 @@ div.tocify {
 </ul>
 </div>
 <div id="data-wrangling-with-dplyr" class="section level2">
-<h2>Data wrangling with <code>dplyr</code></h2>
+<h2>Data wrangling with dplyr</h2>
 <div class="figure">
 <img src="figure/data-science-wrangle.png" />
 
@@ -356,9 +357,9 @@ div.tocify {
 <li>Arranging rows by a variable</li>
 <li>Summarizing variable conditional on others</li>
 </ul>
-<p>The <code>dplyr</code> package provides easy tools for these common data manipulation tasks and is a core package from the <a href="https://www.tidyverse.org/">tidyverse</a> suite of packages. The philosophy of dplyr is that one function does one thing and the name of the function says what it does.</p>
+<p>The dplyr package provides easy tools for these common data manipulation tasks and is a core package from the <a href="https://www.tidyverse.org/">tidyverse</a> suite of packages. The philosophy of dplyr is that one function does one thing and the name of the function says what it does. Some additional dplyr resources:</p>
 <ul>
-<li><a href="https://github.com/hadley/dplyr"><code>dplyr</code> GitHub repo</a></li>
+<li><a href="https://github.com/hadley/dplyr">dplyr GitHub repo</a></li>
 <li><a href="http://cran.rstudio.com/web/packages/dplyr/">CRAN page: vignettes here</a></li>
 <li><a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Cheatsheet</a></li>
 </ul>
@@ -419,7 +420,7 @@ head(dplyr_sel3)</code></pre>
 </div>
 <div id="filtering" class="section level3">
 <h3>Filtering</h3>
-<p>After selecting columns, you’ll probably want to remove observations that don’t fit some criteria. For example, maybe you want to remove CSCI scores less than some threshol, or find stations above a certain latitude, or both.</p>
+<p>After selecting columns, you’ll probably want to remove observations that don’t fit some criteria. For example, maybe you want to remove CSCI scores less than some threshold, find stations above a certain latitude, or both.</p>
 <pre class="r"><code># get CSCI scores greater than 0.79
 dplyr_filt1 &lt;- filter(cscidat, CSCI &gt; 0.79)
 head(dplyr_filt1)</code></pre>
@@ -566,11 +567,62 @@ head(dplyr_rnm)</code></pre>
 </div>
 <div id="joining-datasets" class="section level2">
 <h2>Joining datasets</h2>
+<p>Combining data is a common task of data wrangling. All joins require that each of the tables can be linked by shared identifiers. These are called ‘keys’ and are usually represented as a separate column that acts as a unique variable for the observations. Our example datasets include the <code>id</code> column that represents a unique identifier as a combination of station, sample date, and replicate.</p>
+<p>The challenge with joins is that the two datasets may not represent the same observations for a given key. For example, you might have one table with all observations for every key, another with only some observations, or two tables with only a few shared keys. What you get back from a join will depend on what’s shared between tables, in addition to the type of join you use.</p>
+<p>For our data, we’ll be using an <strong>inner-join</strong> that combines datasets by shared keys (for an overview of the other types of joins, see <a href="http://r4ds.had.co.nz/relational-data.html#outer-join">here</a>).</p>
+<div class="figure">
+<img src="figure/join-inner.png" />
+
+</div>
+<div id="exercise-3" class="section level3">
+<h3>Exercise 3</h3>
+<p>We’ll join our ASCI data to our CSCI data in this exercise to make a single dataset that has scores for both bioassessment indices taken at the same place and location. This will help us plot and map the data later.</p>
+<ol style="list-style-type: decimal">
+<li><p>Before you start, check the dimensions of both datasets (e.g., <code>dim</code> or <code>nrow</code>). How many rows in each?</p>
+<pre class="r"><code>dim(cscidat)
+dim(ascidat)</code></pre></li>
+<li><p>Using the <code>inner_join</code> function from dplyr, join <code>cscidat</code> with <code>ascidat</code> using the <code>id</code> column as the key.</p>
+<pre class="r"><code>alldat &lt;- inner_join(cscidat, ascidat, by = &#39;id&#39;)</code></pre></li>
+<li><p>What are the dimensions of the new dataset (i.e., how many unique bioassessment scores were collected at the same time and place)?</p></li>
+</ol>
+</div>
 </div>
 <div id="plotting-with-ggplot2" class="section level2">
 <h2>Plotting with ggplot2</h2>
-<div id="exercise-3" class="section level3">
-<h3>Exercise 3</h3>
+<p>The entire workflow of data exploration is enhanced through looking at your data, whether you’re exploring a dataset for the first time or creating publication-ready figures. Viewing your data provides insight into patterns that can help you explore different hypotheses. No analysis is complete without a solid graphic.</p>
+<p>We’ll only introduce some of the core concepts behind the popular <a href="https://ggplot2.tidyverse.org/reference/ggplot2-package.html">ggplot2</a> package. This package follows a strict philosophy known as the <em>grammar of graphics</em> that was designed to make thinking, reasoning, and communicating about graphs easier by following a few simple rules. Like building a sentence in speech (aka grammar), all graphs start with a foundational component that is used for building other graph pieces.</p>
+<p>With ggplot2, you begin a plot with the function <code>ggplot()</code>. <code>ggplot()</code> creates a coordinate system that you can add layers to. The first argument of <code>ggplot()</code> is the dataset to use in the graph. So <code>ggplot(data = alldat)</code> creates an empty base graph.</p>
+<pre class="r"><code>ggplot(data = alldat)</code></pre>
+<p>You complete your graph by adding one or more layers (aka <code>geoms</code>) to <code>ggplot()</code>. The function <code>geom_point()</code> adds a layer of points to your plot, which creates a scatterplot. Ggplot2 comes with many geom functions that each add a different type of layer to a plot.</p>
+<pre class="r"><code>ggplot(data = alldat) +
+  geom_point()</code></pre>
+<p>Each geom function in ggplot2 takes a <code>mapping</code> argument. This defines how variables in your dataset are mapped to visual properties. The <code>mapping</code> argument is defined with <code>aes()</code>, and the <code>x</code> and <code>y</code> arguments of <code>aes()</code> specify which variables to map to the x and y axes. ggplot2 looks for the mapped variable in the <code>data</code> argument, in this case, <code>alldat</code>.</p>
+<pre class="r"><code>ggplot(data = alldat) +
+  geom_point(mapping = aes(x = CSCI, y = ASCI))</code></pre>
+<p>Just remember these requirements:</p>
+<ul>
+<li>All ggplot plots start with the <code>ggplot</code> function</li>
+<li>It will need three pieces of information: the <strong>data</strong>, how the data are <strong>mapped</strong> to the plot <strong>aesthetics</strong>, and a <strong>geom</strong> layer</li>
+</ul>
+<p>The core unit of every ggplot looks like this:</p>
+<pre class="r"><code>ggplot(data = &lt;DATA&gt;) + 
+  &lt;GEOM_FUNCTION&gt;(mapping = aes(&lt;MAPPINGS&gt;))</code></pre>
+<p>Applied to the data:</p>
+<pre class="r"><code>ggplot(data = alldat) +
+  geom_point(mapping = aes(x = CSCI, y = ASCI))</code></pre>
+<p><img src="wrangleplot_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<div id="exercise-4" class="section level3">
+<h3>Exercise 4</h3>
+<p>Let’s make a quick ggplot using some of the guidance from above. In this example, we’ll create some boxplots to show the distribution of CSCI scores at different site types (i.e., reference, intermediate, and stressed). This follows the same syntax as above but we’ll use a categorical variable for the x aesthetic and use the <code>geom_boxplot</code> geometry.</p>
+<ol style="list-style-type: decimal">
+<li><p>Copy the code from the last example plot to your script.</p></li>
+<li><p>Replace the <code>geom_point</code> function with <code>geom_boxplot</code></p></li>
+<li><p>Map the <code>site_type</code> column to the x aesthetic and the <code>CSCI</code> scores to the y aesthetic. The final code should look like this:</p>
+<pre class="r"><code>ggplot(data = alldat) +
+  geom_boxplot(mapping = aes(x = site_type, y = CSCI))</code></pre></li>
+<li><p>When you’re done, run the code in the console and view the plot. What does it tell you about the distribution of CSCI scores?</p></li>
+</ol>
+<p>There’s certainly much, much more we can do with ggplot2. Feel free to checkout the official <a href="https://ggplot2.tidyverse.org/reference/ggplot2-package.html">ggplot2</a> website for more information. The RStudio <a href="https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf">cheatsheet</a> is also very helpful.</p>
 </div>
 </div>
 </div>
