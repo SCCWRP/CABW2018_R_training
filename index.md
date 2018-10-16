@@ -34,3 +34,7 @@ Please bring a laptop with the latest version of RStudio and R installed.  Downl
 ## Source content
 
 All source materials for this website can be accessed at https://github.com/SCCWRP/CABW_R_training
+
+## Attribution
+
+Content in these lessons was borrowed, modified, and/or adapted from Marc Weber (USEPA), Ryan Hill (USEPA), Jeffrey Hollister (USEPA), the USGS-R training curriculum [here](https://github.com/USGS-R/training-curriculum), the NCEAS Open Science for Synthesis workshop [here](https://nceas.github.io/oss-2017/index.html), and the wonderful text [R for data science](https://github.com/hadley/r4ds).

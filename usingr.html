@@ -11,7 +11,7 @@
 
 
 
-<title>usingr.utf8.md</title>
+<title></title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -344,7 +344,7 @@ div.tocify {
 <ul>
 <li>The growth of R as explained in the <a href="https://stackoverflow.blog/2017/10/10/impressive-growth-r/">Stack Overflow blog</a>, <a href="http://blog.revolutionanalytics.com/2016/07/r-moves-up-to-5th-place-in-ieee-language-rankings.html">IEEE rating</a></li>
 </ul>
-<p>R is also an open-source programming language - not only is it free, but this means anybody can contribute to it’s development. As of 2018-10-10, there are 13134 on CRAN!</p>
+<p>R is also an open-source programming language - not only is it free, but this means anybody can contribute to it’s development. As of 2018-10-15, there are 13168 on CRAN!</p>
 </div>
 </div>
 <div id="rstudio" class="section level2">
@@ -354,7 +354,10 @@ div.tocify {
 <div id="open-r-and-rstudio" class="section level3">
 <h3>Open R and RStudio</h3>
 <p>If you haven’t done so, download and install RStudio from the link above. After it’s installed, find the RStudio shortcut and fire it up (just watch for now). You should see something like this:</p>
-<p><img src="figure/rstudio.png" /></p>
+<div class="figure">
+<img src="figure/rstudio.png" />
+
+</div>
 <p>There are four panes in RStudio:</p>
 <ul>
 <li>Source</li>
@@ -367,19 +370,28 @@ div.tocify {
 <h3>RStudio projects</h3>
 <p>I strongly encourage you to use RStudio projects when you are working with R. The RStudio project provides a central location for working on a particular task. It helps with file management and is portable because all the files live in the same project. RStudio projects also remember history - what commands you used and what data objects are in your enviornment.</p>
 <p>To create a new project, click on the File menu at the top and select ‘New project…’</p>
-<p><img src="figure/rstudio_proj.jpg" /></p>
+<div class="figure">
+<img src="figure/rstudio_proj.jpg" />
+
+</div>
 <p>Now we can use this project for our data and any scripts we create.</p>
 </div>
 <div id="scripting" class="section level3">
 <h3>Scripting</h3>
 <p>In most cases, you will not enter and execute code directly in the console. Code can be written in a script and then sent directly to the console when you’re ready to run it. The key difference here is that a script can be saved and shared.</p>
 <p>Open a new script from the File menu…</p>
-<p><img src="figure/rstudio_script.jpg" /></p>
+<div class="figure">
+<img src="figure/rstudio_script.jpg" />
+
+</div>
 </div>
 <div id="executing-code-in-rstudio" class="section level3">
 <h3>Executing code in RStudio</h3>
 <p>After you write your script it can be sent to the Console to run the code in R. Any variables you create in your script will not be available in your working environment until this is done. There are two ways to sent code the console. First, you can hit the <code>Run</code> button at the top right of the scripting window. Second, and preferred, you can use <code>ctrl+enter</code> (<code>cmd+enter</code> on a Mac). Both approaches will send the selected line to the console, then move to the next line in your script. You can also highlight and send an entire block of code.</p>
-<p><img src="figure/rstudio_run.jpg" /></p>
+<div class="figure">
+<img src="figure/rstudio_run.jpg" />
+
+</div>
 </div>
 <div id="what-is-the-environment" class="section level3">
 <h3>What is the environment?</h3>
@@ -402,7 +414,7 @@ div.tocify {
 <div id="r-language-fundamentals" class="section level2">
 <h2>R language fundamentals</h2>
 <p>The basic syntax of a function follows the form: <code>function_name(arg1, arg2, ...)</code>.</p>
-<p>With the base install, you will gain access to many (2644 functions, to be exact). Some examples:</p>
+<p>With the base install, you will gain access to many (2636 functions, to be exact). Some examples:</p>
 <pre class="r"><code># print
 print(&#39;hello world!&#39;)</code></pre>
 <pre><code>## [1] &quot;hello world!&quot;</code></pre>
@@ -411,32 +423,32 @@ seq(1, 10)</code></pre>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <pre class="r"><code># random numbers
 rnorm(100, mean = 10, sd = 2)</code></pre>
-<pre><code>##   [1]  8.017181  9.361880 11.910914 13.605894 12.289319  8.685894  8.087674
-##   [8] 11.332362 10.614453 10.919689  6.767926  9.466224 12.117716 10.204345
-##  [15]  9.798478 14.337307 10.974781  7.948481  8.715930  7.862689  7.225087
-##  [22] 13.106021  9.493438  9.596942  9.895801  7.408581 10.597043 15.220245
-##  [29]  8.407796  8.799158  9.157369 11.785013  8.448429  8.554010 12.753036
-##  [36]  8.654192 12.594901  8.512260 11.322119 11.963323 10.030881 11.307747
-##  [43]  8.958305 12.151367  8.499325 11.264974  9.692543  7.988177 11.081897
-##  [50]  8.576111 10.759461 13.021233 10.098704 10.176472 12.163375  8.467900
-##  [57]  9.620063 12.797607  6.599674  7.744900  8.724510 12.290720  7.859138
-##  [64] 14.431608 10.817074  9.443819 12.322287 11.435841  8.686174  7.743350
-##  [71] 10.440942 10.296134  8.949273  8.349283  9.341793 13.993220  7.701357
-##  [78]  8.808769 11.036492 16.510687  9.247327 11.317536  8.272415  9.240046
-##  [85] 10.485026 12.757520  8.848329 10.084032 14.251176 10.673233  7.000081
-##  [92] 10.369855  7.349631  8.280673 13.273185  9.850638 13.969524  8.377584
-##  [99] 14.420625  7.834246</code></pre>
+<pre><code>##   [1]  8.898232  6.940367 11.949809  9.159221 11.863485  6.483966  9.626941
+##   [8]  9.754315  9.009607  6.534180 10.573146 10.326157  8.392761 10.509207
+##  [15] 12.646282 12.509482  7.871879  8.270087 11.664886 11.564192 10.897007
+##  [22]  9.044239  8.899053 12.059192  7.859466 11.319936  9.362120  9.027022
+##  [29]  8.403133 10.469571 10.808649  8.420230 11.512018 10.165385 13.320743
+##  [36]  9.760200  9.198610 11.254259  7.840542  8.426548 11.572302  7.602778
+##  [43]  8.020289 11.651120  9.908783  9.653469  9.607344 13.456394 10.146951
+##  [50] 12.456058  7.377761 10.207935 12.576759 14.330089 11.832676 10.908446
+##  [57]  9.443606 10.993017  5.159311 14.393112  8.853173 10.200645 11.393338
+##  [64] 14.554047  7.927238 10.422747  5.935687  8.549398  9.905820 11.848463
+##  [71] 11.139327  7.155819  8.408668  8.722487 11.976147 12.349213  5.363290
+##  [78]  8.213019  7.322060 10.554622 10.615674 12.807655 11.672166 10.816273
+##  [85] 10.072808 11.970911  4.565428 12.054609 11.197816  9.275144  8.613177
+##  [92]  5.928556 13.613124  9.540018 12.835919 12.519832 11.045732 13.221093
+##  [99] 11.550855 11.238829</code></pre>
 <pre class="r"><code># average 
 mean(rnorm(100))</code></pre>
-<pre><code>## [1] 0.02934888</code></pre>
+<pre><code>## [1] -0.002254387</code></pre>
 <pre class="r"><code># sum
 sum(rnorm(100))</code></pre>
-<pre><code>## [1] 9.591049</code></pre>
+<pre><code>## [1] -4.497268</code></pre>
 <p>Very often you will see functions used like this:</p>
 <pre class="r"><code>my_random_sum &lt;- sum(rnorm(100))</code></pre>
 <p>In this case the first part of the line is the name of an object. You make this up. Ideally it should have some meaning, but the only rules are that it can’t start with a number and must not have any spaces. The second bit, <code>&lt;-</code>, is the assignment operator. This tells R to take the result of <code>sum(rnorm(100))</code> and store it an object named, <code>my_random_sum</code>. It is stored in the environment and can be used by just executing it’s name in the console.</p>
 <pre class="r"><code>my_random_sum</code></pre>
-<pre><code>## [1] 0.1830363</code></pre>
+<pre><code>## [1] 0.1132419</code></pre>
 <p>With this, you have the very basics of how we write R code and save objects that can be used later.</p>
 <div id="packages" class="section level3">
 <h3>Packages</h3>
@@ -444,7 +456,7 @@ sum(rnorm(100))</code></pre>
 </div>
 <div id="cran" class="section level3">
 <h3>CRAN</h3>
-<p>One of the reasons for R’s popularity is CRAN, <a href="http://cran.r-project.org/">The Comprehensive R Archive Network</a>. This is where you download R and also where most will gain access to packages (there are other places, but that is for later). Not much else to say about this now other than to be aware of it. As of 2018-10-10, there are 13134 on CRAN!</p>
+<p>One of the reasons for R’s popularity is CRAN, <a href="http://cran.r-project.org/">The Comprehensive R Archive Network</a>. This is where you download R and also where most will gain access to packages (there are other places, but that is for later). Not much else to say about this now other than to be aware of it. As of 2018-10-15, there are 13168 on CRAN!</p>
 </div>
 <div id="installing-packages" class="section level3">
 <h3>Installing packages</h3>
@@ -583,15 +595,14 @@ ascidat &lt;- read.csv(&#39;data/ascidat.csv&#39;, stringsAsFactors = F)</code><
 dim(cscidat)</code></pre>
 <pre><code>## [1] 1613   10</code></pre>
 <pre class="r"><code>dim(ascidat)</code></pre>
-<pre><code>## [1] 2585    5</code></pre>
+<pre><code>## [1] 2585    3</code></pre>
 <pre class="r"><code># get the column names
 names(cscidat)</code></pre>
 <pre><code>##  [1] &quot;SampleID_old&quot;   &quot;StationCode&quot;    &quot;New_Lat&quot;        &quot;New_Long&quot;      
 ##  [5] &quot;COMID&quot;          &quot;E&quot;              &quot;OE&quot;             &quot;pMMI&quot;          
 ##  [9] &quot;CSCI&quot;           &quot;SampleID_old.1&quot;</code></pre>
 <pre class="r"><code>names(ascidat)</code></pre>
-<pre><code>## [1] &quot;Type.hybrid.1&quot; &quot;MMI.hybrid&quot;    &quot;Replicate&quot;     &quot;SampleDate&quot;   
-## [5] &quot;StationID&quot;</code></pre>
+<pre><code>## [1] &quot;id&quot;        &quot;site_type&quot; &quot;ASCI&quot;</code></pre>
 <pre class="r"><code># see the first six rows
 head(cscidat)</code></pre>
 <pre><code>##          SampleID_old StationCode  New_Lat  New_Long    COMID        E
@@ -609,13 +620,13 @@ head(cscidat)</code></pre>
 ## 5 1.0779468 0.9163731 0.9971599 103FC1106_7.15.14_1
 ## 6 1.0931064 1.0335179 1.0633122 103FCA168_7.24.13_1</code></pre>
 <pre class="r"><code>head(ascidat)</code></pre>
-<pre><code>##   Type.hybrid.1 MMI.hybrid Replicate SampleDate StationID
-## 1     Reference  1.1950555         1    8.10.10 000CAT148
-## 2     Reference  1.1514480         1    8.10.10 000CAT228
-## 3  Intermediate  0.9345882         1     8.9.10 102PS0139
-## 4     Reference  1.1965128         1    8.28.12 102PS0177
-## 5     Reference  1.2091360         2    8.28.12 102PS0177
-## 6     Reference  0.8369236         1    9.14.10 103CDCHHR</code></pre>
+<pre><code>##                    id    site_type      ASCI
+## 1 000CAT148_8.10.10_1    Reference 1.1950555
+## 2 000CAT228_8.10.10_1    Reference 1.1514480
+## 3  102PS0139_8.9.10_1 Intermediate 0.9345882
+## 4 102PS0177_8.28.12_1    Reference 1.1965128
+## 5 102PS0177_8.28.12_2    Reference 1.2091360
+## 6 103CDCHHR_9.14.10_1    Reference 0.8369236</code></pre>
 <pre class="r"><code># get the overall structure
 str(cscidat)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    1613 obs. of  10 variables:
@@ -630,12 +641,10 @@ str(cscidat)</code></pre>
 ##  $ CSCI          : num  0.988 0.981 1.072 1.087 0.997 ...
 ##  $ SampleID_old.1: chr  &quot;000CAT148_8.10.10_1&quot; &quot;000CAT228_8.10.10_1&quot; &quot;102PS0139_8.9.10_1&quot; &quot;103CDCHHR_9.14.10_1&quot; ...</code></pre>
 <pre class="r"><code>str(ascidat)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    2585 obs. of  5 variables:
-##  $ Type.hybrid.1: chr  &quot;Reference&quot; &quot;Reference&quot; &quot;Intermediate&quot; &quot;Reference&quot; ...
-##  $ MMI.hybrid   : num  1.195 1.151 0.935 1.197 1.209 ...
-##  $ Replicate    : int  1 1 1 1 2 1 2 1 1 1 ...
-##  $ SampleDate   : chr  &quot;8.10.10&quot; &quot;8.10.10&quot; &quot;8.9.10&quot; &quot;8.28.12&quot; ...
-##  $ StationID    : chr  &quot;000CAT148&quot; &quot;000CAT228&quot; &quot;102PS0139&quot; &quot;102PS0177&quot; ...</code></pre>
+<pre><code>## &#39;data.frame&#39;:    2585 obs. of  3 variables:
+##  $ id       : chr  &quot;000CAT148_8.10.10_1&quot; &quot;000CAT228_8.10.10_1&quot; &quot;102PS0139_8.9.10_1&quot; &quot;102PS0177_8.28.12_1&quot; ...
+##  $ site_type: chr  &quot;Reference&quot; &quot;Reference&quot; &quot;Intermediate&quot; &quot;Reference&quot; ...
+##  $ ASCI     : num  1.195 1.151 0.935 1.197 1.209 ...</code></pre>
 <p>You can also view each dataset in a spreadsheet style in the scripting window:</p>
 <pre class="r"><code>View(cscidat)
 View(ascidat)</code></pre>

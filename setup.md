@@ -104,11 +104,10 @@ That's OK! There’s a dialog box hiding behind RStudio asking if you want to cr
 
 # Grab the Sample Datasets
 
-We'll be working with some California bioassessment data and some shapefiles for this workshop.  The bioassessment data are available as three separate csv files that describe scores for the California Stream Condition Index (CSCI), the Algal Stream Condition Index (ASCI), and station latitude/longitude.  These files include scores at over 2000 locations and are a portion of the data used to develop the indices. The shapefile is a polygon dataset of the PSA regions of California.  
+We'll be working with some California bioassessment data and some shapefiles for this workshop.  The bioassessment data are available as two separate csv files that describe scores for the California Stream Condition Index (CSCI) and the Algal Stream Condition Index (ASCI).  These files include scores at over 2000 locations and are a portion of the data used to develop the indices. The shapefile is a polygon dataset of the PSA regions of California.  
 
 * `ascidat.csv`: ASCI index data
 * `cscidat.csv`: CSCI index data
-* `latlong.csv`: station locations
 * `calipsa.shp`: PSA regions
 
 Download the zipped file of all the data from this [link](https://SCCWRP.github.io/CABW2018_R_training/data/datazip.zip).  Unzip the content into a folder on your computer that you can access for the workshop.
