@@ -106,7 +106,7 @@ This exercise will make sure R and RStudio are working and that you can get arou
 
 1. Add a single line to this script with the following text: `ls()`.  This is an R function that lists objects in your current environment.  Use the various ways we showed to send this command to the R Console.  Also, try typing this directly into the R Console and hit `Enter` to run it.  
 
-1. Lastly, we need to get this project set up with some example data for our exercies.  You should have downloaded this already, but if not, the data are available from <[link](https://SCCWRP.github.io/CABW2018_R_training/data/datazip.zip)>.  The data are in a compressed folder.  Download the file to your computer (anywhere).  Create a folder in your new project named `data` and extract the files into this location.  
+1. Lastly, we need to get this project set up with some example data for our exercises.  You should have downloaded this already, but if not, the data are available from <[link](https://SCCWRP.github.io/CABW2018_R_training/data/datazip.zip)>.  The data are in a zipped folder.  Download the file to your computer (anywhere).  Create a folder in your new project named `data` and extract the files into this location.  
 
 ## R language fundamentals
 
@@ -160,7 +160,7 @@ When a package gets installed, that means the source is downloaded and put into 
 
 ## Exercise 2
 
-We're going to install some packages from CRAN that will give us the tools for our workshop today.  We'll use the tidyverse, sf, and mapview packages.  Later, we'll explain in detail what each of these packages provide.  
+We're going to install some packages from CRAN that will give us the tools for our workshop today.  We'll use the tidyverse, sf, mapview, viridis, and USAboundaries packages.  Later, we'll explain in detail what each of these packages provide.  
 
 1. At the top of the script you just created, type the following functions.
 
@@ -169,6 +169,8 @@ We're going to install some packages from CRAN that will give us the tools for o
 install.packages("tidyverse")
 install.packages("sf")
 install.packages("mapview")
+install.packages("viridis")
+install.packages("USAboundaries")
     ```
 
 1. Select all three lines by clicking and dragging the mouse pointer over the text.  
@@ -183,6 +185,8 @@ install.packages("mapview")
 library("tidyverse")
 library("sf")
 library("mapview")
+library("viridis")
+library("USAboundaries")
     ```
 
 ### Getting Help

@@ -10,22 +10,20 @@ By the end of this course you should be able to or have the resources to find ou
 
 * Create plots using R packages to explore data trends
 
-* Create maps in R to explore spatial patterns and generate reports
+* Create maps in R to explore spatial patterns
 
 ## Agenda
 
-* __1 - 2pm__: Using R with bioassessment data: what, why, and how
+* __1:30 - 2:30pm__: Using R with bioassessment data: what, why, and how
 
-* __2 - 3pm__: Wrangling and plotting bioassessment data for exploratory analysis
+* __2:30 - 3:30pm__: Wrangling and plotting bioassessment data for exploratory analysis
 
-* __3 - 4pm__: Mapping bioassessment data for exploratory analysis
-
-* __4 - 5pm__: Mapping bioassessment data for reporting
+* __3:30 - 5:00pm__: Mapping bioassessment data in R
 
 ## Instructors
 
-* [Marcus Beck](https://fawda123.github.io/CV/Beck_CV.pdf) ([marcusb@sccwrp.org](mailto:marcusb@sccwrp.org)) - Marcus is a scientist with the Southern California Coastal Water Research Project.  His interests include time series analysis of water quality data, lake bioassessment, and data visualization.  
-* [Ryan Peek](https://ryanpeek.github.io/) ([rapeek@ucdavis.edu](mailto:rapeek@ucdavis.edu)) - Ryan is a post-doctoral researcher at the Center for Watershed Sciences at UC Davis. He interests focus on hydropower regulation and environmental management of rivers and streams in California, as well as integrating the fields of genomics, ecology, and hydrology.
+* [Marcus Beck](https://fawda123.github.io/CV/Beck_CV.pdf) ([marcusb@sccwrp.org](mailto:marcusb@sccwrp.org)) - Marcus is a scientist with the Southern California Coastal Water Research Project.  His interests include time series analysis of water quality data, freshwater bioassessment, and data visualization.   
+* [Ryan Peek](https://ryanpeek.github.io/) ([rapeek@ucdavis.edu](mailto:rapeek@ucdavis.edu)) - Ryan is a post-doctoral researcher at the Center for Watershed Sciences at UC Davis. His interests focus on hydropower regulation and environmental management of rivers and streams in California, as well as integrating the fields of genomics, ecology, and hydrology.
 
 ## Software requirements
 
