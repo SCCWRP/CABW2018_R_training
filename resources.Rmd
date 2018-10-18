@@ -23,6 +23,9 @@ This is a list of the data sources used in this workshop. For live-coding, pleas
 * [Data Carpentry: **R for Data Analysis and Visualization of Ecological Data**](http://www.datacarpentry.org/R-ecology-lesson/)
 * [Data Carpentry: **Data Organization in Spreadsheets**](http://www.datacarpentry.org/spreadsheet-ecology-lesson/)
 * [**RStudio Webinars**, many topics](https://www.rstudio.com/resources/webinars/)
+* [R For Cats: **Basic introduction site, with cats!**](http://rforcats.net/)
+* [Topical cheatsheets from **RStudio**, also viewed from the help menu](http://www.rstudio.com/resources/cheatsheets/)
+* [Cheatsheet from CRAN of **base R functions**](http://cran.r-project.org/doc/contrib/Short-refcard.pdf) 
 
 #### *R eBooks/Courses*
 
@@ -30,6 +33,7 @@ This is a list of the data sources used in this workshop. For live-coding, pleas
 * [Garrett Grolemund and Hadley Wickham's **R For Data Science**](http://r4ds.had.co.nz/)
 * [Chester Ismay and Albert Y. Kim's **Modern DiveR**](https://ismayc.github.io/moderndiver-book/)
 * [Julia Silge and David Robinson **Text Mining with R**](http://tidytextmining.com/)
+* [Hadley Wikham's **Advanced R**](http://adv-r.had.co.nz/)
 
 #### *Git/Github* 
 
