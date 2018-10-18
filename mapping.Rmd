@@ -16,7 +16,7 @@ Next we need to install our packages (if you haven't already). If you have alrea
 ```{r installsf, echo=T, eval=F}
 
 # install packages if you haven't already
-install.packages(c("sf","mapview", "tmap","USAboundaries","viridis"))
+install.packages(c("viridis", "sf","mapview", "tmap","USAboundaries"))
 
 # load packages or "libraries"
 library(tidyverse) # wrangling/plotting tools
@@ -42,26 +42,39 @@ suppressPackageStartupMessages({
 
 ## Read in Data
 
-First we need to read in some data. We'll be using the same data from earlier in the lessons...see the Github repository](https://github.com/SCCWRP/CABW2018_R_training/tree/master/data). Let's use the `read_csv` function from the `tidyverse (readr)` package to read in our `.csv`'s. 
+First we need to read in some data. We'll be using the same data from earlier in the lessons...see the Github repository](https://github.com/SCCWRP/CABW2018_R_training/tree/master/data). Let's use the `read_csv` function from the `tidyverse (readr)` package to read in our `.csv`'s. We can either download these files directly from the website, or we can use a downloaded file on our computer, following the data management/organization tips we spoke about earlier (i.e., using RStudio Projects, and always keep **data** in a `data` folder. 
 
-```{r getData, eval=T, echo=T}
+### Read Data from Local RStudio Project
 
-# if reading locally:
-# ascidat <- read_csv("data/ascidat.csv")
-# cscidat <- read_csv("data/cscidat.csv")
-# latlons <- read_csv("data/latlon.csv")
+This assumes you've already downloaded the data from the [website](https://sccwrp.github.io/CABW2018_R_training/) or from the Github data [repository](https://github.com/SCCWRP/CABW2018_R_training/tree/master/data).
 
+```{r getDataLocal, eval=F, echo=T}
+
+# if reading locally (from your data folder in you RStudio project):
+ascidat <- read_csv("data/ascidat.csv")
+cscidat <- read_csv("data/cscidat.csv")
+latlons <- read_csv("data/latlon.csv")
+
+```
+
+### Read Data from Website
+
+This downloads data directly from the website (so you need to be connected to the internet).
+
+```{r getDataWeb, eval=T, echo=T}
 # if reading from web:
 ascidat <- read_csv("https://raw.githubusercontent.com/SCCWRP/CABW2018_R_training/master/data/ascidat.csv")
 
 cscidat <- read_csv("https://raw.githubusercontent.com/SCCWRP/CABW2018_R_training/master/data/cscidat.csv")
 
 # read in latitude/longitude data for sites:
-latlons <- read_csv("https://raw.githubusercontent.com/SCCWRP/CABW2018_R_training/master/data/latlon.csv")
+#latlons <- read_csv("https://raw.githubusercontent.com/SCCWRP/CABW2018_R_training/master/data/latlon.csv")
+
+latlons <- read_csv(file = "https://raw.githubusercontent.com/SCCWRP/CABW2018_R_training/update_mapping/data/latlon.csv")
 
 ```
 
-Let's take a look at our dataset, and in particular, let's look at the coordinates we'll be using to make our data "spatial". The `latlons` dataset just has three columns. How many rows?
+Let's take a look at our dataset, and in particular, let's look at the coordinates we'll be using to make our data "spatial". The `latlons` dataset just has 3 columns. **_How many rows_**?
 
 If we look at a summary of the latitude and longitude, what do we notice? Why might it be important to look at the latitude and longitude data[^1] before plotting?
 
@@ -72,9 +85,9 @@ summary(latlons)
 
 ```
 
-[^1]: For data from the North American continent, keep an eye on your lat/long coordinates, especially **longitude**. It should be `negative`. A common snafu that can occur is a few values (or all) from the longitude column may remain positive, which means the data typically plots somewhere in the Indian Ocean. Make sure all your longitudes are negative (if in the US and using lat/longs).
+[^1]: For data from the North American continent, and when using the **`WGS84`** datum, keep an eye on your lat/long coordinates, especially **longitude**. It typically should be `negative`. A common snafu that can occur is a few values (or all) from the longitude column may remain positive, which means the data typically plots somewhere in the Indian Ocean. Make sure all your longitudes are negative (if in the US and using lat/longs).
 
-### Fix the Spatial Data
+### Tidy the Spatial Data
 
 In case there is something amiss, such as values that aren't negative, a quick fix is to run the following code to make sure all longitude values are negative.
 
@@ -82,21 +95,30 @@ In case there is something amiss, such as values that aren't negative, a quick f
 
 latlons$New_Long <- abs(latlons$New_Long) * -1 # make all values negative
 
+range(latlons$New_Long)
+
 ```
 
-### Make Data Spatial & Plot
+## Make Data Spatial
 
 Once we are sure our data are ok and things have been vetted, let's make the data spatial and create a few quick test plots. To make the data spatial using `sf`, we need to know two important pieces...
 
- - Which columns are the spatial coordinates in (either name or number)?
- - What projection or CRS do we want to use?
+ - Which columns contain the spatial coordinates in (either name or column number)?
+ - What [projection](http://spatialreference.org/ref/epsg/) or [EPSG (CRS, SRID, etc)](http://epsg.io/) is the data in/or that we want to use?
+
+### Projections/Transformations
+
+Spatial data is tricky, because different parts of the world work in different "*datum*" or "*projections*". The best description of how these work requires imagining draping a square tablecloth over a round ball (earth). The tablecloth isn't quite big enough to cover the whole globe, so near the edges of the tablecoth there's stretching. At the center of the tablecloth there's very little stretching. When working with spatial data, we want a projection that is going to give us the least amount of stretching for the location/region we're working in. A few common projections used in California for state/federal work:
+
+ - [NAD83 California Albers: EPSG 3310](http://epsg.io/3310)
+ - [NAD83 California Teal Albers: SR-ORG:10](http://spatialreference.org/ref/sr-org/10/)
+ - [WGS84 Lat Lon: EPSG 4326](http://epsg.io/4326)
+
+### Make Spatial with `sf`
+
+Here we read in the data and add a CRS projection.
 
 ```{r makespatial}
-
-# set projections
-# utms <- CRS("+init=epsg:32610") ## more detailed def using the EPSG code
-# lats84<-CRS("+init=epsg:4326") # set the default for lat/longs
-# lats84
 
 # make data sf object: 
 df_sf <- st_as_sf(latlons,
@@ -107,7 +129,24 @@ df_sf <- st_as_sf(latlons,
 
 ```
 
-### Plotting with `sf` Data
+### Transform or convert to different projection?
+
+Now that our data is in this format, it's pretty easy to transform/convert to another spatial projection. Here we can switch the projection over to something different:
+
+```{r transformSF, eval=T, echo=T}
+
+# check CRS first:
+st_crs(df_sf)
+
+# change CRS using st_transform
+df_sf_albers <- st_transform(df_sf, crs=3310)
+
+# check that it changed
+st_crs(df_sf_albers)
+
+```
+
+## Plot `sf` Data
 
 Now we can make a few quick plots to see how our data looks. The simplest option is to use the `plot` function. However, if we try to plot by running: 
 
@@ -117,7 +156,9 @@ Now we can make a few quick plots to see how our data looks. The simplest option
  
  ![](images/plot_df_sf.png)
 
-Baseplotting functions work with `sf`, but be aware, using `plot` will default to plotting a facet or map for every column of data in your dataframe. Avoid that by specifying `st_coordinates()` or `$geometry` to ensure only one iteration gets plotted.
+Baseplotting functions work with `sf`, but be aware, using `plot` will default to plotting a facet or map for every **column** of data in your dataframe. Avoid that by specifying `st_coordinates()` or `$geometry` to ensure only the spatial data gets plotted.
+
+### Plotting with `plot`
 
 ```{r single_sf1}
 # single layer
@@ -125,14 +166,16 @@ plot(df_sf$geometry)
 
 # add some flair
 plot(df_sf$geometry, col = "orange")
+
 ```
 
+You can make it as fancy as you want, here are a few additional options:
 
 ```{r single_sf2, eval=F, echo=T}
 
 # this is better
-plot(st_coordinates(df_sf), pch=16, col=adjustcolor("maroon", alpha=0.7), cex=1.5)
-graphics::title("A Map")
+plot(st_coordinates(df_sf), pch=16, col=adjustcolor("maroon", alpha=0.7), cex=1.5, xlab = "Longitude", ylab="Latitude")
+graphics::title("A Map in WGS84")
 
 ```
 
@@ -153,7 +196,13 @@ mapview::mapview(df_sf)
 
 <!-- add gif here-->
 
-## Get some Boundary Data for State and County
+## Spatial Operations
+
+Now that we can get data into R, and transform and plot our data, what about other spatial data or operations? The `sf` package can do nearly all the same things you can do in GIS software, buffer, crop, clip, merge, etc. For a full list and some nice vignettes, check out the `sf` page: https://r-spatial.github.io/sf/, and click on the **Articles** tab.
+
+There's simply too much to show and not enough time, but below are a few bonus activities we can work through. I'll show how to crop or clip one spatial dataset using another spatial dataset, and how to read/write `shapefiles` and `geopackages`.
+
+### Get some Boundary Data for State and County
 
 Now we have our data, let's use some boundaries to crop/buffer and manipulate around the data. While there are loads of options available, I'll show two. A package called `USAboundaries`, which allows us to quickly download county or state outlines, in `sf` formats. Very handy for making some quick professional maps.
 
