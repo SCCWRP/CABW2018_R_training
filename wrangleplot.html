@@ -11,7 +11,7 @@
 
 
 
-<title></title>
+<title>wrangleplot.utf8.md</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -25,6 +25,9 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -290,6 +293,13 @@ div.tocify {
 <li>
   <a href="mapping.html">Mapping</a>
 </li>
+<li>
+  <a href="resources.html">
+    <span class="fa fa-list"></span>
+     
+    Resources
+  </a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -338,10 +348,7 @@ div.tocify {
 </div>
 <div id="data-wrangling-with-dplyr" class="section level2">
 <h2>Data wrangling with dplyr</h2>
-<div class="figure">
-<img src="figure/data-science-wrangle.png" />
-
-</div>
+<p><img src="figure/data-science-wrangle.png" /></p>
 <p>The data wrangling process includes data import, tidying, and transformation. The process directly feeds into, and is not mutually exclusive, with the <em>understanding</em> or modelling side of data exploration. More generally, I consider data wrangling as the manipulation or combination of datasets for the purpose of analysis.</p>
 <p><strong>All wrangling is based on a purpose.</strong> No one wrangles for the sake of wrangling (usually), so the process always begins by answering the following two questions:</p>
 <ul>
@@ -570,10 +577,7 @@ head(dplyr_rnm)</code></pre>
 <p>Combining data is a common task of data wrangling. All joins require that each of the tables can be linked by shared identifiers. These are called ‘keys’ and are usually represented as a separate column that acts as a unique variable for the observations. Our example datasets include the <code>id</code> column that represents a unique identifier as a combination of station, sample date, and replicate.</p>
 <p>The challenge with joins is that the two datasets may not represent the same observations for a given key. For example, you might have one table with all observations for every key, another with only some observations, or two tables with only a few shared keys. What you get back from a join will depend on what’s shared between tables, in addition to the type of join you use.</p>
 <p>For our data, we’ll be using an <strong>inner-join</strong> that combines datasets by shared keys (for an overview of the other types of joins, see <a href="http://r4ds.had.co.nz/relational-data.html#outer-join">here</a>).</p>
-<div class="figure">
-<img src="figure/join-inner.png" />
-
-</div>
+<p><img src="figure/join-inner.png" /></p>
 <div id="exercise-3" class="section level3">
 <h3>Exercise 3</h3>
 <p>We’ll join our ASCI data to our CSCI data in this exercise to make a single dataset that has scores for both bioassessment indices taken at the same place and location. This will help us plot and map the data later.</p>

@@ -72,7 +72,7 @@ cscidat <- read_csv("https://raw.githubusercontent.com/SCCWRP/CABW2018_R_trainin
 # read in latitude/longitude data for sites:
 #latlons <- read_csv("https://raw.githubusercontent.com/SCCWRP/CABW2018_R_training/master/data/latlon.csv")
 
-latlons <- read_csv(file = "https://raw.githubusercontent.com/SCCWRP/CABW2018_R_training/update_mapping/data/latlon.csv")
+latlons <- read_csv(file = "https://raw.githubusercontent.com/SCCWRP/CABW2018_R_training/master/data/latlon.csv")
 
 ```
 

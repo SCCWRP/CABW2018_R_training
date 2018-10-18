@@ -25,6 +25,9 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -290,6 +293,13 @@ div.tocify {
 <li>
   <a href="mapping.html">Mapping</a>
 </li>
+<li>
+  <a href="resources.html">
+    <span class="fa fa-list"></span>
+     
+    Resources
+  </a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -402,7 +412,7 @@ div.tocify {
 <div id="r-language-fundamentals" class="section level2">
 <h2>R language fundamentals</h2>
 <p>The basic syntax of a function follows the form: <code>function_name(arg1, arg2, ...)</code>.</p>
-<p>With the base install, you will gain access to many (2644 functions, to be exact). Some examples:</p>
+<p>With the base install, you will gain access to many (3629 functions, to be exact). Some examples:</p>
 <pre class="r"><code># print
 print(&#39;hello world!&#39;)</code></pre>
 <pre><code>## [1] &quot;hello world!&quot;</code></pre>
@@ -411,32 +421,32 @@ seq(1, 10)</code></pre>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <pre class="r"><code># random numbers
 rnorm(100, mean = 10, sd = 2)</code></pre>
-<pre><code>##   [1]  8.070245 12.538676 14.229962  7.834979 10.272947 12.940636 11.697225
-##   [8]  6.327773  8.516170 12.511448 10.024842  8.673532 10.512044  7.351198
-##  [15] 11.205264 11.640597 10.602784  9.230686  8.280050  8.895076  7.240742
-##  [22] 12.611774  9.411532  9.728843  9.089977  8.295987  6.752598  8.408307
-##  [29]  8.593789 10.813759  8.191197 13.833037  5.785436  8.395128 12.128369
-##  [36] 10.175182 10.445176 12.738056 11.125930  8.496198  9.933890 16.927526
-##  [43] 10.002450 11.292120  5.275007 10.683330 10.592801  7.783210  7.968561
-##  [50]  8.749356 11.644942  6.307765 12.829507  8.043877  9.633923 11.760027
-##  [57]  9.878218  6.717364  9.457562  9.564686  7.126082 10.754894  9.722368
-##  [64] 13.745608  6.813097  9.511756 12.827420  7.860198 13.077517  8.712688
-##  [71]  8.721857 11.381061 12.845660 11.186665  7.160341  9.637613  8.010883
-##  [78]  5.273945 10.680246  8.842559 11.863008 10.651109  8.149545  9.279781
-##  [85]  8.252386 11.323711 11.085753 12.161436  5.817969  9.494860  7.186857
-##  [92] 12.802659 11.532429 10.461709 12.320554 11.402872  7.987322  8.368278
-##  [99] 10.746228 10.522432</code></pre>
+<pre><code>##   [1] 10.463134 11.631972 12.704590 14.218595 11.886985  7.699176 11.655195
+##   [8]  8.976181  6.809548  8.083370 11.175802  7.211968 14.573388 12.281958
+##  [15]  7.753514  9.564667 10.894604  9.514251 12.176831  9.307217 13.287833
+##  [22]  9.524909 12.657249  9.414670 12.092368 11.850545  9.585878 11.348851
+##  [29]  7.126604  7.828607  9.709406  9.299536 10.685900  9.959771 10.694487
+##  [36] 10.478364  8.442953 12.452632 11.618214  7.521072 11.872472 11.878328
+##  [43]  9.723153  8.829062 10.044865  6.983647 16.303448  6.923891  9.770822
+##  [50]  7.987760 11.872587 10.178372 10.372485  9.270533  5.770926  8.520807
+##  [57] 12.757881  9.198481  7.049119 11.719759  8.995723  6.886015  8.324317
+##  [64]  9.627476  9.525157 11.770442  8.818076  7.850026 10.175580  9.449503
+##  [71] 10.023352  5.898933 11.132766 11.359315 11.465594 11.070365 12.083610
+##  [78]  7.642243 11.015954  8.697636 11.417909 12.909197 13.837791  7.422458
+##  [85] 13.266990 10.618600 10.319115 10.988614 11.445962  6.546722  9.179444
+##  [92]  8.905656 12.953275  8.341710 10.032875 11.011825  8.978259  9.478751
+##  [99] 11.218481 12.122385</code></pre>
 <pre class="r"><code># average 
 mean(rnorm(100))</code></pre>
-<pre><code>## [1] -0.005701574</code></pre>
+<pre><code>## [1] 0.02913815</code></pre>
 <pre class="r"><code># sum
 sum(rnorm(100))</code></pre>
-<pre><code>## [1] 1.95355</code></pre>
+<pre><code>## [1] -16.21195</code></pre>
 <p>Very often you will see functions used like this:</p>
 <pre class="r"><code>my_random_sum &lt;- sum(rnorm(100))</code></pre>
 <p>In this case the first part of the line is the name of an object. You make this up. Ideally it should have some meaning, but the only rules are that it can’t start with a number and must not have any spaces. The second bit, <code>&lt;-</code>, is the assignment operator. This tells R to take the result of <code>sum(rnorm(100))</code> and store it an object named, <code>my_random_sum</code>. It is stored in the environment and can be used by just executing it’s name in the console.</p>
 <pre class="r"><code>my_random_sum</code></pre>
-<pre><code>## [1] -9.065376</code></pre>
+<pre><code>## [1] 8.960777</code></pre>
 <p>With this, you have the very basics of how we write R code and save objects that can be used later.</p>
 <div id="packages" class="section level3">
 <h3>Packages</h3>
