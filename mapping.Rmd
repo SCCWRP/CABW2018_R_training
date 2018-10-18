@@ -28,7 +28,7 @@ library(USAboundaries) # data for USA boundaries
 
 ```
 
-```{r load libs, echo=F, warning=FALSE}
+```{r loadLibs, echo=F, warning=FALSE}
 suppressPackageStartupMessages({
   library(tidyverse); # reading/writing files
   library(viridis); # nice color palette
@@ -160,7 +160,7 @@ Baseplotting functions work with `sf`, but be aware, using `plot` will default t
 
 ### Plotting with `plot`
 
-```{r single_sf1}
+```{r singleSF1}
 # single layer
 plot(df_sf$geometry)
 
@@ -175,7 +175,7 @@ plot(df_sf$geometry, col = "orange")
 
 You can make plots as fancy as you want, here are a few additional options:
 
-```{r single_sf2, eval=T, echo=T}
+```{r singleSF2, eval=T, echo=T}
 
 # this is better
 plot(st_coordinates(df_sf), pch=16, col=adjustcolor("maroon", alpha=0.7), cex=1.5, xlab = "Longitude", ylab="Latitude")
@@ -187,7 +187,7 @@ graphics::title("A Map in WGS84")
 
 One of the nicest/coolest packages you'll find for mapping, is the `mapview` package. As long as data are in an `sf` format, you can quickly make some very nice and interactive maps of your data/sites. First let's see what `class` of data we have:
 
-```{r quick_mapview, echo=T, eval=T}
+```{r quickMapview, echo=T, eval=T}
 
 # check data is in sf format?
 class(df_sf)
@@ -200,19 +200,19 @@ mapview::mapview(df_sf)
 
 Pretty cool!
 
-```{r frogfig, results="asis", warnings=FALSE, messages=FALSE, echo=FALSE, out.height = '70%', fig.cap='Hanging on still?'}
+```{r frogFarside, results="asis", warnings=FALSE, messages=FALSE, echo=FALSE, out.height = '70%', fig.cap='Hanging on still?'}
 
 knitr::include_graphics("images/frog_stuck_on_plane.jpg")
 
 ```
 
-## Spatial Operations
+# Spatial Operations
 
 Now that we can get data into R, and transform and plot our data, what about other spatial data or operations? The `sf` package can do nearly all the same things you can do in GIS software, buffer, crop, clip, merge, etc. For a full list and some nice vignettes, check out the `sf` page: https://r-spatial.github.io/sf/, and click on the **Articles** tab.
 
-There's simply too much to show and not enough time, but below are a few bonus activities we can work through. I'll show how to crop or clip one spatial dataset using another spatial dataset, and how to read/write `shapefiles` and `geopackages`.
+There's simply too much to show and not enough time, but below are a few bonus activities we can work through. I'll show how to crop or clip one spatial dataset using another spatial dataset, and eventually how to read/write `shapefiles` and `geopackages`.
 
-### Get some Boundary Data for States
+## Get some Boundary Data for States
 
 Now we have our data, let's use some boundaries to crop/buffer and manipulate the data. While there are loads of options available, I'll show two. A package called `USAboundaries`, which allows us to quickly download county or state outlines, in `sf` formats. Very handy for making some quick professional maps. Let's get an outline of CA and add our points to a map.
 
@@ -257,7 +257,7 @@ Alternatively, we can use `ggplot2` instead. This is where `sf` objects are real
 
 So let's load some background imagery and add it to our plot.
 
-```{r gg_sf, eval=T, echo=T}
+```{r GGsf, eval=T, echo=T}
 
 nicemap<-
   ggplot() + # set up the framework
@@ -284,7 +284,7 @@ Ok, let's include our other dataset and try to tie this all together. Here's wha
  
 **So, first let's grab counties for CA and subset:**
  
-```{r getCo}
+```{r getCounties}
 
 # Download outlines of all the counties for California
 CA_counties<-us_counties(resolution = "high", states = "CA") # what does resolution do?
@@ -299,7 +299,7 @@ sacto_co <- filter(CA_counties, name==co_names)
  
 **Now let's make a test map to make sure this data works/plots:**
 
-```{r mapCo}
+```{r mapCounties}
 
 ggplot() + 
   geom_sf(data=CA_counties, col="gray", alpha=0.5, lty=2) + # all counties
@@ -340,12 +340,11 @@ plot(sacto_csci$geometry, add=T, bg="purple", pch=21)
 
 ```
 
-
 ### Interactive Map!
 
 Finally, let's make a dynamic map that shows the CSCI scores!
 
-```{r}
+```{r mapviewCSCI}
 mapview(sacto_csci, zcol="CSCI", layer="CSCI")
 
 # add another layer by linking with "+"
@@ -357,9 +356,9 @@ mapview(sacto_co, layer="Sacramento County") +
 
 ### Static Map
 
- > **Challenge**: Can you make the same map as above (minus the background stuff and interactivity) using ggplot? Hint, `viridis` may be useful here...
+ > **Challenge**: Can you make the same map as below using ggplot? Hint, `viridis` may be useful here...
 
-```{r eval=T, echo=FALSE}
+```{r staticCSCI, eval=T, echo=FALSE}
 
 ggplot() +
   geom_sf(data=sacto_co, col="gray", alpha=0.4, lwd=2) +
@@ -369,3 +368,49 @@ ggplot() +
 
 ```
 
+
+
+## Saving Data Out & Getting it Back In
+
+So we now can do a number of different things with spatial data, mapping, making a web map, cropping, etc. But a common task is saving spatial data for use in another program, or reading spatial data (i.e., typically **shapefiles**) into R.
+
+We'll walk through how to do that with the data we've used thus far.
+
+### Save into a shapefile
+
+Shapefiles have been the de-facto data currency for spatial (vector-based) data for awhile. Newer more open-source formats are becoming easier to use (e.g., *geopackage*), but if you do anything spatial, you'll have to use shapefiles at some point.
+
+Let's save one of our data layers into a shapefile. With the `sf` package, this is fairly straightforward.
+
+```{r saveShp}
+
+# save out as a shapefile
+st_write(obj = sacto_csci, "data/sacramento_co_csci.shp", 
+         delete_layer = TRUE ) # delete the existing layer if it already exists
+
+# warnings are ok, typically associated with field widths or field names.
+# commonly I get this:
+# Warning messages:
+# 1: In abbreviate_shapefile_names(obj) :
+#   Field names abbreviated for ESRI Shapefile driver
+```
+
+How can we make sure this worked? Well we can go find the folder and check that there are 4 separate files ending with `.dbf`, `.prj`, `.shp`, and `.shx`. We can also read this data back into R and plot it to make sure it looks ok.
+
+```{r readShp}
+
+# select the path to the shp file
+tst_shp <- st_read("data/sacramento_co_csci.shp")
+
+plot(tst_shp$geometry)
+
+mapview(tst_shp)
+
+```
+
+
+## Interested in Learning More?
+
+There are loads of resources...but a geospatial workshop you may want to check out is run by the Carpentries. Lessons/material are freely available here: 
+
+ - https://datacarpentry.org/geospatial-workshop/
