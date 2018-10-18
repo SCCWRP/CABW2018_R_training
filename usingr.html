@@ -11,7 +11,7 @@
 
 
 
-<title></title>
+<title>usingr.utf8.md</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -344,7 +344,7 @@ div.tocify {
 <ul>
 <li>The growth of R as explained in the <a href="https://stackoverflow.blog/2017/10/10/impressive-growth-r/">Stack Overflow blog</a>, <a href="http://blog.revolutionanalytics.com/2016/07/r-moves-up-to-5th-place-in-ieee-language-rankings.html">IEEE rating</a></li>
 </ul>
-<p>R is also an open-source programming language - not only is it free, but this means anybody can contribute to it’s development. As of 2018-10-15, there are 13168 on CRAN!</p>
+<p>R is also an open-source programming language - not only is it free, but this means anybody can contribute to it’s development. As of 2018-10-18, there are 13182 on CRAN!</p>
 </div>
 </div>
 <div id="rstudio" class="section level2">
@@ -354,10 +354,7 @@ div.tocify {
 <div id="open-r-and-rstudio" class="section level3">
 <h3>Open R and RStudio</h3>
 <p>If you haven’t done so, download and install RStudio from the link above. After it’s installed, find the RStudio shortcut and fire it up (just watch for now). You should see something like this:</p>
-<div class="figure">
-<img src="figure/rstudio.png" />
-
-</div>
+<p><img src="figure/rstudio.png" /></p>
 <p>There are four panes in RStudio:</p>
 <ul>
 <li>Source</li>
@@ -370,28 +367,19 @@ div.tocify {
 <h3>RStudio projects</h3>
 <p>I strongly encourage you to use RStudio projects when you are working with R. The RStudio project provides a central location for working on a particular task. It helps with file management and is portable because all the files live in the same project. RStudio projects also remember history - what commands you used and what data objects are in your enviornment.</p>
 <p>To create a new project, click on the File menu at the top and select ‘New project…’</p>
-<div class="figure">
-<img src="figure/rstudio_proj.jpg" />
-
-</div>
+<p><img src="figure/rstudio_proj.jpg" /></p>
 <p>Now we can use this project for our data and any scripts we create.</p>
 </div>
 <div id="scripting" class="section level3">
 <h3>Scripting</h3>
 <p>In most cases, you will not enter and execute code directly in the console. Code can be written in a script and then sent directly to the console when you’re ready to run it. The key difference here is that a script can be saved and shared.</p>
 <p>Open a new script from the File menu…</p>
-<div class="figure">
-<img src="figure/rstudio_script.jpg" />
-
-</div>
+<p><img src="figure/rstudio_script.jpg" /></p>
 </div>
 <div id="executing-code-in-rstudio" class="section level3">
 <h3>Executing code in RStudio</h3>
 <p>After you write your script it can be sent to the Console to run the code in R. Any variables you create in your script will not be available in your working environment until this is done. There are two ways to sent code the console. First, you can hit the <code>Run</code> button at the top right of the scripting window. Second, and preferred, you can use <code>ctrl+enter</code> (<code>cmd+enter</code> on a Mac). Both approaches will send the selected line to the console, then move to the next line in your script. You can also highlight and send an entire block of code.</p>
-<div class="figure">
-<img src="figure/rstudio_run.jpg" />
-
-</div>
+<p><img src="figure/rstudio_run.jpg" /></p>
 </div>
 <div id="what-is-the-environment" class="section level3">
 <h3>What is the environment?</h3>
@@ -408,13 +396,13 @@ div.tocify {
 <li><p>Create a new “R Script” in the Source Pane, save that file into your newly created project and name it “cabw_script.R”. It’ll just be a blank text file at this point.</p></li>
 <li><p>Add in a comment line to separate this section. It should look something like: <code># Exercise 1: Just Getting used to RStudio and Scripts</code>.</p></li>
 <li><p>Add a single line to this script with the following text: <code>ls()</code>. This is an R function that lists objects in your current environment. Use the various ways we showed to send this command to the R Console. Also, try typing this directly into the R Console and hit <code>Enter</code> to run it.</p></li>
-<li><p>Lastly, we need to get this project set up with some example data for our exercies. You should have downloaded this already, but if not, the data are available from &lt;<a href="https://SCCWRP.github.io/CABW2018_R_training/data/datazip.zip">link</a>&gt;. The data are in a compressed folder. Download the file to your computer (anywhere). Create a folder in your new project named <code>data</code> and extract the files into this location.</p></li>
+<li><p>Lastly, we need to get this project set up with some example data for our exercises. You should have downloaded this already, but if not, the data are available from &lt;<a href="https://SCCWRP.github.io/CABW2018_R_training/data/datazip.zip">link</a>&gt;. The data are in a zipped folder. Download the file to your computer (anywhere). Create a folder in your new project named <code>data</code> and extract the files into this location.</p></li>
 </ol>
 </div>
 <div id="r-language-fundamentals" class="section level2">
 <h2>R language fundamentals</h2>
 <p>The basic syntax of a function follows the form: <code>function_name(arg1, arg2, ...)</code>.</p>
-<p>With the base install, you will gain access to many (2636 functions, to be exact). Some examples:</p>
+<p>With the base install, you will gain access to many (2644 functions, to be exact). Some examples:</p>
 <pre class="r"><code># print
 print(&#39;hello world!&#39;)</code></pre>
 <pre><code>## [1] &quot;hello world!&quot;</code></pre>
@@ -423,32 +411,32 @@ seq(1, 10)</code></pre>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <pre class="r"><code># random numbers
 rnorm(100, mean = 10, sd = 2)</code></pre>
-<pre><code>##   [1]  8.898232  6.940367 11.949809  9.159221 11.863485  6.483966  9.626941
-##   [8]  9.754315  9.009607  6.534180 10.573146 10.326157  8.392761 10.509207
-##  [15] 12.646282 12.509482  7.871879  8.270087 11.664886 11.564192 10.897007
-##  [22]  9.044239  8.899053 12.059192  7.859466 11.319936  9.362120  9.027022
-##  [29]  8.403133 10.469571 10.808649  8.420230 11.512018 10.165385 13.320743
-##  [36]  9.760200  9.198610 11.254259  7.840542  8.426548 11.572302  7.602778
-##  [43]  8.020289 11.651120  9.908783  9.653469  9.607344 13.456394 10.146951
-##  [50] 12.456058  7.377761 10.207935 12.576759 14.330089 11.832676 10.908446
-##  [57]  9.443606 10.993017  5.159311 14.393112  8.853173 10.200645 11.393338
-##  [64] 14.554047  7.927238 10.422747  5.935687  8.549398  9.905820 11.848463
-##  [71] 11.139327  7.155819  8.408668  8.722487 11.976147 12.349213  5.363290
-##  [78]  8.213019  7.322060 10.554622 10.615674 12.807655 11.672166 10.816273
-##  [85] 10.072808 11.970911  4.565428 12.054609 11.197816  9.275144  8.613177
-##  [92]  5.928556 13.613124  9.540018 12.835919 12.519832 11.045732 13.221093
-##  [99] 11.550855 11.238829</code></pre>
+<pre><code>##   [1]  8.070245 12.538676 14.229962  7.834979 10.272947 12.940636 11.697225
+##   [8]  6.327773  8.516170 12.511448 10.024842  8.673532 10.512044  7.351198
+##  [15] 11.205264 11.640597 10.602784  9.230686  8.280050  8.895076  7.240742
+##  [22] 12.611774  9.411532  9.728843  9.089977  8.295987  6.752598  8.408307
+##  [29]  8.593789 10.813759  8.191197 13.833037  5.785436  8.395128 12.128369
+##  [36] 10.175182 10.445176 12.738056 11.125930  8.496198  9.933890 16.927526
+##  [43] 10.002450 11.292120  5.275007 10.683330 10.592801  7.783210  7.968561
+##  [50]  8.749356 11.644942  6.307765 12.829507  8.043877  9.633923 11.760027
+##  [57]  9.878218  6.717364  9.457562  9.564686  7.126082 10.754894  9.722368
+##  [64] 13.745608  6.813097  9.511756 12.827420  7.860198 13.077517  8.712688
+##  [71]  8.721857 11.381061 12.845660 11.186665  7.160341  9.637613  8.010883
+##  [78]  5.273945 10.680246  8.842559 11.863008 10.651109  8.149545  9.279781
+##  [85]  8.252386 11.323711 11.085753 12.161436  5.817969  9.494860  7.186857
+##  [92] 12.802659 11.532429 10.461709 12.320554 11.402872  7.987322  8.368278
+##  [99] 10.746228 10.522432</code></pre>
 <pre class="r"><code># average 
 mean(rnorm(100))</code></pre>
-<pre><code>## [1] -0.002254387</code></pre>
+<pre><code>## [1] -0.005701574</code></pre>
 <pre class="r"><code># sum
 sum(rnorm(100))</code></pre>
-<pre><code>## [1] -4.497268</code></pre>
+<pre><code>## [1] 1.95355</code></pre>
 <p>Very often you will see functions used like this:</p>
 <pre class="r"><code>my_random_sum &lt;- sum(rnorm(100))</code></pre>
 <p>In this case the first part of the line is the name of an object. You make this up. Ideally it should have some meaning, but the only rules are that it can’t start with a number and must not have any spaces. The second bit, <code>&lt;-</code>, is the assignment operator. This tells R to take the result of <code>sum(rnorm(100))</code> and store it an object named, <code>my_random_sum</code>. It is stored in the environment and can be used by just executing it’s name in the console.</p>
 <pre class="r"><code>my_random_sum</code></pre>
-<pre><code>## [1] 0.1132419</code></pre>
+<pre><code>## [1] -9.065376</code></pre>
 <p>With this, you have the very basics of how we write R code and save objects that can be used later.</p>
 <div id="packages" class="section level3">
 <h3>Packages</h3>
@@ -456,7 +444,7 @@ sum(rnorm(100))</code></pre>
 </div>
 <div id="cran" class="section level3">
 <h3>CRAN</h3>
-<p>One of the reasons for R’s popularity is CRAN, <a href="http://cran.r-project.org/">The Comprehensive R Archive Network</a>. This is where you download R and also where most will gain access to packages (there are other places, but that is for later). Not much else to say about this now other than to be aware of it. As of 2018-10-15, there are 13168 on CRAN!</p>
+<p>One of the reasons for R’s popularity is CRAN, <a href="http://cran.r-project.org/">The Comprehensive R Archive Network</a>. This is where you download R and also where most will gain access to packages (there are other places, but that is for later). Not much else to say about this now other than to be aware of it. As of 2018-10-18, there are 13182 on CRAN!</p>
 </div>
 <div id="installing-packages" class="section level3">
 <h3>Installing packages</h3>
@@ -465,20 +453,24 @@ sum(rnorm(100))</code></pre>
 </div>
 <div id="exercise-2" class="section level2">
 <h2>Exercise 2</h2>
-<p>We’re going to install some packages from CRAN that will give us the tools for our workshop today. We’ll use the tidyverse, sf, and mapview packages. Later, we’ll explain in detail what each of these packages provide.</p>
+<p>We’re going to install some packages from CRAN that will give us the tools for our workshop today. We’ll use the tidyverse, sf, mapview, viridis, and USAboundaries packages. Later, we’ll explain in detail what each of these packages provide.</p>
 <ol style="list-style-type: decimal">
 <li><p>At the top of the script you just created, type the following functions.</p>
 <pre class="r"><code># install packages from CRAN
 install.packages(&quot;tidyverse&quot;)
 install.packages(&quot;sf&quot;)
-install.packages(&quot;mapview&quot;)</code></pre></li>
+install.packages(&quot;mapview&quot;)
+install.packages(&quot;viridis&quot;)
+install.packages(&quot;USAboundaries&quot;)</code></pre></li>
 <li><p>Select all three lines by clicking and dragging the mouse pointer over the text.</p></li>
 <li><p>Send all threee commands to the console using <code>ctrl+enter</code>. You should see some text output on the console about the installation process. The installation may take a few minutes so don’t be alarmed.</p></li>
 <li><p>After the packages are done installing, verify that there were no errors during the process (this should be pretty obvious, i.e., error text in big scary red letters).</p></li>
 <li><p>Load the packages after they’ve installed.</p>
 <pre class="r"><code>library(&quot;tidyverse&quot;)
 library(&quot;sf&quot;)
-library(&quot;mapview&quot;)</code></pre></li>
+library(&quot;mapview&quot;)
+library(&quot;viridis&quot;)
+library(&quot;USAboundaries&quot;)</code></pre></li>
 </ol>
 <div id="getting-help" class="section level3">
 <h3>Getting Help</h3>
