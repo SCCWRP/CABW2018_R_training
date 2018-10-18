@@ -11,6 +11,9 @@ navbar:
       href: wrangleplot.html
     - text: "Mapping"
       href: mapping.html
+    - text: "Resources"
+      icon: fa-list
+      href: resources.html
 output_dir: "."
 output:
   html_document:
