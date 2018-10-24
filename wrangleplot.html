@@ -349,7 +349,7 @@ div.tocify {
 <div id="data-wrangling-with-dplyr" class="section level2">
 <h2>Data wrangling with dplyr</h2>
 <p><img src="figure/data-science-wrangle.png" /></p>
-<p>The data wrangling process includes data import, tidying, and transformation. The process directly feeds into, and is not mutually exclusive, with the <em>understanding</em> or modelling side of data exploration. More generally, I consider data wrangling as the manipulation or combination of datasets for the purpose of analysis.</p>
+<p>The data wrangling process includes data import, tidying, and transformation. The process directly feeds into, and is not mutually exclusive with, the <em>understanding</em> or modelling side of data exploration. More generally, I consider data wrangling as the manipulation or combination of datasets for the purpose of analysis.</p>
 <p><strong>All wrangling is based on a purpose.</strong> No one wrangles for the sake of wrangling (usually), so the process always begins by answering the following two questions:</p>
 <ul>
 <li>What do my input data look like?</li>
@@ -362,7 +362,7 @@ div.tocify {
 <li>Adding or modifying existing variables</li>
 <li>Renaming variables</li>
 <li>Arranging rows by a variable</li>
-<li>Summarizing variable conditional on others</li>
+<li>Summarizing a variable conditional on others</li>
 </ul>
 <p>The dplyr package provides easy tools for these common data manipulation tasks and is a core package from the <a href="https://www.tidyverse.org/">tidyverse</a> suite of packages. The philosophy of dplyr is that one function does one thing and the name of the function says what it does. Some additional dplyr resources:</p>
 <ul>
@@ -580,7 +580,7 @@ head(dplyr_rnm)</code></pre>
 <p><img src="figure/join-inner.png" /></p>
 <div id="exercise-3" class="section level3">
 <h3>Exercise 3</h3>
-<p>We’ll join our ASCI data to our CSCI data in this exercise to make a single dataset that has scores for both bioassessment indices taken at the same place and location. This will help us plot and map the data later.</p>
+<p>We’ll join our ASCI data to our CSCI data in this exercise to make a single dataset that has scores for both bioassessment indices taken at the same place and time. This will help us plot and map the data later.</p>
 <ol style="list-style-type: decimal">
 <li><p>Before you start, check the dimensions of both datasets (e.g., <code>dim</code> or <code>nrow</code>). How many rows in each?</p>
 <pre class="r"><code>dim(cscidat)

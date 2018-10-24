@@ -82,7 +82,7 @@ Open a new script from the File menu...
 
 ### Executing code in RStudio
 
-After you write your script it can be sent to the Console to run the code in R.  Any variables you create in your script will not be available in your working environment until this is done.  There are two ways to sent code the console.  First, you can hit the `Run` button at the top right of the scripting window.  Second, and preferred, you can use `ctrl+enter` (`cmd+enter` on a Mac).  Both approaches will send the selected line to the console, then move to the next line in your script.  You can also highlight and send an entire block of code.
+After you write your script it can be sent to the Console to run the code in R.  Any variables you create in your script will not be available in your working environment until this is done.  There are two ways to send code to the console.  First, you can hit the `Run` button at the top right of the scripting window.  Second, and preferred, you can use `ctrl+enter` (`cmd+enter` on a Mac).  Both approaches will send the selected line to the console, then move to the next line in your script.  You can also highlight and send an entire block of code.
 
 ![](figure/rstudio_run.jpg)
 
@@ -96,23 +96,19 @@ This exercise will make sure R and RStudio are working and that you can get arou
 
 1. Start RStudio: To start both R and RStudio requires only firing up RStudio.  RStudio should be available from All Programs at the Start Menu.  Fire up RStudio. 
 
-1. Take a few minutes to look around RStudio.  Find the Console Pane. Find Global and Project Options (hint: look in Tools).  Look at the Environment, History Pane.  Look at the Files, Plots, Packages, etc. pane.
-
 1. Create a new project.  Name it "cabw_r_workshop".  We will use this for the rest of the workshop.
 
 1. Create a new "R Script" in the Source Pane, save that file into your newly created project and name it "cabw_script.R". It'll just be a blank text file at this point.
 
 1. Add in a comment line to separate this section.  It should look something like: `# Exercise 1: Just Getting used to RStudio and Scripts`.
 
-1. Add a single line to this script with the following text: `ls()`.  This is an R function that lists objects in your current environment.  Use the various ways we showed to send this command to the R Console.  Also, try typing this directly into the R Console and hit `Enter` to run it.  
-
-1. Lastly, we need to get this project set up with some example data for our exercises.  You should have downloaded this already, but if not, the data are available from <[link](https://SCCWRP.github.io/CABW2018_R_training/data/datazip.zip)>.  The data are in a zipped folder.  Download the file to your computer (anywhere).  Create a folder in your new project named `data` and extract the files into this location.  
+1. Lastly, we need to get this project set up with some example data for our exercises.  You should have downloaded this already, but if not, the data are available [here](https://SCCWRP.github.io/CABW2018_R_training/data/datazip.zip).  The data are in a zipped folder.  Download the file to your computer (anywhere).  Create a folder in your new project named `data` and extract the files into this location.  
 
 ## R language fundamentals
 
 The basic syntax of a function follows the form: `function_name(arg1, arg2, ...)`.  
 
-With the base install, you will gain access to many (`r pkgs <- search(); pkgs <- pkgs[grep("package:",pkgs)]; length(unlist(sapply(pkgs,lsf.str)))` functions, to be exact). 
+With the base install, you will gain access to many functions (`r pkgs <- search(); pkgs <- pkgs[grep("package:",pkgs)]; length(unlist(sapply(pkgs,lsf.str)))`, to be exact). 
 Some examples:
 
 ```{r}
@@ -138,7 +134,7 @@ Very often you will see functions used like this:
 my_random_sum <- sum(rnorm(100))
 ```
 
-In this case the first part of the line is the name of an object.  You make this up.  Ideally it should have some meaning, but the only rules are that it can't start with a number and must not have any spaces.  The second bit, `<-`, is the assignment operator.  This tells R to take the result of `sum(rnorm(100))` and store it an object named, `my_random_sum`.  It is stored in the environment and can be used by just executing it's name in the console.
+In this case the first part of the line is the name of an object.  You make this up.  Ideally it should have some meaning, but the only rules are that it can't start with a number and must not have any spaces.  The second bit, `<-`, is the assignment operator.  This tells R to take the result of `sum(rnorm(100))` and store it in an object named, `my_random_sum`.  It is stored in the environment and can be used by just executing it's name in the console.
 
 ```{r}
 my_random_sum
@@ -148,7 +144,7 @@ With this, you have the very basics of how we write R code and save objects that
 
 ### Packages
 
-The base install of R is quite powerful, but you will soon have a need or desire to go beyond this.  Packages provide this ability.  They are a standardized method for extending R with new methods, techniques, and programming functionality.  There is a lot to say about packages regarding finding them, using them, etc., but for now let's focus just on the basics.  
+The base install of R is quite powerful, but you will soon have a need or desire to go beyond this.  Packages provide this ability.  They are a standardized way of extending R with new methods, techniques, and programming functionality.  There is a lot to say about packages regarding finding them, using them, etc., but for now let's focus just on the basics.  
 
 ### CRAN
 
@@ -156,7 +152,7 @@ One of the reasons for R's popularity is CRAN, [The Comprehensive R Archive Netw
 
 ### Installing packages
 
-When a package gets installed, that means the source is downloaded and put into your library.  A default library location is set for you so no need to worry about that.  In fact on Windows most of this is pretty automatic.  Let's give it a shot.
+When a package gets installed, that means the source code is downloaded and put into your library.  A default library location is set for you so no need to worry about that.  In fact, on Windows most of this is pretty automatic.  Let's give it a shot.
 
 ## Exercise 2
 
@@ -173,9 +169,9 @@ install.packages("viridis")
 install.packages("USAboundaries")
     ```
 
-1. Select all three lines by clicking and dragging the mouse pointer over the text.  
+1. Select all the lines by clicking and dragging the mouse pointer over the text.  
 
-1. Send all threee commands to the console using `ctrl+enter`.  You should see some text output on the console about the installation process.  The installation may take a few minutes so don't be alarmed.  
+1. Send all the commands to the console using `ctrl+enter`.  You should see some text output on the console about the installation process.  The installation may take a few minutes so don't be alarmed.  
 
 1. After the packages are done installing, verify that there were no errors during the process (this should be pretty obvious, i.e., error text in big scary red letters).
 
@@ -300,7 +296,7 @@ The only constraints required to make a data frame are:
 
 It is the rare case when you manually enter your data in R, not to mention impractical for most datasets.  Most data analysis workflows typically begin with importing a dataset from an external source.  Literally, this means committing a dataset to memory (i.e., storing it as a variable) as one of R's data structure formats.
 
-Flat data files (text only, rectangular format) present the least complications on import because there is very little to assume about the structure of the data. On import, R tries to guess the data type for each column and this is fairly unambiguous with flat files.  The base installation of R comes with some easy to use functions for importing flat files, such as `read.table()` and `read.csv`.
+Flat data files (text only, rectangular format) present the least complications on import because there is very little to assume about the structure of the data. On import, R tries to guess the data type for each column and this is fairly unambiguous with flat files.  The base installation of R comes with some easy to use functions for importing flat files, such as `read.table()` and `read.csv()`.
 
 ### Exercise 3
 
@@ -346,7 +342,7 @@ View(ascidat)
 
 ### Other ways to import data
 
-More often you will probably have an Excel spreadsheet to import. In the old days, importing spreadsheets into R was almost impossible given the proprietary data structure of Excel.  The tools available in R have since matured and it's now pretty painless to import a spreadsheet.  The `readxl` package is the most recent and by far most flexible data import package for Excel files. It comes with the `tidyverse` family of package.
+More often you will probably have an Excel spreadsheet to import. In the old days, importing spreadsheets into R was almost impossible given the proprietary data structure of Excel.  The tools available in R have since matured and it's now pretty painless to import a spreadsheet.  The `readxl` package is the most recent and by far most flexible data import package for Excel files. It comes with the `tidyverse` family of packages.
 
 Once installed, we can load it to access the import functions.
 

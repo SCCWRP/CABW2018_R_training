@@ -31,7 +31,7 @@ Please bring a laptop with the latest version of RStudio and R installed.  Downl
 
 ## Source content
 
-All source materials for this website can be accessed at https://github.com/SCCWRP/CABW_R_training
+All source materials for this website can be accessed at https://github.com/SCCWRP/CABW2018_R_training
 
 ## Attribution
 

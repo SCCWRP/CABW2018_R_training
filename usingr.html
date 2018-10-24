@@ -354,7 +354,7 @@ div.tocify {
 <ul>
 <li>The growth of R as explained in the <a href="https://stackoverflow.blog/2017/10/10/impressive-growth-r/">Stack Overflow blog</a>, <a href="http://blog.revolutionanalytics.com/2016/07/r-moves-up-to-5th-place-in-ieee-language-rankings.html">IEEE rating</a></li>
 </ul>
-<p>R is also an open-source programming language - not only is it free, but this means anybody can contribute to it’s development. As of 2018-10-18, there are 13182 on CRAN!</p>
+<p>R is also an open-source programming language - not only is it free, but this means anybody can contribute to it’s development. As of 2018-10-23, there are 13204 on CRAN!</p>
 </div>
 </div>
 <div id="rstudio" class="section level2">
@@ -388,7 +388,7 @@ div.tocify {
 </div>
 <div id="executing-code-in-rstudio" class="section level3">
 <h3>Executing code in RStudio</h3>
-<p>After you write your script it can be sent to the Console to run the code in R. Any variables you create in your script will not be available in your working environment until this is done. There are two ways to sent code the console. First, you can hit the <code>Run</code> button at the top right of the scripting window. Second, and preferred, you can use <code>ctrl+enter</code> (<code>cmd+enter</code> on a Mac). Both approaches will send the selected line to the console, then move to the next line in your script. You can also highlight and send an entire block of code.</p>
+<p>After you write your script it can be sent to the Console to run the code in R. Any variables you create in your script will not be available in your working environment until this is done. There are two ways to send code to the console. First, you can hit the <code>Run</code> button at the top right of the scripting window. Second, and preferred, you can use <code>ctrl+enter</code> (<code>cmd+enter</code> on a Mac). Both approaches will send the selected line to the console, then move to the next line in your script. You can also highlight and send an entire block of code.</p>
 <p><img src="figure/rstudio_run.jpg" /></p>
 </div>
 <div id="what-is-the-environment" class="section level3">
@@ -401,18 +401,16 @@ div.tocify {
 <p>This exercise will make sure R and RStudio are working and that you can get around the basics in RStudio. Use the blue stickies when you have completed, and red stickies if you are running into problems.</p>
 <ol style="list-style-type: decimal">
 <li><p>Start RStudio: To start both R and RStudio requires only firing up RStudio. RStudio should be available from All Programs at the Start Menu. Fire up RStudio.</p></li>
-<li><p>Take a few minutes to look around RStudio. Find the Console Pane. Find Global and Project Options (hint: look in Tools). Look at the Environment, History Pane. Look at the Files, Plots, Packages, etc. pane.</p></li>
 <li><p>Create a new project. Name it “cabw_r_workshop”. We will use this for the rest of the workshop.</p></li>
 <li><p>Create a new “R Script” in the Source Pane, save that file into your newly created project and name it “cabw_script.R”. It’ll just be a blank text file at this point.</p></li>
 <li><p>Add in a comment line to separate this section. It should look something like: <code># Exercise 1: Just Getting used to RStudio and Scripts</code>.</p></li>
-<li><p>Add a single line to this script with the following text: <code>ls()</code>. This is an R function that lists objects in your current environment. Use the various ways we showed to send this command to the R Console. Also, try typing this directly into the R Console and hit <code>Enter</code> to run it.</p></li>
-<li><p>Lastly, we need to get this project set up with some example data for our exercises. You should have downloaded this already, but if not, the data are available from &lt;<a href="https://SCCWRP.github.io/CABW2018_R_training/data/datazip.zip">link</a>&gt;. The data are in a zipped folder. Download the file to your computer (anywhere). Create a folder in your new project named <code>data</code> and extract the files into this location.</p></li>
+<li><p>Lastly, we need to get this project set up with some example data for our exercises. You should have downloaded this already, but if not, the data are available <a href="https://SCCWRP.github.io/CABW2018_R_training/data/datazip.zip">here</a>. The data are in a zipped folder. Download the file to your computer (anywhere). Create a folder in your new project named <code>data</code> and extract the files into this location.</p></li>
 </ol>
 </div>
 <div id="r-language-fundamentals" class="section level2">
 <h2>R language fundamentals</h2>
 <p>The basic syntax of a function follows the form: <code>function_name(arg1, arg2, ...)</code>.</p>
-<p>With the base install, you will gain access to many (3629 functions, to be exact). Some examples:</p>
+<p>With the base install, you will gain access to many functions (3629, to be exact). Some examples:</p>
 <pre class="r"><code># print
 print(&#39;hello world!&#39;)</code></pre>
 <pre><code>## [1] &quot;hello world!&quot;</code></pre>
@@ -421,44 +419,44 @@ seq(1, 10)</code></pre>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <pre class="r"><code># random numbers
 rnorm(100, mean = 10, sd = 2)</code></pre>
-<pre><code>##   [1] 10.463134 11.631972 12.704590 14.218595 11.886985  7.699176 11.655195
-##   [8]  8.976181  6.809548  8.083370 11.175802  7.211968 14.573388 12.281958
-##  [15]  7.753514  9.564667 10.894604  9.514251 12.176831  9.307217 13.287833
-##  [22]  9.524909 12.657249  9.414670 12.092368 11.850545  9.585878 11.348851
-##  [29]  7.126604  7.828607  9.709406  9.299536 10.685900  9.959771 10.694487
-##  [36] 10.478364  8.442953 12.452632 11.618214  7.521072 11.872472 11.878328
-##  [43]  9.723153  8.829062 10.044865  6.983647 16.303448  6.923891  9.770822
-##  [50]  7.987760 11.872587 10.178372 10.372485  9.270533  5.770926  8.520807
-##  [57] 12.757881  9.198481  7.049119 11.719759  8.995723  6.886015  8.324317
-##  [64]  9.627476  9.525157 11.770442  8.818076  7.850026 10.175580  9.449503
-##  [71] 10.023352  5.898933 11.132766 11.359315 11.465594 11.070365 12.083610
-##  [78]  7.642243 11.015954  8.697636 11.417909 12.909197 13.837791  7.422458
-##  [85] 13.266990 10.618600 10.319115 10.988614 11.445962  6.546722  9.179444
-##  [92]  8.905656 12.953275  8.341710 10.032875 11.011825  8.978259  9.478751
-##  [99] 11.218481 12.122385</code></pre>
+<pre><code>##   [1] 10.148568 14.852089 12.343719  9.683014 10.666116 11.774533 12.193359
+##   [8] 13.077595 14.235334 10.563450 12.024634  7.064504  7.242821 12.416145
+##  [15] 11.943594  7.888201  5.552864  6.589039 11.226783  9.435687 11.989715
+##  [22] 10.403852  9.269825 14.896480  6.857654 11.196052 11.629598  8.695316
+##  [29] 10.445603  9.112010  8.160501  8.851903 11.664645 12.038963 10.090283
+##  [36]  7.290761  9.696165 10.902190  9.929134 10.662696 11.066692  8.456534
+##  [43]  9.964495  9.248643  9.873300 12.110145  9.331963 12.371602 10.044788
+##  [50] 11.532822 13.665401  8.542728 10.234538 11.160231  8.081757  9.793893
+##  [57] 14.021598 10.007661  8.086209  8.175720 10.339478  9.631538  8.024992
+##  [64]  8.790344  8.411093  9.597348  7.898947 11.483132  8.777728 13.488560
+##  [71]  9.493530 15.653937 14.239780  9.093108 14.490367  7.103236 14.587269
+##  [78] 10.225475  8.445158 10.017070 13.273125 11.964523 12.079956  9.017769
+##  [85] 11.232626 10.123151 10.361518  8.768154 14.917612 10.444513 10.338645
+##  [92]  9.340383  7.045425  8.262433 11.770717 13.584703 11.573853 10.167536
+##  [99] 14.112595 14.211624</code></pre>
 <pre class="r"><code># average 
 mean(rnorm(100))</code></pre>
-<pre><code>## [1] 0.02913815</code></pre>
+<pre><code>## [1] 0.2568901</code></pre>
 <pre class="r"><code># sum
 sum(rnorm(100))</code></pre>
-<pre><code>## [1] -16.21195</code></pre>
+<pre><code>## [1] -5.884506</code></pre>
 <p>Very often you will see functions used like this:</p>
 <pre class="r"><code>my_random_sum &lt;- sum(rnorm(100))</code></pre>
-<p>In this case the first part of the line is the name of an object. You make this up. Ideally it should have some meaning, but the only rules are that it can’t start with a number and must not have any spaces. The second bit, <code>&lt;-</code>, is the assignment operator. This tells R to take the result of <code>sum(rnorm(100))</code> and store it an object named, <code>my_random_sum</code>. It is stored in the environment and can be used by just executing it’s name in the console.</p>
+<p>In this case the first part of the line is the name of an object. You make this up. Ideally it should have some meaning, but the only rules are that it can’t start with a number and must not have any spaces. The second bit, <code>&lt;-</code>, is the assignment operator. This tells R to take the result of <code>sum(rnorm(100))</code> and store it in an object named, <code>my_random_sum</code>. It is stored in the environment and can be used by just executing it’s name in the console.</p>
 <pre class="r"><code>my_random_sum</code></pre>
-<pre><code>## [1] 8.960777</code></pre>
+<pre><code>## [1] -8.092222</code></pre>
 <p>With this, you have the very basics of how we write R code and save objects that can be used later.</p>
 <div id="packages" class="section level3">
 <h3>Packages</h3>
-<p>The base install of R is quite powerful, but you will soon have a need or desire to go beyond this. Packages provide this ability. They are a standardized method for extending R with new methods, techniques, and programming functionality. There is a lot to say about packages regarding finding them, using them, etc., but for now let’s focus just on the basics.</p>
+<p>The base install of R is quite powerful, but you will soon have a need or desire to go beyond this. Packages provide this ability. They are a standardized way of extending R with new methods, techniques, and programming functionality. There is a lot to say about packages regarding finding them, using them, etc., but for now let’s focus just on the basics.</p>
 </div>
 <div id="cran" class="section level3">
 <h3>CRAN</h3>
-<p>One of the reasons for R’s popularity is CRAN, <a href="http://cran.r-project.org/">The Comprehensive R Archive Network</a>. This is where you download R and also where most will gain access to packages (there are other places, but that is for later). Not much else to say about this now other than to be aware of it. As of 2018-10-18, there are 13182 on CRAN!</p>
+<p>One of the reasons for R’s popularity is CRAN, <a href="http://cran.r-project.org/">The Comprehensive R Archive Network</a>. This is where you download R and also where most will gain access to packages (there are other places, but that is for later). Not much else to say about this now other than to be aware of it. As of 2018-10-23, there are 13204 on CRAN!</p>
 </div>
 <div id="installing-packages" class="section level3">
 <h3>Installing packages</h3>
-<p>When a package gets installed, that means the source is downloaded and put into your library. A default library location is set for you so no need to worry about that. In fact on Windows most of this is pretty automatic. Let’s give it a shot.</p>
+<p>When a package gets installed, that means the source code is downloaded and put into your library. A default library location is set for you so no need to worry about that. In fact, on Windows most of this is pretty automatic. Let’s give it a shot.</p>
 </div>
 </div>
 <div id="exercise-2" class="section level2">
@@ -472,8 +470,8 @@ install.packages(&quot;sf&quot;)
 install.packages(&quot;mapview&quot;)
 install.packages(&quot;viridis&quot;)
 install.packages(&quot;USAboundaries&quot;)</code></pre></li>
-<li><p>Select all three lines by clicking and dragging the mouse pointer over the text.</p></li>
-<li><p>Send all threee commands to the console using <code>ctrl+enter</code>. You should see some text output on the console about the installation process. The installation may take a few minutes so don’t be alarmed.</p></li>
+<li><p>Select all the lines by clicking and dragging the mouse pointer over the text.</p></li>
+<li><p>Send all the commands to the console using <code>ctrl+enter</code>. You should see some text output on the console about the installation process. The installation may take a few minutes so don’t be alarmed.</p></li>
 <li><p>After the packages are done installing, verify that there were no errors during the process (this should be pretty obvious, i.e., error text in big scary red letters).</p></li>
 <li><p>Load the packages after they’ve installed.</p>
 <pre class="r"><code>library(&quot;tidyverse&quot;)
@@ -581,7 +579,7 @@ mydf</code></pre>
 <div id="getting-your-data-into-r" class="section level2">
 <h2>Getting your data into R</h2>
 <p>It is the rare case when you manually enter your data in R, not to mention impractical for most datasets. Most data analysis workflows typically begin with importing a dataset from an external source. Literally, this means committing a dataset to memory (i.e., storing it as a variable) as one of R’s data structure formats.</p>
-<p>Flat data files (text only, rectangular format) present the least complications on import because there is very little to assume about the structure of the data. On import, R tries to guess the data type for each column and this is fairly unambiguous with flat files. The base installation of R comes with some easy to use functions for importing flat files, such as <code>read.table()</code> and <code>read.csv</code>.</p>
+<p>Flat data files (text only, rectangular format) present the least complications on import because there is very little to assume about the structure of the data. On import, R tries to guess the data type for each column and this is fairly unambiguous with flat files. The base installation of R comes with some easy to use functions for importing flat files, such as <code>read.table()</code> and <code>read.csv()</code>.</p>
 <div id="exercise-3" class="section level3">
 <h3>Exercise 3</h3>
 <p>Now that we have the data downloaded and extracted to our data folder, we’ll use <code>read.csv</code> to import two files.</p>
@@ -653,7 +651,7 @@ View(ascidat)</code></pre>
 </div>
 <div id="other-ways-to-import-data" class="section level3">
 <h3>Other ways to import data</h3>
-<p>More often you will probably have an Excel spreadsheet to import. In the old days, importing spreadsheets into R was almost impossible given the proprietary data structure of Excel. The tools available in R have since matured and it’s now pretty painless to import a spreadsheet. The <code>readxl</code> package is the most recent and by far most flexible data import package for Excel files. It comes with the <code>tidyverse</code> family of package.</p>
+<p>More often you will probably have an Excel spreadsheet to import. In the old days, importing spreadsheets into R was almost impossible given the proprietary data structure of Excel. The tools available in R have since matured and it’s now pretty painless to import a spreadsheet. The <code>readxl</code> package is the most recent and by far most flexible data import package for Excel files. It comes with the <code>tidyverse</code> family of packages.</p>
 <p>Once installed, we can load it to access the import functions.</p>
 <pre class="r"><code>library(readxl)
 dat &lt;- read_excel(&#39;location/of/excel/file.xlsx&#39;)</code></pre>
