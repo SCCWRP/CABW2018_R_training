@@ -41,7 +41,7 @@ There are many programming languages available and each has it's specific benefi
 
 * The growth of R as explained in the [Stack Overflow blog](https://stackoverflow.blog/2017/10/10/impressive-growth-r/), [IEEE rating](http://blog.revolutionanalytics.com/2016/07/r-moves-up-to-5th-place-in-ieee-language-rankings.html)
 
-R is also an open-source programming language - not only is it free, but this means anybody can contribute to it's development. As of `r format(Sys.time(), "%Y-%m-%d")`, there are `r nrow(available.packages())` on CRAN!   
+R is also an open-source programming language - not only is it free, but this means anybody can contribute to it's development. As of `r format(Sys.time(), "%Y-%m-%d")`, there are `r nrow(available.packages())` supplemental packages for R on CRAN!   
 
 ## RStudio
 
